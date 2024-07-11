@@ -248,7 +248,7 @@ class CategoriesController extends Controller
 
                 $thumbnailFileName = time() . rand(1111, 9999) . '.' . $request->file($thumbnailInputName)->getClientOriginalExtension();
                 $path = $this->uploadPath;
-                $request->file($formFileName)->move($path, $thumbnailFileName);
+                $request->file($thumbnailInputName)->move($path, $thumbnailFileName);
 
                 // resize & optimize
                 Helper::imageResize($path.$thumbnailFileName);
