@@ -29,7 +29,7 @@
                 } else {
                     $category_title = @$CurrentCategory->$title_var2;
                 }
-                 if (@$CurrentCategory->$description_var != "") {
+                if (@$CurrentCategory->$description_var != "") {
                     $categoryDescription = @$CurrentCategory->$description_var;
                 } else {
                     $categoryDescription = @$CurrentCategory->$description_var2;
@@ -53,14 +53,17 @@
                         @if(@$search_word !="")
                             <li class="active">{!! __("backend.search") !!}</li>
                         @elseif($webmaster_section_title !="")
-                            <li class="active"><a href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{!! $webmaster_section_title !!}</a></li>
+                            <li class="active"><a
+                                    href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{!! $webmaster_section_title !!}</a>
+                            </li>
                         @elseif(@$search_word!="")
                             <li class="active">{{ @$search_word }}</li>
                         @else
                             <li class="active">{{ $User->name }}</li>
                         @endif
                         @if($category_title !="")
-                            <li class="active"><a href="{{ Helper::categoryURL(@$CurrentCategory->id) }}">{{ $category_title }}</a>
+                            <li class="active"><a
+                                    href="{{ Helper::categoryURL(@$CurrentCategory->id) }}">{{ $category_title }}</a>
                             </li>
                         @endif
                     </ol>
@@ -80,9 +83,9 @@
                             $description = "description_" . @Helper::currentLanguage()->code;
                         @endphp
                         @if(!empty($categoryDescription))
-                        <div class="p-5">
-                            <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
-                        </div>
+                            <div class="p-5">
+                                <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
+                            </div>
                         @endif
                         @if($Topics->total() == 0)
                             <div class="p-5 card text-center no-data">
@@ -131,21 +134,21 @@
                                         $i++;
                                         ?>
                                     @endforeach
-
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-lg-8">
                                     {!! $Topics->appends($_GET)->links() !!}
                                 </div>
                                 <div class="col-lg-4 text-end">
-                                    <h5 style="padding-top: 18px"><span class="badge bg-primary">{{ $Topics->firstItem() }}</span>
+                                    <h5 style="padding-top: 18px"><span
+                                            class="badge bg-primary">{{ $Topics->firstItem() }}</span>
                                         - <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>
-                                        <!--{{ __('backend.of') }}-->
-                                        <!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->
-                                        </h5>
+                                    <!--{{ __('backend.of') }}-->
+                                    <!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->
+                                    </h5>
                                 </div>
                             </div>
-                        @endif
                         @endif
                     </div>
                 </div>

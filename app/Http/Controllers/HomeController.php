@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Language;
+use App\Models\WebmasterSectionField;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\App;
 use App\Models\Banner;
@@ -23,7 +25,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Mail;
 use Redirect;
-use Helper;
 use Auth;
 
 class HomeController extends Controller
@@ -164,12 +165,19 @@ class HomeController extends Controller
                     }
                 }
             }
-            return $this->list_page($lang, $WebmasterSection);
+            return $this->list_page($lang, $WebmasterSection, [], $part1);
         }
         return $this->page_404();
     }
 
-    public function list_page($lang, $WebmasterSection = [], $Category = [])
+    /**
+     * @param $lang
+     * @param array $WebmasterSection
+     * @param array $Category
+     * @param null $part1
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function list_page($lang, $WebmasterSection = [], $Category = [], $part1 = null)
     {
         if (!empty($WebmasterSection)) {
 
@@ -191,7 +199,6 @@ class HomeController extends Controller
                     $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=', $Category->id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 }
             }
-            // dd($CategoriesList);
 
             $category_topics = [];
             $TopicsList = [];
@@ -350,12 +357,37 @@ class HomeController extends Controller
             // count topics by Category
             $TopicsCountPerCat = $this->topics_count_per_category($WebmasterSection->id);
 
+            $specialities = [];
+            $currentSpeciality = '';
+            if ($part1 == 'specialities') {
+                $sectionFields = WebmasterSectionField::query()->where('webmaster_id', 8)->first();
+                $cf_details_var = "details_" . Helper::currentLanguage()->code;
+                $cf_details_var2 = "details_" . config('smartend.default_language');
+                if ($sectionFields->$cf_details_var != "") {
+                    $cf_details = $sectionFields->$cf_details_var;
+                } else {
+                    $cf_details = $sectionFields->$cf_details_var2;
+                }
+                $view = 'speciality';
+                $specialities = preg_split('/\r\n|[\r\n]/', $cf_details);
+                $specialityId = request()->speciality_id;
+                if (!empty($specialityId)) {
+                    $topics_ids = TopicField::query()->where("field_id", 1)->whereRaw("FIND_IN_SET(" . $specialityId . ",REPLACE(`field_value`, ' ', ''))")->pluck('topic_id')->toArray();
+                    $TopicsList = Topic::where([['webmaster_id', '=', 8], ['status',
+                        1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', 8], ['status', 1], ['expire_date', null]]);
+                    $TopicsList = $TopicsList->Wherein("id", $topics_ids);
+                    $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(config('smartend.frontend_pagination'));
+                    $currentSpeciality = !empty($specialities[$specialityId - 1]) ? $specialities[$specialityId - 1] : '';
+                }
+            }
 
             return view('frontEnd.' . $view, [
                 "PageTitle" => @$meta_tags["title"],
                 "PageDescription" => @$meta_tags["desc"],
                 "PageKeywords" => @$meta_tags["keywords"],
                 "WebmasterSection" => $WebmasterSection,
+                "specialities" => $specialities,
+                "currentSpeciality" => $currentSpeciality,
                 "Categories" => $CategoriesList,
                 "Topics" => $TopicsList,
                 "CurrentCategory" => $Category,
