@@ -149,6 +149,13 @@
                                     {{ __('backend.mainAndSubCategories') }}
                                 </label>
                             </div>
+                            <div>
+                                <label class="ui-check ui-check-md">
+                                    {!! Form::radio('sections_status','3',false, array('id' => 'sections_status4','class'=>'has-value')) !!}
+                                    <i class="dark-white"></i>
+                                    {{ __('backend.mainAndSubCategoriesAndSpecialities') }}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>

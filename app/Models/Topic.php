@@ -51,6 +51,12 @@ class Topic extends Model implements Feedable
         return $this->belongsTo('App\Models\Section', 'section_id');
     }
 
+    //Relation to Specialities
+    public function speciality()
+    {
+        return $this->belongsTo('App\Models\Section', 'speciality_id');
+    }
+
     //Relation to TopicCategory
     public function categories()
     {

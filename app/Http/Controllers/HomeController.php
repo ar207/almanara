@@ -67,7 +67,7 @@ class HomeController extends Controller
         }
 
         if ($part1 == "") {
-            $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
+            $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
             // home page
             $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('id', 'desc')->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
@@ -99,18 +99,18 @@ class HomeController extends Controller
             }
 
             if ($part2 != '') {
-                $Section1 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part2)->first();
+                $Section1 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part2)->where('is_speciality', 0)->first();
                 if (!empty($Section1)) {
                     if ($part3 != '') {
-                        $Section3 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part3)->first();
+                        $Section3 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part3)->where('is_speciality', 0)->first();
                         if (empty($Section3)) {
-                            $Section3 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part3))->first();
+                            $Section3 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part3))->where('is_speciality', 0)->first();
                         }
                         if (!empty($Section3)) {
                             if ($part4 != "") {
-                                $Section4 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part4)->first();
+                                $Section4 = Section::where('status', 1)->where("seo_url_slug_" . $lang, $part4)->where('is_speciality', 0)->first();
                                 if (empty($Section4)) {
-                                    $Section4 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part4))->first();
+                                    $Section4 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part4))->where('is_speciality', 0)->first();
                                 }
                                 if (!empty($Section4)) {
                                     if ($part5 != "") {
@@ -153,11 +153,11 @@ class HomeController extends Controller
                     if (!empty($Topic1)) {
                         return $this->post_page($lang, $Topic1);
                     } else {
-                        $Section2 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->first();
+                        $Section2 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->where('is_speciality', 0)->first();
                         if (!empty($Section2)) {
                             return $this->list_page($lang, $WebmasterSection, $Section2);
                         } else {
-                            $Topic2 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->first();
+                            $Topic2 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->where('is_speciality', 0)->first();
                             if (!empty($Topic2)) {
                                 return $this->post_page($lang, $Topic2);
                             }
@@ -194,9 +194,9 @@ class HomeController extends Controller
                 // general search
                 $CategoriesList = [];
             } else {
-                $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+                $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 if (!empty($Category)) {
-                    $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=', $Category->id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+                    $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', $Category->id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 }
             }
 
@@ -261,10 +261,10 @@ class HomeController extends Controller
                     $page_id = $Category->id;
                     $cat_ids = [];
                     $cat_ids[] = $Category->id;
-                    $SubCategories = Section::where("status", 1)->where("father_id", $Category->id)->pluck("id")->toarray();
+                    $SubCategories = Section::where("status", 1)->where("father_id", $Category->id)->where('is_speciality', 0)->pluck("id")->toarray();
                     foreach ($SubCategories as $SubCategory) {
                         $cat_ids[] = $SubCategory;
-                        $SubCategories2 = Section::where("status", 1)->where("father_id", $SubCategory)->pluck("id")->toarray();
+                        $SubCategories2 = Section::where("status", 1)->where("father_id", $SubCategory)->where('is_speciality', 0)->pluck("id")->toarray();
                         foreach ($SubCategories2 as $SubCategory2) {
                             $cat_ids[] = $SubCategory2;
                         }
@@ -358,26 +358,25 @@ class HomeController extends Controller
             $TopicsCountPerCat = $this->topics_count_per_category($WebmasterSection->id);
 
             $specialities = [];
-            $currentSpeciality = '';
+            $currentSpeciality = $speciality = '';
             if ($part1 == 'specialities') {
-                $sectionFields = WebmasterSectionField::query()->where('webmaster_id', 8)->first();
-                $cf_details_var = "details_" . Helper::currentLanguage()->code;
-                $cf_details_var2 = "details_" . config('smartend.default_language');
-                if ($sectionFields->$cf_details_var != "") {
-                    $cf_details = $sectionFields->$cf_details_var;
-                } else {
-                    $cf_details = $sectionFields->$cf_details_var2;
-                }
                 $view = 'speciality';
-                $specialities = preg_split('/\r\n|[\r\n]/', $cf_details);
+                $specialities = Section::where('webmaster_id', '=', 8)->where('is_speciality', 1)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 $specialityId = request()->speciality_id;
                 if (!empty($specialityId)) {
-                    $topics_ids = TopicField::query()->where("field_id", 1)->whereRaw("FIND_IN_SET(" . $specialityId . ",REPLACE(`field_value`, ' ', ''))")->pluck('topic_id')->toArray();
                     $TopicsList = Topic::where([['webmaster_id', '=', 8], ['status',
                         1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', 8], ['status', 1], ['expire_date', null]]);
-                    $TopicsList = $TopicsList->Wherein("id", $topics_ids);
+                    $TopicsList = $TopicsList->where("speciality_id", $specialityId);
                     $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(config('smartend.frontend_pagination'));
-                    $currentSpeciality = !empty($specialities[$specialityId - 1]) ? $specialities[$specialityId - 1] : '';
+
+                    $cf_details_var = "title_" . Helper::currentLanguage()->code;
+                    $cf_details_var2 = "title_" . config('smartend.default_language');
+                    $speciality = Section::query()->find($specialityId);
+                    if (!empty($speciality->$cf_details_var)) {
+                        $currentSpeciality = $speciality->$cf_details_var;
+                    } else {
+                        $currentSpeciality = $speciality->$cf_details_var2;
+                    }
                 }
             }
 
@@ -387,6 +386,7 @@ class HomeController extends Controller
                 "PageKeywords" => @$meta_tags["keywords"],
                 "WebmasterSection" => $WebmasterSection,
                 "specialities" => $specialities,
+                "speciality" => $speciality,
                 "currentSpeciality" => $currentSpeciality,
                 "Categories" => $CategoriesList,
                 "Topics" => $TopicsList,
@@ -424,7 +424,7 @@ class HomeController extends Controller
                 $Topic->save();
 
                 // categories list
-                $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+                $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
 
                 $Category = [];
                 $TopicCategory = TopicCategory::where('topic_id', $Topic->id)->first();
@@ -1084,17 +1084,17 @@ class HomeController extends Controller
 
     private function topics_count_per_category($webmaster_id = 0): array
     {
-        $CategoriesList = Section::where('webmaster_id', '=', $webmaster_id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+        $CategoriesList = Section::where('webmaster_id', '=', $webmaster_id)->where('status', 1)->where('is_speciality', 0)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
 
         $TopicsCountPerCat = [];
         if (count($CategoriesList) > 0) {
             foreach ($CategoriesList as $CAT) {
                 $cat_ids = [];
                 $cat_ids[] = $CAT->id;
-                $SubCategories = Section::where("status", 1)->where("father_id", $CAT->id)->pluck("id")->toarray();
+                $SubCategories = Section::where("status", 1)->where("father_id", $CAT->id)->where('is_speciality', 0)->pluck("id")->toarray();
                 foreach ($SubCategories as $SubCategory) {
                     $cat_ids[] = $SubCategory;
-                    $SubCategories2 = Section::where("status", 1)->where("father_id", $SubCategory)->pluck("id")->toarray();
+                    $SubCategories2 = Section::where("status", 1)->where("father_id", $SubCategory)->where('is_speciality', 0)->pluck("id")->toarray();
                     foreach ($SubCategories2 as $SubCategory2) {
                         $cat_ids[] = $SubCategory2;
                     }

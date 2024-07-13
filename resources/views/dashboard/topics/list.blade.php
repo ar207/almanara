@@ -274,6 +274,9 @@ if ($WebmasterSection->$title_var != "") {
                         @if($WebmasterSection->case_status)
                             <th style="width:80px;">{{ __('backend.status') }}</th>
                         @endif
+                        @if($WebmasterSection->sections_status == 3)
+                            <th style="width:80px;">{{ __('backend.specialities') }}</th>
+                        @endif
                         @foreach($WebmasterSection->customFields as $customField)
                             <?php
                             // check permission
@@ -590,6 +593,11 @@ if ($WebmasterSection->$title_var != "") {
                         @if($WebmasterSection->case_status)
                     {
                         "data": "status", "orderable": true
+                    },
+                        @endif
+                        @if($WebmasterSection->sections_status == 3)
+                    {
+                        "data": "speciality", "orderable": true
                     },
                         @endif
                         @foreach($WebmasterSection->customFields as $customField)

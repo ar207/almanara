@@ -11,7 +11,7 @@ class WebmasterSection extends Model
 
     public function sections()
     {
-        return $this->hasMany('App\Models\Section', 'webmaster_id')->orderby('row_no', 'asc');
+        return $this->hasMany('App\Models\Section', 'webmaster_id')->where('is_speciality', 0)->orderby('row_no', 'asc');
     }
 
     public function topics()

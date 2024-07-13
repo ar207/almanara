@@ -19,9 +19,10 @@
                         @if(@$MenuLink->sub)
                             <ul>
                                 @foreach($MenuLink->sub as $SubLink)
-                                    <li class="{{ (@$SubLink->sub)?"dropdown":"" }}"><a class="nav-link"
-                                                                                        href="{{ @$SubLink->url }}"
-                                                                                        target="{{ @$SubLink->target }}">{!! (@$SubLink->icon)?"<i class='".@$SubLink->icon."'></i> ":"" !!} {{ @$SubLink->title }}
+                                    <li class="{{ (@$SubLink->sub)?"dropdown":"" }}">
+                                        <a class="nav-link" href="{{ @$SubLink->url }}"
+                                           target="{{ @$SubLink->target }}">
+                                            {!! (@$SubLink->icon)?"<i class='".@$SubLink->icon."'></i> ":"" !!} {{ @$SubLink->title }}
                                             @if(@$SubLink->sub)
                                                 <i class="drop-arrow bi bi-chevron-{{ @Helper::currentLanguage()->right }}"></i>
                                             @endif

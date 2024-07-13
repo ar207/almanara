@@ -87,6 +87,7 @@
                                     {!! ($WebSection->type==0) ? "<span class='label'><i class='material-icons'>&#xe165;</i>  ".__('backend.typeTextPages')."</span>":"" !!}
                                 </td>
                                 <td class="text-center">
+                                    {!! ($WebSection->sections_status==3) ? "<span class='label'><i class='material-icons'>&#xe23e;</i>  ".__('backend.mainAndSubCategoriesAndSpecialities')."</span>":"" !!}
                                     {!! ($WebSection->sections_status==2) ? "<span class='label'><i class='material-icons'>&#xe23e;</i>  ".__('backend.mainAndSubCategories')."</span>":"" !!}
                                     {!! ($WebSection->sections_status==1) ? "<span class='label'><i class='material-icons'>&#xe241;</i>  ".__('backend.mainCategoriesOnly')."</span>":"" !!}
                                     {!! ($WebSection->sections_status==0) ? "<span class='label'><i class='material-icons'>&#xe14b;</i>  ".__('backend.withoutCategories')."</span>":"" !!}

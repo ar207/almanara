@@ -259,6 +259,14 @@ class TopicsController extends Controller
                 } else {
                     $title = $Topic->$title_var2;
                 }
+                $specialityName = '';
+                if (!empty($Topic->speciality)) {
+                    if (!empty($Topic->speciality->$title_var)) {
+                        $specialityName = $Topic->speciality->$title_var;
+                    } else {
+                        $specialityName = $Topic->speciality->$title_var2;
+                    }
+                }
 
                 // Get Categories list
                 $section = "";
@@ -423,6 +431,10 @@ class TopicsController extends Controller
                 if ($WebmasterSection->case_status) {
                     $nestedData['status'] = "<div class='text-center'> <i class=\"fa " . (($Topic->status == 1) ? "fa-check text-success" : "fa-times text-danger") . " inline\"></i></div>";
                 }
+
+                if ($WebmasterSection->sections_status == 3) {
+                    $nestedData['speciality'] = "<div class='text-center'>" . $specialityName . "</div>";
+                }
                 $options = '
                       <div class="dropdown">
         <button type="button" class="btn btn-sm light dk dropdown-toggle" data-toggle="dropdown"><i class="material-icons">&#xe5d4;</i> ' . __('backend.options') . '</button>
@@ -540,11 +552,11 @@ class TopicsController extends Controller
         //Webmaster Topic Details
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
-            $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=',
-                '0')->orderby('row_no', 'asc')->get();
+            $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=', '0')->where('is_speciality', 0)->orderby('row_no', 'asc')->get();
+            $specialities = Section::where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
 
             return view("dashboard.topics.create",
-                compact("GeneralWebmasterSections", "WebmasterSection", "fatherSections"));
+                compact("GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities"));
         }
         return redirect()->route('NotFound');
     }
@@ -578,8 +590,8 @@ class TopicsController extends Controller
                 $request->file($formFileName)->move($path, $fileFinalName);
 
                 // resize & optimize
-                Helper::imageResize($path.$fileFinalName);
-                Helper::imageOptimize($path.$fileFinalName);
+                Helper::imageResize($path . $fileFinalName);
+                Helper::imageOptimize($path . $fileFinalName);
             }
 
             $formFileName = "audio_file";
@@ -599,8 +611,8 @@ class TopicsController extends Controller
                 $request->file($formFileName)->move($path, $attachFileFinalName);
 
                 // resize & optimize
-                Helper::imageResize($path.$attachFileFinalName);
-                Helper::imageOptimize($path.$attachFileFinalName);
+                Helper::imageResize($path . $attachFileFinalName);
+                Helper::imageOptimize($path . $attachFileFinalName);
             }
 
             if ($request->video_type == 3) {
@@ -628,6 +640,7 @@ class TopicsController extends Controller
 
             // Save topic details
             $Topic->row_no = $next_nor_no;
+            $Topic->speciality_id = $request->speciality_id;
             foreach (Helper::languagesList() as $ActiveLanguage) {
                 if ($ActiveLanguage->box_status) {
                     $Topic->{"title_" . $ActiveLanguage->code} = $request->{"title_" . $ActiveLanguage->code};
@@ -775,8 +788,10 @@ class TopicsController extends Controller
                 $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=',
                     '0')->orderby('row_no', 'asc')->get();
 
+                $specialities = Section::where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
+
                 return view("dashboard.topics.edit",
-                    compact("Topic", "GeneralWebmasterSections", "WebmasterSection", "fatherSections"));
+                    compact("Topic", "GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities"));
             } else {
                 return redirect()->action('Dashboard\TopicsController@index', $webmasterId);
             }
@@ -815,8 +830,8 @@ class TopicsController extends Controller
                     $request->file($formFileName)->move($path, $fileFinalName);
 
                     // resize & optimize
-                    Helper::imageResize($path.$fileFinalName);
-                    Helper::imageOptimize($path.$fileFinalName);
+                    Helper::imageResize($path . $fileFinalName);
+                    Helper::imageOptimize($path . $fileFinalName);
                 }
 
 
@@ -847,8 +862,8 @@ class TopicsController extends Controller
                     $request->file($formFileName)->move($path, $attachFileFinalName);
 
                     // resize & optimize
-                    Helper::imageResize($path.$attachFileFinalName);
-                    Helper::imageOptimize($path.$attachFileFinalName);
+                    Helper::imageResize($path . $attachFileFinalName);
+                    Helper::imageOptimize($path . $attachFileFinalName);
                 }
 
                 if ($request->video_type == 3) {
@@ -925,6 +940,7 @@ class TopicsController extends Controller
                     $Topic->status = 0;
                 }
                 $Topic->form_id = $request->page_form_id;
+                $Topic->speciality_id = $request->speciality_id;
                 $Topic->updated_by = Auth::user()->id;
                 $Topic->save();
 
@@ -1265,7 +1281,7 @@ class TopicsController extends Controller
             }
             if (!empty($Topic)) {
                 // Delete a Topic photo
-                if ($Topic->photo_file != ""  && $Topic->photo_file != "default.png") {
+                if ($Topic->photo_file != "" && $Topic->photo_file != "default.png") {
                     File::delete($this->uploadPath . $Topic->photo_file);
                 }
                 if ($Topic->attach_file != "") {
@@ -1292,7 +1308,7 @@ class TopicsController extends Controller
                 $PhotoFiles = Photo::where('topic_id', $Topic->id)->get();
                 if (count($PhotoFiles) > 0) {
                     foreach ($PhotoFiles as $PhotoFile) {
-                        if ($PhotoFile->file != ""  && $PhotoFile->file != "default.png") {
+                        if ($PhotoFile->file != "" && $PhotoFile->file != "default.png") {
                             File::delete($this->uploadPath . $PhotoFile->file);
                         }
                     }
@@ -1476,8 +1492,8 @@ class TopicsController extends Controller
                 $request->file($formFileName)->move($path, $fileFinalName);
 
                 // resize & optimize
-                Helper::imageResize($path.$fileFinalName);
-                Helper::imageOptimize($path.$fileFinalName);
+                Helper::imageResize($path . $fileFinalName);
+                Helper::imageOptimize($path . $fileFinalName);
             }
             // End of Upload Files
             if ($fileFinalName != "") {
@@ -1510,7 +1526,7 @@ class TopicsController extends Controller
             $Photo = Photo::find($photo_id);
             if (!empty($Photo)) {
                 // Delete a Topic photo
-                if ($Photo->file != ""  && $Photo->file != "default.png") {
+                if ($Photo->file != "" && $Photo->file != "default.png") {
                     File::delete($this->uploadPath . $Photo->file);
                 }
 
@@ -1551,7 +1567,7 @@ class TopicsController extends Controller
                         // Delete Photos
                         $Photos = Photo::wherein('id', $request->ids)->get();
                         foreach ($Photos as $Photo) {
-                            if ($Photo->file != ""  && $Photo->file != "default.png") {
+                            if ($Photo->file != "" && $Photo->file != "default.png") {
                                 File::delete($this->uploadPath . $Photo->file);
                             }
                         }
@@ -2134,7 +2150,7 @@ class TopicsController extends Controller
                         // Delete Topics photo
                         $AttachFiles = AttachFile::wherein('id', $request->ids)->get();
                         foreach ($AttachFiles as $AttachFile) {
-                            if ($AttachFile->file != ""  && $AttachFile->file != "default.png") {
+                            if ($AttachFile->file != "" && $AttachFile->file != "default.png") {
                                 File::delete($this->uploadPath . $AttachFile->file);
                             }
                         }
@@ -2305,8 +2321,8 @@ class TopicsController extends Controller
             $request->file($formFileName)->move($path, $fileFinalName);
 
             // resize & optimize
-            Helper::imageResize($path.$fileFinalName);
-            Helper::imageOptimize($path.$fileFinalName);
+            Helper::imageResize($path . $fileFinalName);
+            Helper::imageOptimize($path . $fileFinalName);
         }
         // End of Upload Files
         if ($fileFinalName != "") {

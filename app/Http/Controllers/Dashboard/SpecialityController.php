@@ -14,7 +14,7 @@ use File;
 use Illuminate\Http\Request;
 use Redirect;
 
-class CategoriesController extends Controller
+class SpecialityController extends Controller
 {
     private $uploadPath = "uploads/sections/";
 
@@ -49,16 +49,16 @@ class CategoriesController extends Controller
 
         if (@Auth::user()->permissionsGroup->view_status) {
             $Sections = Section::where('created_by', '=', Auth::user()->id)->where('webmaster_id', '=',
-                $webmasterId)->where('father_id', '0')->where('is_speciality', 0)->orderby('row_no',
+                $webmasterId)->where('father_id', '0')->where('is_speciality', 1)->orderby('row_no',
                 'asc')->paginate(config('smartend.backend_pagination'));
         } else {
             $Sections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=',
-                '0')->where('is_speciality', 0)->orderby('row_no',
+                '0')->where('is_speciality', 1)->orderby('row_no',
                 'asc')->paginate(config('smartend.backend_pagination'));
         }
 
 
-        return view("dashboard.categories.list", compact("Sections", "GeneralWebmasterSections", "WebmasterSection"));
+        return view("dashboard.specialities.list", compact("Sections", "GeneralWebmasterSections", "WebmasterSection"));
     }
 
     /**
@@ -77,10 +77,10 @@ class CategoriesController extends Controller
         //Webmaster Section Details
         $WebmasterSection = WebmasterSection::find($webmasterId);
 
-        $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=',
-            '0')->where('is_speciality', 0)->orderby('row_no', 'asc')->get();
+        $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->where('father_id', '=',
+            '0')->orderby('row_no', 'asc')->get();
 
-        return view("dashboard.categories.create",
+        return view("dashboard.specialities.create",
             compact("GeneralWebmasterSections", "WebmasterSection", "fatherSections"));
     }
 
@@ -135,7 +135,7 @@ class CategoriesController extends Controller
 
         $Section = new Section;
         $Section->row_no = $next_nor_no;
-        $Section->is_speciality = 0;
+        $Section->is_speciality = 1;
 
         foreach (Helper::languagesList() as $ActiveLanguage) {
             if ($ActiveLanguage->box_status) {
@@ -156,14 +156,14 @@ class CategoriesController extends Controller
             $Section->thumbnail = $thumbnailFileName;
         }
         $Section->webmaster_id = $webmasterId;
-        $Section->father_id = $request->father_id;
+        $Section->father_id = 0;
         $Section->visits = 0;
         $Section->status = 1;
         $Section->created_by = Auth::user()->id;
 
         $Section->save();
 
-        return redirect()->action('Dashboard\CategoriesController@index', $webmasterId)->with('doneMessage',
+        return redirect()->action('Dashboard\SpecialityController@index', $webmasterId)->with('doneMessage',
             __('backend.addDone'));
     }
 
@@ -191,12 +191,12 @@ class CategoriesController extends Controller
             $WebmasterSection = WebmasterSection::find($Sections->webmaster_id);
 
             $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('id', '!=',
-                $id)->where('father_id', '0')->orderby('row_no', 'asc')->get();
+                $id)->where('father_id', '0')->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
 
-            return view("dashboard.categories.edit",
+            return view("dashboard.specialities.edit",
                 compact("Sections", "GeneralWebmasterSections", "WebmasterSection", "fatherSections"));
         } else {
-            return redirect()->action('Dashboard\CategoriesController@index', $webmasterId);
+            return redirect()->action('Dashboard\SpecialityController@index', $webmasterId);
         }
     }
 
@@ -287,15 +287,15 @@ class CategoriesController extends Controller
             if ($thumbnailFileName != "") {
                 $Section->thumbnail = $thumbnailFileName;
             }
-            $Section->is_speciality = 0;
-            $Section->father_id = $request->father_id;
+            $Section->is_speciality = 1;
+            $Section->father_id = 0;
             $Section->status = $request->status;
             $Section->updated_by = Auth::user()->id;
             $Section->save();
-            return redirect()->action('Dashboard\CategoriesController@edit', [$webmasterId, $id])->with('doneMessage',
+            return redirect()->action('Dashboard\SpecialityController@edit', [$webmasterId, $id])->with('doneMessage',
                 __('backend.saveDone'));
         } else {
-            return redirect()->action('Dashboard\CategoriesController@index', $webmasterId);
+            return redirect()->action('Dashboard\SpecialityController@index', $webmasterId);
         }
     }
 
@@ -314,10 +314,10 @@ class CategoriesController extends Controller
             }
             $Section->updated_by = Auth::user()->id;
             $Section->save();
-            return redirect()->action('Dashboard\CategoriesController@edit', [$webmasterId, $id])->with('doneMessage',
+            return redirect()->action('Dashboard\SpecialityController@edit', [$webmasterId, $id])->with('doneMessage',
                 __('backend.saveDone'))->with('activeTab', 'seo');
         } else {
-            return redirect()->action('Dashboard\CategoriesController@index', $webmasterId);
+            return redirect()->action('Dashboard\SpecialityController@index', $webmasterId);
         }
     }
 
@@ -347,10 +347,10 @@ class CategoriesController extends Controller
             }
             Section::where('father_id', $Section->id)->delete();
             $Section->delete();
-            return redirect()->action('Dashboard\CategoriesController@index', $webmasterId)->with('doneMessage',
+            return redirect()->action('Dashboard\SpecialityController@index', $webmasterId)->with('doneMessage',
                 __('backend.deleteDone'));
         } else {
-            return redirect()->action('Dashboard\CategoriesController@index', $webmasterId);
+            return redirect()->action('Dashboard\SpecialityController@index', $webmasterId);
         }
     }
 
@@ -400,7 +400,7 @@ class CategoriesController extends Controller
                 }
             }
         }
-        return redirect()->action('Dashboard\CategoriesController@index', $webmasterId)->with('doneMessage',
+        return redirect()->action('Dashboard\SpecialityController@index', $webmasterId)->with('doneMessage',
             __('backend.saveDone'));
     }
 

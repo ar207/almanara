@@ -29,9 +29,7 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
 
                     <li>
                         <a href="{{ route('adminHome') }}" onclick="location.href='{{ route('adminHome') }}'">
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe3fc;</i>
-                  </span>
+                            <span class="nav-icon"><i class="material-icons">&#xe3fc;</i></span>
                             <span class="nav-text">{{ __('backend.dashboard') }}</span>
                         </a>
                     </li>
@@ -52,12 +50,8 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                                 ?>
                                 <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2  || $PathCurrentFolder3==$currentFolder3) ? 'class=active' : '' }}>
                                     <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                                        <span class="nav-icon">
-                    <i class="material-icons">&#xe1b8;</i>
-                  </span>
+                                        <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                                        <span class="nav-icon"><i class="material-icons">&#xe1b8;</i></span>
                                         <span class="nav-text">{{ __('backend.visitorsAnalytics') }}</span>
                                     </a>
                                     <ul class="nav-sub">
@@ -177,9 +171,7 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('contacts') }}">
-<span class="nav-icon">
-<i class="material-icons">&#xe7ef;</i>
-</span>
+                                    <span class="nav-icon"><i class="material-icons">&#xe7ef;</i></span>
                                     <span class="nav-text">{{ __('backend.newsletter') }}</span>
                                 </a>
                             </li>
@@ -194,9 +186,7 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('webmails') }}">
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe156;</i>
-                  </span>
+                                    <span class="nav-icon"><i class="material-icons">&#xe156;</i></span>
                                     <span class="nav-text">{{ __('backend.siteInbox') }}
                                         @if( @$webmailsNewCount >0)
                                             <badge class="label warn m-l-xs">{{ @$webmailsNewCount }}</badge>
@@ -216,9 +206,7 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('calendar') }}" onclick="location.href='{{ route('calendar') }}'">
-                  <span class="nav-icon">
-                    <i class="material-icons">&#xe5c3;</i>
-                  </span>
+                                    <span class="nav-icon"><i class="material-icons">&#xe5c3;</i></span>
                                     <span class="nav-text">{{ __('backend.calendar') }}</span>
                                 </a>
                             </li>
@@ -275,18 +263,12 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             @if($GeneralWebmasterSection->sections_status > 0 && @Auth::user()->permissionsGroup->view_status == 0)
                                 <li {{ ($GeneralWebmasterSection->id == @$WebmasterSection->id && $is_webmaster != "webmaster") ? 'class=active' : '' }}>
                                     <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                                        <span class="nav-icon">
-                    <i class="material-icons">{!! $LiIcon !!}</i>
-                  </span>
-                                        <span
-                                            class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
+                                        <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                                        <span class="nav-icon"><i class="material-icons">{!! $LiIcon !!}</i></span>
+                                        <span class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
                                     </a>
                                     <ul class="nav-sub">
                                         @if($GeneralWebmasterSection->sections_status > 0)
-
                                             <?php
                                             $currentFolder = "categories"; // Put folder name here
                                             $PathCurrentFolder = substr($urlAfterRoot,
@@ -298,6 +280,18 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                                                         class="nav-text">{{ __('backend.sectionsOf') }} {{ $GeneralWebmasterSectionTitle }}</span>
                                                 </a>
                                             </li>
+                                                @if($GeneralWebmasterSection->sections_status == 3)
+                                                    <?php
+                                                    $currentFolder = "specialities"; // Put folder name here
+                                                    $PathCurrentFolder = substr($urlAfterRoot,
+                                                        (strlen($GeneralWebmasterSection->id) + 1), strlen($currentFolder));
+                                                    ?>
+                                                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                                                        <a href="{{ route('specialities',$GeneralWebmasterSection->id) }}">
+                                                            <span class="nav-text">{{ __('backend.specialitiesOf') }}{{ $GeneralWebmasterSectionTitle }}</span>
+                                                        </a>
+                                                    </li>
+                                                @endif
                                         @endif
 
                                         <?php
@@ -318,11 +312,8 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             @else
                                 <li {{ ($GeneralWebmasterSection->id== @$WebmasterSection->id) ? 'class=active' : '' }}>
                                     <a href="{{ route('topics',$GeneralWebmasterSection->id) }}">
-                  <span class="nav-icon">
-                    <i class="material-icons">{!! $LiIcon !!}</i>
-                  </span>
-                                        <span
-                                            class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
+                                        <span class="nav-icon"><i class="material-icons">{!! $LiIcon !!}</i></span>
+                                        <span class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
                                     </a>
                                 </li>
                             @endif
@@ -339,9 +330,7 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                                 <a href="{{ route('Banners') }}">
-<span class="nav-icon">
-<i class="material-icons">&#xe433;</i>
-</span>
+                                    <span class="nav-icon"><i class="material-icons">&#xe433;</i></span>
                                     <span class="nav-text">{{ __('backend.adsBanners') }}</span>
                                 </a>
                             </li>
@@ -369,12 +358,8 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2 || $PathCurrentFolder3==$currentFolder3 || $PathCurrentFolder4==$currentFolder4 ) ? 'class=active' : '' }}>
                                 <a>
-<span class="nav-caret">
-<i class="fa fa-caret-down"></i>
-</span>
-                                    <span class="nav-icon">
-<i class="material-icons">&#xe8b8;</i>
-</span>
+                                    <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                                    <span class="nav-icon"><i class="material-icons">&#xe8b8;</i></span>
                                     <span class="nav-text">{{ __('backend.generalSiteSettings') }}</span>
                                 </a>
                                 <ul class="nav-sub">
@@ -428,12 +413,8 @@ $mnu_title_var2 = "title_" . config('smartend.default_language');
                         ?>
                         <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                             <a>
-<span class="nav-caret">
-<i class="fa fa-caret-down"></i>
-</span>
-                                <span class="nav-icon">
-<i class="material-icons">&#xe8be;</i>
-</span>
+                                <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                                <span class="nav-icon"><i class="material-icons">&#xe8be;</i></span>
                                 <span class="nav-text">{{ __('backend.webmasterTools') }}</span>
                             </a>
                             <ul class="nav-sub">

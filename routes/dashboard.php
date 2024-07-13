@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\WebmasterSectionsController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\BannersController;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\SpecialityController;
 use App\Http\Controllers\Dashboard\TopicsController;
 use App\Http\Controllers\Dashboard\ContactsController;
 use App\Http\Controllers\Dashboard\WebmailsController;
@@ -99,6 +100,16 @@ Route::post('/{webmasterId}/categories/{id}/update', [CategoriesController::clas
 Route::post('/{webmasterId}/categories/{id}/seo', [CategoriesController::class, 'seo'])->name('categoriesSEOUpdate');
 Route::get('/{webmasterId}/categories/destroy/{id?}', [CategoriesController::class, 'destroy'])->name('categoriesDestroy');
 Route::post('/{webmasterId}/categories/updateAll', [CategoriesController::class, 'updateAll'])->name('categoriesUpdateAll');
+
+// specialities
+Route::get('/{webmasterId}/specialities', [SpecialityController::class, 'index'])->name('specialities');
+Route::get('/{webmasterId}/specialities/create', [SpecialityController::class, 'create'])->name('specialitiesCreate');
+Route::post('/{webmasterId}/specialities/store', [SpecialityController::class, 'store'])->name('specialitiesStore');
+Route::get('/{webmasterId}/specialities/{id}/edit', [SpecialityController::class, 'edit'])->name('specialitiesEdit');
+Route::post('/{webmasterId}/specialities/{id}/update', [SpecialityController::class, 'update'])->name('specialitiesUpdate');
+Route::post('/{webmasterId}/specialities/{id}/seo', [SpecialityController::class, 'seo'])->name('specialitiesSEOUpdate');
+Route::get('/{webmasterId}/specialities/destroy/{id?}', [SpecialityController::class, 'destroy'])->name('specialitiesDestroy');
+Route::post('/{webmasterId}/specialities/updateAll', [SpecialityController::class, 'updateAll'])->name('specialitiesUpdateAll');
 
 // Topics
 Route::get('/{webmasterId}/topics', [TopicsController::class, 'index'])->name('topics');

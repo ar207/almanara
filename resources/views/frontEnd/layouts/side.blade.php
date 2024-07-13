@@ -131,7 +131,7 @@
             </div>
 
         @endif
-        
+
 
         @include('frontEnd.layouts.banners',["BannersSettingsId"=>Helper::GeneralWebmasterSettings("side_banners_section_id")])
 
