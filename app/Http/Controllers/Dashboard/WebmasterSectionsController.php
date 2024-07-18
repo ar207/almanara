@@ -76,6 +76,7 @@ class WebmasterSectionsController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -131,6 +132,7 @@ class WebmasterSectionsController extends Controller
         $WebmasterSection->section_icon_status = $request->section_icon_status;
         $WebmasterSection->icon_status = $request->icon_status;
         $WebmasterSection->related_status = $request->related_status;
+        $WebmasterSection->topic_arrangement = $request->topic_arrangement;
         $WebmasterSection->status = 1;
         if ($fileFinalName != "") {
             $WebmasterSection->photo = $fileFinalName;
