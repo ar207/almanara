@@ -171,7 +171,8 @@ if ($WebmasterSection->$title_var != "") {
                             <label for="speciality_id"
                                    class="col-sm-2 form-control-label">{!!  __('backend.specialities') !!} </label>
                             <div class="col-sm-10">
-                                <select name="speciality_id[]" id="speciality_id" class="form-control select2-multiple" multiple
+                                <select name="speciality_id[]" id="speciality_id" class="form-control select2-multiple"
+                                        multiple
                                         ui-jp="select2"
                                         ui-options="{theme: 'bootstrap'}">
                                     <?php
@@ -413,6 +414,16 @@ if ($WebmasterSection->$title_var != "") {
                                 <i class="material-icons">&#xe8fd;</i>
                                 {!!  __('backend.attachTypes') !!}
                             </small>
+                        </div>
+                    </div>
+                @endif
+
+                @if(!empty($WebmasterSection->topic_arrangement))
+                    <div class="form-group row">
+                        <label for="attach_file"
+                               class="col-sm-2 form-control-label">{!!  __('backend.topicsArrangement') !!}</label>
+                        <div class="col-sm-10">
+                            {!! Form::number('topic_arrangement', $arrangementTopic + 1, ['placeholder' => '', 'class' => 'form-control', 'min' => 0, 'step' => 'any']) !!}
                         </div>
                     </div>
                 @endif

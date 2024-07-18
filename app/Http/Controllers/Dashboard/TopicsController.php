@@ -562,13 +562,15 @@ class TopicsController extends Controller
         // General END
 
         //Webmaster Topic Details
-        $WebmasterSection = WebmasterSection::find($webmasterId);
+        $WebmasterSection = WebmasterSection::query()->find($webmasterId);
         if (!empty($WebmasterSection)) {
-            $fatherSections = Section::where('webmaster_id', '=', $webmasterId)->where('father_id', '=', '0')->where('is_speciality', 0)->orderby('row_no', 'asc')->get();
-            $specialities = Section::where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
+            $fatherSections = Section::query()->where('webmaster_id', '=', $webmasterId)->where('father_id', '=', '0')->where('is_speciality', 0)->orderby('row_no', 'asc')->get();
+            $specialities = Section::query()->where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
+
+            $arrangementTopic = Topic::query()->where('webmaster_id', '=', $webmasterId)->max('row_no');
 
             return view("dashboard.topics.create",
-                compact("GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities"));
+                compact("GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities", "arrangementTopic"));
         }
         return redirect()->route('NotFound');
     }
@@ -583,13 +585,26 @@ class TopicsController extends Controller
                 'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
                 'video_file' => 'mimes:mp4,ogv,webm'
             ]);
+            $topicArrangement = $request->input('topic_arrangement');
 
-
-            $next_nor_no = Topic::where('webmaster_id', '=', $webmasterId)->max('row_no');
+            $next_nor_no = Topic::query()->where('webmaster_id', '=', $webmasterId)->max('row_no');
             if ($next_nor_no < 1) {
                 $next_nor_no = 1;
             } else {
                 $next_nor_no++;
+            }
+
+            if (!empty($topicArrangement)) {
+                $existingTopic = Topic::query()->where('webmaster_id', '=', $webmasterId)->where('row_no', $topicArrangement)->first();
+
+                if ($existingTopic) {
+                    $existingTopic->row_no = $next_nor_no;
+                    $existingTopic->save();
+
+                    $next_nor_no = $topicArrangement;
+                } else {
+                    $next_nor_no = $topicArrangement;
+                }
             }
 
             // Start of Upload Files
@@ -812,9 +827,10 @@ class TopicsController extends Controller
                     '0')->orderby('row_no', 'asc')->get();
 
                 $specialities = Section::where('webmaster_id', '=', $webmasterId)->where('is_speciality', 1)->orderby('row_no', 'asc')->get();
+                $arrangementTopic = Topic::query()->where('webmaster_id', '=', $webmasterId)->max('row_no');
 
                 return view("dashboard.topics.edit",
-                    compact("Topic", "GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities"));
+                    compact("Topic", "GeneralWebmasterSections", "WebmasterSection", "fatherSections", "specialities", "arrangementTopic"));
             } else {
                 return redirect()->action('Dashboard\TopicsController@index', $webmasterId);
             }
@@ -827,7 +843,7 @@ class TopicsController extends Controller
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             //
-            $Topic = Topic::find($id);
+            $Topic = Topic::query()->find($id);
             if (!empty($Topic)) {
 
 
@@ -962,6 +978,30 @@ class TopicsController extends Controller
                 if (!@Auth::user()->permissionsGroup->active_status) {
                     $Topic->status = 0;
                 }
+
+                $topicArrangement = $request->input('topic_arrangement');
+
+                $next_nor_no = Topic::query()->where('webmaster_id', '=', $webmasterId)->max('row_no');
+                if ($next_nor_no < 1) {
+                    $next_nor_no = 1;
+                } else {
+                    $next_nor_no++;
+                }
+
+                if (!empty($topicArrangement)) {
+                    $existingTopic = Topic::query()->where('id', '!=', $id)->where('webmaster_id', '=', $webmasterId)->where('row_no', $topicArrangement)->first();
+
+                    if ($existingTopic) {
+                        $existingTopic->row_no = $next_nor_no;
+                        $existingTopic->save();
+
+                        $next_nor_no = $topicArrangement;
+                    } else {
+                        $next_nor_no = $topicArrangement;
+                    }
+                }
+
+                $Topic->row_no = $next_nor_no;
                 $Topic->form_id = $request->page_form_id;
                 $Topic->updated_by = Auth::user()->id;
                 $Topic->save();

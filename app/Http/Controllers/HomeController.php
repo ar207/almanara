@@ -195,9 +195,9 @@ class HomeController extends Controller
                 // general search
                 $CategoriesList = [];
             } else {
-                $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+                $CategoriesList = Section::query()->where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 if (!empty($Category)) {
-                    $CategoriesList = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', $Category->id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+                    $CategoriesList = Section::query()->where('webmaster_id', '=', $WebmasterSection->id)->where('is_speciality', 0)->where('father_id', '=', $Category->id)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 }
             }
 
@@ -238,10 +238,19 @@ class HomeController extends Controller
                 // topics list
                 if ($search_word != "" && $WebmasterSection->id == 1) {
                     //general search
-                    $TopicsList = Topic::where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['status', 1], ['expire_date', null]]);
+                    $TopicsList = Topic::query()->where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['status', 1], ['expire_date', null]])->orderBy('row_no', 'asc');
                 } else {
-                    $TopicsList = Topic::where([['webmaster_id', '=', $WebmasterSection->id], ['status',
-                        1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]]);
+                    if ($part1 == 'news') {
+                        $TopicsList = Topic::query()->where([['webmaster_id', '=', $WebmasterSection->id], ['status',
+                            1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])
+                            ->orWhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])
+                            ->orderBy('id', 'desc');
+                    } else {
+                        $TopicsList = Topic::query()->where([['webmaster_id', '=', $WebmasterSection->id], ['status',
+                            1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])
+                            ->orWhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])
+                            ->orderBy('row_no', 'asc');
+                    }
                 }
 
                 // search word
@@ -366,10 +375,10 @@ class HomeController extends Controller
                 $specialityId = request()->speciality_id;
                 if (!empty($specialityId)) {
                     $topicSpeciality = TopicSpeciality::query()->where('section_id', $specialityId)->pluck('topic_id')->toArray();
-                    $TopicsList = Topic::where([['webmaster_id', '=', 8], ['status',
+                    $TopicsList = Topic::query()->where([['webmaster_id', '=', 8], ['status',
                         1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', 8], ['status', 1], ['expire_date', null]]);
                     $TopicsList = $TopicsList->whereIn("id", $topicSpeciality);
-                    $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(config('smartend.frontend_pagination'));
+                    $TopicsList = $TopicsList->orderby('row_no', 'asc')->paginate(config('smartend.frontend_pagination'));
 
                     $cf_details_var = "title_" . Helper::currentLanguage()->code;
                     $cf_details_var2 = "title_" . config('smartend.default_language');
