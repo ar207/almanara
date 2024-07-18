@@ -359,13 +359,17 @@ if ($WebmasterSection->$title_var != "") {
                                     <label for="speciality_id"
                                            class="col-sm-2 form-control-label">{!!  __('backend.specialities') !!} </label>
                                     <div class="col-sm-10">
-                                        <select name="speciality_id" id="speciality_id" class="form-control select2-multiple"
+                                        <select name="speciality_id[]" id="speciality_id" class="form-control select2-multiple" multiple
                                                 ui-jp="select2"
                                                 ui-options="{theme: 'bootstrap'}">
                                             <?php
                                             $title_var = "title_" . @Helper::currentLanguage()->code;
                                             $title_var2 = "title_" . config('smartend.default_language');
                                             $t_arrow = "&raquo;";
+                                            $selectSpecialities = array();
+                                            foreach ($Topic->specialities as $speciality) {
+                                                $selectSpecialities[] = $speciality->section_id;
+                                            }
                                             ?>
                                             @foreach ($specialities as $speciality)
                                                 <?php
@@ -375,7 +379,7 @@ if ($WebmasterSection->$title_var != "") {
                                                     $ftitle = $speciality->$title_var2;
                                                 }
                                                 ?>
-                                                <option value="{{ $speciality->id  }}" {{ $speciality->id == $Topic->speciality_id ? 'selected' : '' }}>{!! $ftitle !!}</option>
+                                                <option value="{{ $speciality->id  }}" {{ (in_array($speciality->id,$selectSpecialities)) ? "selected='selected'":""  }}>{!! $ftitle !!}</option>
                                             @endforeach
                                         </select>
                                     </div>

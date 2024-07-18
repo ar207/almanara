@@ -63,6 +63,12 @@ class Topic extends Model implements Feedable
         return $this->hasMany('App\Models\TopicCategory');
     }
 
+    //Relation to TopicSpeciality
+    public function specialities()
+    {
+        return $this->hasMany('App\Models\TopicSpeciality');
+    }
+
     //Relation to Users
     public function from_topic()
     {

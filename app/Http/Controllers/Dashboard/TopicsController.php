@@ -16,6 +16,7 @@ use App\Models\Section;
 use App\Models\Topic;
 use App\Models\TopicCategory;
 use App\Models\TopicField;
+use App\Models\TopicSpeciality;
 use App\Models\WebmasterSection;
 use Auth;
 use File;
@@ -259,17 +260,9 @@ class TopicsController extends Controller
                 } else {
                     $title = $Topic->$title_var2;
                 }
-                $specialityName = '';
-                if (!empty($Topic->speciality)) {
-                    if (!empty($Topic->speciality->$title_var)) {
-                        $specialityName = $Topic->speciality->$title_var;
-                    } else {
-                        $specialityName = $Topic->speciality->$title_var2;
-                    }
-                }
 
                 // Get Categories list
-                $section = "";
+                $section = $specialities = "";
                 if ($WebmasterSection->sections_status != 0) {
                     foreach ($Topic->categories as $category) {
                         try {
@@ -287,8 +280,27 @@ class TopicsController extends Controller
                         }
 
                     }
+                    foreach ($Topic->specialities as $speciality) {
+                        try {
+                            if (@$speciality->section->$title_var != "") {
+                                $sp_title = @$speciality->section->$title_var;
+                            } else {
+                                $sp_title = @$speciality->section->$title_var2;
+                            }
+                            if ($sp_title != "") {
+                                $specialities .= "<span class='label dker b-a text-sm m-t-sm'>" . $sp_title . "</span> ";
+                            }
+
+                        } catch (Exception $e) {
+
+                        }
+
+                    }
                     if ($section == "") {
                         $section = "<span style='color: orangered'><i>" . __('backend.topicDeletedSection') . "</i></span>";
+                    }
+                    if ($specialities == "") {
+                        $specialities = "<span style='color: orangered'><i>" . __('backend.topicDeletedSection') . "</i></span>";
                     }
                 }
 
@@ -433,7 +445,7 @@ class TopicsController extends Controller
                 }
 
                 if ($WebmasterSection->sections_status == 3) {
-                    $nestedData['speciality'] = "<div class='text-center'>" . $specialityName . "</div>";
+                    $nestedData['speciality'] = "<div class='text-center'>" . $specialities . "</div>";
                 }
                 $options = '
                       <div class="dropdown">
@@ -640,7 +652,6 @@ class TopicsController extends Controller
 
             // Save topic details
             $Topic->row_no = $next_nor_no;
-            $Topic->speciality_id = $request->speciality_id;
             foreach (Helper::languagesList() as $ActiveLanguage) {
                 if ($ActiveLanguage->box_status) {
                     $Topic->{"title_" . $ActiveLanguage->code} = $request->{"title_" . $ActiveLanguage->code};
@@ -695,6 +706,18 @@ class TopicsController extends Controller
                         $TopicCategory->topic_id = $Topic->id;
                         $TopicCategory->section_id = $category;
                         $TopicCategory->save();
+                    }
+                }
+            }
+
+            if (!empty($request->speciality_id)) {
+                // Save Specialities
+                foreach ($request->speciality_id as $speciality) {
+                    if ($speciality > 0) {
+                        $TopicSpeciality = new TopicSpeciality();
+                        $TopicSpeciality->topic_id = $Topic->id;
+                        $TopicSpeciality->section_id = $speciality;
+                        $TopicSpeciality->save();
                     }
                 }
             }
@@ -940,7 +963,6 @@ class TopicsController extends Controller
                     $Topic->status = 0;
                 }
                 $Topic->form_id = $request->page_form_id;
-                $Topic->speciality_id = $request->speciality_id;
                 $Topic->updated_by = Auth::user()->id;
                 $Topic->save();
 
@@ -954,6 +976,20 @@ class TopicsController extends Controller
                             $TopicCategory->topic_id = $Topic->id;
                             $TopicCategory->section_id = $category;
                             $TopicCategory->save();
+                        }
+                    }
+                }
+
+                // Remove old categories
+                TopicSpeciality::where('topic_id', $Topic->id)->delete();
+                // Save new specialities
+                if ($request->speciality_id != "" && $request->speciality_id != 0) {
+                    foreach ($request->speciality_id as $speciality) {
+                        if ($speciality > 0) {
+                            $TopicSpeciality = new TopicSpeciality();
+                            $TopicSpeciality->topic_id = $Topic->id;
+                            $TopicSpeciality->section_id = $speciality;
+                            $TopicSpeciality->save();
                         }
                     }
                 }
@@ -1115,6 +1151,16 @@ class TopicsController extends Controller
                         $TopicCategory->topic_id = $NewTopic->id;
                         $TopicCategory->section_id = @$category->section_id;
                         $TopicCategory->save();
+                    }
+                }
+
+                // copy specialities
+                foreach ($Topic->specialities as $speciality) {
+                    if (@$speciality->section_id > 0) {
+                        $TopicSpeciality = new TopicSpeciality();
+                        $TopicSpeciality->topic_id = $NewTopic->id;
+                        $TopicSpeciality->section_id = @$speciality->section_id;
+                        $TopicSpeciality->save();
                     }
                 }
 
@@ -1300,6 +1346,7 @@ class TopicsController extends Controller
                 RelatedTopic::where('topic2_id', $Topic->id)->delete();
                 // Remove categories
                 TopicCategory::where('topic_id', $Topic->id)->delete();
+                TopicSpeciality::where('topic_id', $Topic->id)->delete();
                 // Remove comments
                 Comment::where('topic_id', $Topic->id)->delete();
                 // Remove maps
@@ -1408,6 +1455,9 @@ class TopicsController extends Controller
                         RelatedTopic::wherein('topic2_id', $request->ids)->delete();
                         // Remove categories
                         TopicCategory::wherein('topic_id', $request->ids)
+                            ->delete();
+                        // Remove categories
+                        TopicSpeciality::wherein('topic_id', $request->ids)
                             ->delete();
                         // Remove Photos
                         Photo::wherein('topic_id', $request->ids)

@@ -171,7 +171,7 @@ if ($WebmasterSection->$title_var != "") {
                             <label for="speciality_id"
                                    class="col-sm-2 form-control-label">{!!  __('backend.specialities') !!} </label>
                             <div class="col-sm-10">
-                                <select name="speciality_id" id="speciality_id" class="form-control select2-multiple"
+                                <select name="speciality_id[]" id="speciality_id" class="form-control select2-multiple" multiple
                                         ui-jp="select2"
                                         ui-options="{theme: 'bootstrap'}">
                                     <?php
