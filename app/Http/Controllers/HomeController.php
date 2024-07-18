@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Language;
+use App\Models\TopicSpeciality;
 use App\Models\WebmasterSectionField;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\App;
@@ -364,9 +365,10 @@ class HomeController extends Controller
                 $specialities = Section::where('webmaster_id', '=', 8)->where('is_speciality', 1)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 $specialityId = request()->speciality_id;
                 if (!empty($specialityId)) {
+                    $topicSpeciality = TopicSpeciality::query()->where('section_id', $specialityId)->pluck('topic_id')->toArray();
                     $TopicsList = Topic::where([['webmaster_id', '=', 8], ['status',
                         1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', 8], ['status', 1], ['expire_date', null]]);
-                    $TopicsList = $TopicsList->where("speciality_id", $specialityId);
+                    $TopicsList = $TopicsList->whereIn("id", $topicSpeciality);
                     $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(config('smartend.frontend_pagination'));
 
                     $cf_details_var = "title_" . Helper::currentLanguage()->code;
