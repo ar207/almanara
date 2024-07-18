@@ -188,6 +188,7 @@ class WebmasterSectionsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -246,6 +247,7 @@ class WebmasterSectionsController extends Controller
             $WebmasterSection->section_icon_status = $request->section_icon_status;
             $WebmasterSection->icon_status = $request->icon_status;
             $WebmasterSection->related_status = $request->related_status;
+            $WebmasterSection->topic_arrangement = $request->topic_arrangement;
             $WebmasterSection->status = $request->status;
             if ($fileFinalName != "") {
                 $WebmasterSection->photo = $fileFinalName;
