@@ -152,6 +152,7 @@ return array(
     'mainAndSubCategoriesAndSpecialities' => 'Main and sub categories and specialities',
     'sectionIconPicker' => 'Section Icon (Picker)',
     'topicsIconPicker' => 'Topics Icon (Picker)',
+    'topicsArrangement' => 'Topics Arrangement',
     'iconPicker' => 'Icon (Picker)',
     'siteInfoSettings' => 'Website Info',
     'siteStatusSettings' => 'Website Status',

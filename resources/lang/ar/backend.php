@@ -152,6 +152,7 @@ return array(
     'mainAndSubCategoriesAndSpecialities' => 'الفئات الرئيسية والفرعية والتخصصات',
     'sectionIconPicker' => 'إختيار أيقونة للقسم',
     'topicsIconPicker' => 'إختيار أيقونة للموضوعات',
+    'topicsArrangement' => 'ترتيب المواضيع',
     'iconPicker' => 'إختيار أيقونة',
     'siteInfoSettings' => 'بيانات الموقع',
     'siteStatusSettings' => 'حالة الموقع',
