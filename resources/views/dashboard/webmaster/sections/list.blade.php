@@ -11,15 +11,15 @@
                     <a href="">{{ __('backend.siteSectionsSettings') }}</a>
                 </small>
             </div>
-            <div class="box-tool">
-                <ul class="nav">
-                    <li class="nav-item inline">
-                        <a class="btn btn-fw primary" href="{{route("WebmasterSectionsCreate")}}">
-                            <i class="material-icons">&#xe02e;</i>
-                            &nbsp; {{ __('backend.sectionNew') }}</a>
-                    </li>
-                </ul>
-            </div>
+            {{--<div class="box-tool">--}}
+                {{--<ul class="nav">--}}
+                    {{--<li class="nav-item inline">--}}
+                        {{--<a class="btn btn-fw primary" href="{{route("WebmasterSectionsCreate")}}">--}}
+                            {{--<i class="material-icons">&#xe02e;</i>--}}
+                            {{--&nbsp; {{ __('backend.sectionNew') }}</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
             @if($WebmasterSections->total() == 0)
                 <div class="row p-a">
                     <div class="col-sm-12">
