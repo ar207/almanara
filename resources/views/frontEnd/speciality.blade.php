@@ -28,6 +28,9 @@
             if (@$WebmasterSection->photo != "") {
                 $category_image = URL::to('uploads/topics/' . @$WebmasterSection->photo);
             }
+            if (!empty($speciality)) {
+                $category_image = URL::to('uploads/sections/' . @$speciality->photo);
+            }
         }
         ?>
         @if($category_image !="")
@@ -69,7 +72,6 @@
                     @else
                         <div class="row">
                             @if(@count($specialities) > 0)
-
                                 <?php
                                 $title_var = "title_" . @Helper::currentLanguage()->code;
                                 $title_var2 = "title_" . config('smartend.default_language');
@@ -95,8 +97,8 @@
                                     if (empty($categoryThumbnail)) {
                                         $categoryThumbnail = !empty($speciality->photo) ? URL::to('uploads/sections/' . $speciality->photo) : '';
                                     }
-
-                                    $category_link_url = url('specialities') . '?speciality_id=' . $speciality->id;
+                                    $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
+                                    $category_link_url = url($checkLocale.'specialities') . '?speciality_id=' . $speciality->id;
                                     ?>
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <article>

@@ -157,7 +157,7 @@ class HomeController extends Controller
                         if (!empty($Section2)) {
                             return $this->list_page($lang, $WebmasterSection, $Section2);
                         } else {
-                            $Topic2 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->where('is_speciality', 0)->first();
+                            $Topic2 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->first();
                             if (!empty($Topic2)) {
                                 return $this->post_page($lang, $Topic2);
                             }
