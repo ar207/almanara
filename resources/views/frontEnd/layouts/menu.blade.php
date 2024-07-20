@@ -7,9 +7,9 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 @foreach($MenuLinks as $MenuLink)
-                    <li class="{{ (@$MenuLink->sub)?"dropdown":"" }}"><a
-                            class="nav-link {{ \App\Helpers\SiteMenu::ActiveLink(url()->current(),@$MenuLink,@$WebmasterSection) }}"
-                            href="{{ @$MenuLink->url }}" target="{{ @$MenuLink->target }}">
+                    <li class="{{ (@$MenuLink->sub)?"dropdown":"" }}">
+                        <a class="nav-link {{ \App\Helpers\SiteMenu::ActiveLink(url()->current(),@$MenuLink,@$WebmasterSection) }}"
+                           href="{{ @$MenuLink->url }}" target="{{ @$MenuLink->target }}">
                             {!! (@$MenuLink->icon)?"<i class='".@$MenuLink->icon."'></i> ":"" !!} {{ @$MenuLink->title }}
                             @if(@$MenuLink->sub)
                                 <i class="drop-arrow bi bi-chevron-down"></i>
@@ -30,10 +30,10 @@
                                         @if(@$SubLink->sub)
                                             <ul>
                                                 @foreach($SubLink->sub as $SubLink2)
-                                                    <li class="{{ (@$SubLink2->sub)?"dropdown":"" }}"><a
-                                                            class="nav-link"
-                                                            href="{{ @$SubLink2->url }}"
-                                                            target="{{ @$SubLink2->target }}">{!! (@$SubLink2->icon)?"<i class='".@$SubLink2->icon."'></i> ":"" !!} {{ @$SubLink2->title }}
+                                                    <li class="{{ (@$SubLink2->sub)?"dropdown":"" }}">
+                                                        <a class="nav-link" href="{{ @$SubLink2->url }}"
+                                                           target="{{ @$SubLink2->target }}">
+                                                            {!! (@$SubLink2->icon)?"<i class='".@$SubLink2->icon."'></i> ":"" !!} {{ @$SubLink2->title }}
                                                             @if(@$SubLink2->sub)
                                                                 <i class="drop-arrow bi bi-chevron-{{ @Helper::currentLanguage()->right }}"></i>
                                                             @endif
@@ -41,10 +41,11 @@
                                                         @if(@$SubLink2->sub)
                                                             <ul>
                                                                 @foreach($SubLink2->sub as $SubLink3)
-                                                                    <li><a
-                                                                            class="nav-link"
-                                                                            href="{{ @$SubLink3->url }}"
-                                                                            target="{{ @$SubLink3->target }}">{!! (@$SubLink3->icon)?"<i class='".@$SubLink3->icon."'></i> ":"" !!} {{ @$SubLink3->title }}</a>
+                                                                    <li>
+                                                                        <a class="nav-link" href="{{ @$SubLink3->url }}"
+                                                                           target="{{ @$SubLink3->target }}">
+                                                                            {!! (@$SubLink3->icon)?"<i class='".@$SubLink3->icon."'></i> ":"" !!} {{ @$SubLink3->title }}
+                                                                        </a>
                                                                     </li>
                                                                 @endforeach
                                                             </ul>

@@ -244,6 +244,7 @@ class HomeController extends Controller
                         $TopicsList = Topic::query()->where([['webmaster_id', '=', $WebmasterSection->id], ['status',
                             1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])
                             ->orWhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])
+                            ->orderBy('date', 'asc')
                             ->orderBy('id', 'desc');
                     } else {
                         $TopicsList = Topic::query()->where([['webmaster_id', '=', $WebmasterSection->id], ['status',

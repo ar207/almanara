@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use App;
 use App\Models\Menu;
+use App\Models\Section;
 use URL;
 
 class SiteMenu
@@ -113,10 +114,34 @@ class SiteMenu
                             }
                         }
                     }
+                    $linkUrl = Helper::sectionURL($MenuLink->cat_id);
+                    if ($MenuLink->cat_id == 17) {
+                        $specialities = Section::query()->where('webmaster_id', 8)->where('is_speciality', 1)->get();
+                        foreach ($specialities as $speciality) {
+                            if ($speciality->$_title_var != "") {
+                                $topic_title = $speciality->$_title_var;
+                            } else {
+                                $topic_title = $speciality->$_title_var2;
+                            }
+                            $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
+                            $Sub[] = [
+                                "id" => $speciality->id,
+                                "title" => $topic_title,
+                                "url" => url($checkLocale . 'specialities') . '?speciality_id=' . $speciality->id,
+                                "target" => "",
+                                "icon" => ($speciality->icon != "") ? "fa " . $speciality->icon : "",
+                                "category_id" => 0,
+                                "webmaster_id" => $MenuLink->cat_id,
+                                "sub" => [],
+                            ];
+                        }
+                        $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
+                        $linkUrl = url($checkLocale . 'specialities');
+                    }
                     $Links[] = [
                         "id" => $MenuLink->id,
                         "title" => $link_title,
-                        "url" => Helper::sectionURL($MenuLink->cat_id),
+                        "url" => $linkUrl,
                         "target" => ($MenuLink->target) ? "_blank" : "",
                         "icon" => ($MenuLink->icon != "") ? "fa " . $MenuLink->icon : "",
                         "category_id" => 0,
@@ -139,7 +164,7 @@ class SiteMenu
                     // Direct Link
                     $this_link_url = "";
                     $link = $MenuLink->link;
-                    if(@$MenuLink->$_link_var !=""){
+                    if (@$MenuLink->$_link_var != "") {
                         $link = @$MenuLink->$_link_var;
                     }
                     if ($link != "") {

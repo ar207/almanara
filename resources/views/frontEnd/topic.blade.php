@@ -53,7 +53,7 @@
             }
             $page_title = $category_title;
             if (@$CurrentCategory->photo != "") {
-               //  $category_image = URL::to('uploads/sections/' . @$CurrentCategory->photo);
+                //  $category_image = URL::to('uploads/sections/' . @$CurrentCategory->photo);
             }
         }
 
@@ -62,7 +62,7 @@
             $file_ext = strrchr($Topic->attach_file, ".");
             $file_ext = strtolower($file_ext);
             if (in_array($file_ext, [".jpg", ".jpeg", ".png", ".gif", ".webp"])) {
-               // $category_image = URL::to('uploads/topics/' . @$Topic->attach_file);
+                // $category_image = URL::to('uploads/topics/' . @$Topic->attach_file);
                 $attach_file = "";
             }
         }
@@ -173,7 +173,7 @@
                                         </div>
                                     @endif
                                     @if($Topic->photo_file !="")
-                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"  loading="lazy"
+                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}" loading="lazy"
                                              alt="{{ $title }}"/>
                                     @endif
                                     <div class="audio-player">
@@ -199,48 +199,16 @@
                                         </div>
                                     @endif
 
-                                    @if($Topic->photo_file !="")
-                                        <div class="post-image mb-2">
-                                            <a href="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
-                                               class="galelry-lightbox" title="{{ $title }}">
-                                                <img  loading="lazy"
-                                                    src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"
-                                                    alt="{{ $title }}" class="post-main-photo">
-                                            </a>
-                                        </div>
-                                    @endif
-
-                                    <div id="gallery" class="gallery line-frame mb-3 post-gallery">
-                                        <div class="row g-0 m-0">
-                                            <?php
-                                            $cols_lg = 3;
-                                            $cols_md = 4;
-                                            if ($Categories->count() > 1) {
-                                                $cols_lg = 4;
-                                                $cols_md = 6;
-                                            }
-                                            if ($Topic->photos->count() == 3) {
-                                                $cols_lg = 4;
-                                                $cols_md = 4;
-                                            }
-                                            if ($Topic->photos->count() == 2) {
-                                                $cols_lg = 6;
-                                                $cols_md = 6;
-                                            }
-                                            ?>
-                                            @foreach($Topic->photos as $photo)
-                                                <div class="col-lg-{{ $cols_lg }} col-md-{{ $cols_md }}">
-                                                    <div class="gallery-item">
-                                                        <a href="{{ URL::to('uploads/topics/'.$photo->file) }}"
-                                                           class="galelry-lightbox" title="{{ $photo->title }}">
-                                                            <img src="{{ URL::to('uploads/topics/'.$photo->file) }}"  loading="lazy"
-                                                                 alt="{{ $photo->title }}" class="img-fluid">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    {{--@if($Topic->photo_file !="")--}}
+                                    {{--<div class="post-image mb-2">--}}
+                                    {{--<a href="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"--}}
+                                    {{--class="galelry-lightbox" title="{{ $title }}">--}}
+                                    {{--<img  loading="lazy"--}}
+                                    {{--src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"--}}
+                                    {{--alt="{{ $title }}" class="post-main-photo">--}}
+                                    {{--</a>--}}
+                                    {{--</div>--}}
+                                    {{--@endif--}}
                                 </div>
                             @else
                                 {{--one photo--}}
@@ -255,11 +223,11 @@
                                             </h1>
                                         </div>
                                     @endif
-                                    @if($Topic->photo_file !="")
-                                        <img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"  loading="lazy"
-                                             alt="{{ $title }}" title="{{ $title }}" class="post-main-photo"/>
-                                        <br>
-                                    @endif
+                                    {{--@if($Topic->photo_file !="")--}}
+                                    {{--<img src="{{ URL::to('uploads/topics/'.$Topic->photo_file) }}"  loading="lazy"--}}
+                                    {{--alt="{{ $title }}" title="{{ $title }}" class="post-main-photo"/>--}}
+                                    {{--<br>--}}
+                                    {{--@endif--}}
                                 </div>
                             @endif
 
@@ -267,6 +235,39 @@
 
                             <div class="article-body">
                                 {!! str_replace('"#','"'.Request::url().'#',$Topic->$details) !!}
+                            </div>
+
+                            <div id="gallery" class="gallery line-frame mb-3 post-gallery">
+                                <div class="row g-0 m-0">
+                                    <?php
+                                    $cols_lg = 3;
+                                    $cols_md = 4;
+                                    if ($Categories->count() > 1) {
+                                        $cols_lg = 4;
+                                        $cols_md = 6;
+                                    }
+                                    if ($Topic->photos->count() == 3) {
+                                        $cols_lg = 4;
+                                        $cols_md = 4;
+                                    }
+                                    if ($Topic->photos->count() == 2) {
+                                        $cols_lg = 6;
+                                        $cols_md = 6;
+                                    }
+                                    ?>
+                                    @foreach($Topic->photos as $photo)
+                                        <div class="col-lg-{{ $cols_lg }} col-md-{{ $cols_md }}">
+                                            <div class="gallery-item">
+                                                <a href="{{ URL::to('uploads/topics/'.$photo->file) }}"
+                                                   class="galelry-lightbox" title="{{ $photo->title }}">
+                                                    <img src="{{ URL::to('uploads/topics/'.$photo->file) }}"
+                                                         loading="lazy"
+                                                         alt="{{ $photo->title }}" class="img-fluid">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
 
                             @if($attach_file !="")
