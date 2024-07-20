@@ -911,13 +911,6 @@ class Helper
 
             $formattedDate = date($format, strtotime($date));
 
-            if ($locale === 'ar') {
-                $arabicNumbers = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-                $englishNumbers = ['0','1','2','3','4','5','6','7','8','9'];
-
-                $formattedDate = str_replace($englishNumbers, $arabicNumbers, $formattedDate);
-            }
-
             return $formattedDate;
         }
         return "";
