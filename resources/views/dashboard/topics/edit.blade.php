@@ -651,8 +651,8 @@ if ($WebmasterSection->$title_var != "") {
                                             <div class="col-sm-12">
                                                 <div id="topic_cover_photo" class="col-sm-4 box p-a-xs">
                                                     <a target="_blank"
-                                                       href="{{ asset('uploads/topics/'.$Topic->photo_file) }}"><img
-                                                            src="{{ asset('uploads/topics/'.$Topic->photo_file) }}"
+                                                       href="{{ asset('uploads/topics/'.$Topic->cover_photo) }}"><img
+                                                            src="{{ asset('uploads/topics/'.$Topic->cover_photo) }}"
                                                             class="img-responsive">
                                                         {{ $Topic->cover_photo }}
                                                     </a>
