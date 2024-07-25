@@ -644,7 +644,7 @@ if ($WebmasterSection->$title_var != "") {
                         @if($WebmasterSection->photo_status)
                             <div class="form-group row">
                                 <label for="photo_file"
-                                       class="col-sm-2 form-control-label">{!!  __('backend.topicPhoto') !!}</label>
+                                       class="col-sm-2 form-control-label">{!!  __('backend.coverPhoto') !!}</label>
                                 <div class="col-sm-10">
                                     @if($Topic->photo_file!="")
                                         <div class="row">
