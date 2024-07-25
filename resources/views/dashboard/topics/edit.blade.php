@@ -641,6 +641,50 @@ if ($WebmasterSection->$title_var != "") {
                             </div>
                         @endif
 
+                        @if($WebmasterSection->photo_status)
+                            <div class="form-group row">
+                                <label for="photo_file"
+                                       class="col-sm-2 form-control-label">{!!  __('backend.topicPhoto') !!}</label>
+                                <div class="col-sm-10">
+                                    @if($Topic->photo_file!="")
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div id="topic_cover_photo" class="col-sm-4 box p-a-xs">
+                                                    <a target="_blank"
+                                                       href="{{ asset('uploads/topics/'.$Topic->photo_file) }}"><img
+                                                            src="{{ asset('uploads/topics/'.$Topic->photo_file) }}"
+                                                            class="img-responsive">
+                                                        {{ $Topic->cover_photo }}
+                                                    </a>
+                                                    <br>
+                                                    <a onclick="document.getElementById('topic_cover_photo').style.display='none';document.getElementById('cover_photo_delete').value='1';document.getElementById('cover_undo').style.display='block';"
+                                                       class="btn btn-sm btn-default">{!!  __('backend.delete') !!}</a>
+                                                </div>
+                                                <div id="cover_undo" class="col-sm-4 p-a-xs" style="display: none">
+                                                    <a onclick="document.getElementById('topic_cover_photo').style.display='block';document.getElementById('cover_photo_delete').value='0';document.getElementById('cover_undo').style.display='none';">
+                                                        <i class="material-icons">
+                                                            &#xe166;</i> {!!  __('backend.undoDelete') !!}</a>
+                                                </div>
+
+                                                {!! Form::hidden('cover_photo_delete','0', array('id'=>'cover_photo_delete')) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {!! Form::file('cover_photo', array('class' => 'form-control','id'=>'cover_photo','accept'=>'image/*')) !!}
+
+                                </div>
+                            </div>
+                            <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                            </div>
+                        @endif
+
                         @if($WebmasterSection->icon_status)
                             <div class="form-group row">
                                 <label for="icon"

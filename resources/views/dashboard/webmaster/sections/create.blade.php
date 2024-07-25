@@ -396,6 +396,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="icon_status1"
+                           class="col-sm-2 form-control-label">{!!  __('backend.coverPhoto') !!}</label>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label class="ui-check ui-check-md">
+                                {!! Form::radio('is_cover_photo','1', array('id' => 'is_cover_photo1','class'=>'has-value')) !!}
+                                <i class="dark-white"></i>
+                                {{ __('backend.yes') }}
+                            </label>
+                            &nbsp; &nbsp;
+                            <label class="ui-check ui-check-md">
+                                {!! Form::radio('is_cover_photo','0', array('id' => 'is_cover_photo2','class'=>'has-value')) !!}
+                                <i class="dark-white"></i>
+                                {{ __('backend.no') }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <br/>
                     <label><h5><i class="material-icons">&#xe8d8;</i> {{ __('backend.additionalTabs') }}

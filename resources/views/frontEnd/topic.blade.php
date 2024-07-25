@@ -32,7 +32,8 @@
         $webmaster_section_title = "";
         $category_title = "";
         $page_title = "";
-        $category_image = URL::to('uploads/topics/' . @$Topic->photo_file);
+        $coverImage = !empty($Topic->cover_photo) ? $Topic->cover_photo : $Topic->photo_file;
+        $category_image = URL::to('uploads/topics/' . $coverImage);
 
         if (@$WebmasterSection != "none") {
             if (@$WebmasterSection->$title_var != "") {

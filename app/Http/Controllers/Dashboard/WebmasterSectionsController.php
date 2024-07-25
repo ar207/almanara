@@ -133,6 +133,7 @@ class WebmasterSectionsController extends Controller
         $WebmasterSection->icon_status = $request->icon_status;
         $WebmasterSection->related_status = $request->related_status;
         $WebmasterSection->topic_arrangement = $request->topic_arrangement;
+        $WebmasterSection->is_cover_photo = $request->is_cover_photo;
         $WebmasterSection->status = 1;
         if ($fileFinalName != "") {
             $WebmasterSection->photo = $fileFinalName;
@@ -248,6 +249,7 @@ class WebmasterSectionsController extends Controller
             $WebmasterSection->icon_status = $request->icon_status;
             $WebmasterSection->related_status = $request->related_status;
             $WebmasterSection->topic_arrangement = $request->topic_arrangement;
+            $WebmasterSection->is_cover_photo = $request->is_cover_photo;
             $WebmasterSection->status = $request->status;
             if ($fileFinalName != "") {
                 $WebmasterSection->photo = $fileFinalName;

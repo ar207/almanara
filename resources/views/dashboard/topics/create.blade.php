@@ -387,6 +387,24 @@ if ($WebmasterSection->$title_var != "") {
                     </div>
                 @endif
 
+                @if($WebmasterSection->is_cover_photo)
+                    <div class="form-group row">
+                        <label for="photo_file"
+                               class="col-sm-2 form-control-label">{!!  __('backend.coverPhoto') !!}</label>
+                        <div class="col-sm-10">
+                            {!! Form::file('cover_photo', array('class' => 'form-control','id'=>'cover_photo','accept'=>'image/*')) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                        <div class="offset-sm-2 col-sm-10">
+                            <small>
+                                <i class="material-icons">&#xe8fd;</i>
+                                {!!  __('backend.imagesTypes') !!}
+                            </small>
+                        </div>
+                    </div>
+                @endif
+
                 @if($WebmasterSection->icon_status)
                     <div class="form-group row">
                         <label for="icon"

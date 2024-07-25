@@ -582,6 +582,7 @@ class TopicsController extends Controller
             //
             $this->validate($request, [
                 'photo_file' => 'image',
+                'cover_photo' => 'image',
                 'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
                 'video_file' => 'mimes:mp4,ogv,webm'
             ]);
@@ -619,6 +620,19 @@ class TopicsController extends Controller
                 // resize & optimize
                 Helper::imageResize($path . $fileFinalName);
                 Helper::imageOptimize($path . $fileFinalName);
+            }
+
+            $coverInputName = "cover_photo";
+            $coverFinalName = "";
+            if ($request->$coverInputName != "") {
+                $coverFinalName = time() . rand(1111,
+                        9999) . '.' . $request->file($coverInputName)->getClientOriginalExtension();
+                $path = $this->uploadPath;
+                $request->file($coverInputName)->move($path, $coverFinalName);
+
+                // resize & optimize
+                Helper::imageResize($path . $coverFinalName);
+                Helper::imageOptimize($path . $coverFinalName);
             }
 
             $formFileName = "audio_file";
@@ -685,6 +699,9 @@ class TopicsController extends Controller
             }
             if ($fileFinalName != "") {
                 $Topic->photo_file = $fileFinalName;
+            }
+            if ($coverFinalName != "") {
+                $Topic->cover_photo = $coverFinalName;
             }
             if ($audioFileFinalName != "") {
                 $Topic->audio_file = $audioFileFinalName;
@@ -849,6 +866,7 @@ class TopicsController extends Controller
 
                 $this->validate($request, [
                     'photo_file' => 'image',
+                    'cover_photo' => 'image',
                     'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
                     'video_file' => 'mimes:mp4,ogv,webm'
                 ]);
@@ -871,6 +889,25 @@ class TopicsController extends Controller
                     // resize & optimize
                     Helper::imageResize($path . $fileFinalName);
                     Helper::imageOptimize($path . $fileFinalName);
+                }
+
+
+                $coverInputName = "cover_photo";
+                $coverFinalName = "";
+                if ($request->$coverInputName != "") {
+                    // Delete a Topic photo
+                    if ($Topic->$coverInputName != "" && $Topic->$coverInputName != "default.png") {
+                        File::delete($this->uploadPath . $Topic->$coverInputName);
+                    }
+
+                    $coverFinalName = time() . rand(1111,
+                            9999) . '.' . $request->file($coverInputName)->getClientOriginalExtension();
+                    $path = $this->uploadPath;
+                    $request->file($coverInputName)->move($path, $coverFinalName);
+
+                    // resize & optimize
+                    Helper::imageResize($path . $coverFinalName);
+                    Helper::imageOptimize($path . $coverFinalName);
                 }
 
 
@@ -947,8 +984,21 @@ class TopicsController extends Controller
                     $Topic->photo_file = "";
                 }
 
+                if ($request->cover_photo_delete == 1) {
+                    // Delete cover_photo_file
+                    if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
+                        File::delete($this->uploadPath . $Topic->cover_photo);
+                    }
+
+                    $Topic->cover_photo = "";
+                }
+
                 if ($fileFinalName != "") {
                     $Topic->photo_file = $fileFinalName;
+                }
+
+                if ($coverFinalName != "") {
+                    $Topic->cover_photo = $coverFinalName;
                 }
                 if ($audioFileFinalName != "") {
                     $Topic->audio_file = $audioFileFinalName;
@@ -1150,6 +1200,13 @@ class TopicsController extends Controller
                     $copied = File::copy($path . $Topic->photo_file, $path . $new_file_name);
                     if ($copied) {
                         $NewTopic->photo_file = $new_file_name;
+                    }
+                }
+                if ($Topic->cover_photo != "") {
+                    $new_file_name = "c" . $Topic->cover_photo;
+                    $copied = File::copy($path . $Topic->cover_photo, $path . $new_file_name);
+                    if ($copied) {
+                        $NewTopic->cover_photo = $new_file_name;
                     }
                 }
                 if ($Topic->audio_file != "") {
@@ -1370,6 +1427,9 @@ class TopicsController extends Controller
                 if ($Topic->photo_file != "" && $Topic->photo_file != "default.png") {
                     File::delete($this->uploadPath . $Topic->photo_file);
                 }
+                if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
+                    File::delete($this->uploadPath . $Topic->cover_photo);
+                }
                 if ($Topic->attach_file != "") {
                     File::delete($this->uploadPath . $Topic->attach_file);
                 }
@@ -1458,6 +1518,9 @@ class TopicsController extends Controller
                         foreach ($Topics as $Topic) {
                             if ($Topic->photo_file != "" && $Topic->photo_file != "default.png") {
                                 File::delete($this->uploadPath . $Topic->photo_file);
+                            }
+                            if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
+                                File::delete($this->uploadPath . $Topic->cover_photo);
                             }
                             if ($Topic->attach_file != "") {
                                 File::delete($this->uploadPath . $Topic->attach_file);
@@ -2642,6 +2705,9 @@ class TopicsController extends Controller
                             // Delete a Topic photo
                             if ($Topic->photo_file != "" && $Topic->photo_file != "default.png") {
                                 File::delete($this->uploadPath . $Topic->photo_file);
+                            }
+                            if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
+                                File::delete($this->uploadPath . $Topic->cover_photo);
                             }
                             if ($Topic->attach_file != "") {
                                 File::delete($this->uploadPath . $Topic->attach_file);
