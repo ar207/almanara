@@ -116,7 +116,7 @@ class SiteMenu
                     }
                     $linkUrl = Helper::sectionURL($MenuLink->cat_id);
                     if ($MenuLink->cat_id == 17) {
-                        $specialities = Section::query()->where('webmaster_id', 8)->where('is_speciality', 1)->get();
+                        $specialities = Section::query()->where('webmaster_id', 8)->where('is_speciality', 1)->orderBy('row_no', 'asc')->get();
                         foreach ($specialities as $speciality) {
                             if ($speciality->$_title_var != "") {
                                 $topic_title = $speciality->$_title_var;
