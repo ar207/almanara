@@ -141,8 +141,9 @@
                                         }
                                         $mainCategoryId = !empty($mainCategory) ? $mainCategory->id : '';
                                         $subCategoryId = !empty($subCategory) ? $subCategory->id : '';
+                                        $CurrentCategoryId = !empty($CurrentCategory) ? $CurrentCategory->id : '';
 
-                                        $topic_link_url = Helper::topicURL($Topic->id, "", $CurrentCategory->id, $mainCategoryId, $subCategoryId);
+                                        $topic_link_url = Helper::topicURL($Topic->id, "", $CurrentCategoryId, $mainCategoryId, $subCategoryId);
                                         ?>
                                         <div
                                             class="col-lg-4 col-md-6 col-12">
