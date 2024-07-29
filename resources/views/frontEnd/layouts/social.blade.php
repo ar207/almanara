@@ -25,9 +25,9 @@
                 class="bi bi-instagram"></i></a>
     @endif
     @if(Helper::GeneralSiteSettings('social_link7'))
-        <a href="{{Helper::GeneralSiteSettings('social_link7')}}" data-bs-toggle="tooltip" title="Pinterest" data-bs-placement="{{ @$tt_position }}"
-           target="_blank" class="social-pinterest"><i
-                class="bi bi-pinterest"></i></a>
+        <a href="{{Helper::GeneralSiteSettings('social_link7')}}" data-bs-toggle="tooltip" title="Tiktok" data-bs-placement="{{ @$tt_position }}"
+           target="_blank" class="social-tiktok"><i
+                class="bi bi-tiktok"></i></a>
     @endif
     @if(Helper::GeneralSiteSettings('social_link8'))
         <a href="{{Helper::GeneralSiteSettings('social_link8')}}" data-bs-toggle="tooltip" title="Threads" data-bs-placement="{{ @$tt_position }}"
