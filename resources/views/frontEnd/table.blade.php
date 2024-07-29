@@ -79,7 +79,6 @@
                                 <div>
                                     <table class="table table-bordered">
                                         <thead>
-                                        <th class="text-center light">ID</th>
                                         @if($WebmasterSection->title_status)
                                             <th class="text-left light">{{ __('backend.topicName') }}</th>
                                         @endif
@@ -163,7 +162,6 @@
                                             $i++;
                                             ?>
                                             <tr>
-                                                <td class="text-center">{!! $Topic->id !!}</td>
                                                 @if($WebmasterSection->title_status)
                                                     <td>{!! $title !!}</td>
                                                 @endif

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Validator;
 use Mail;
 use Redirect;
 use Auth;
+use function Symfony\Component\ErrorHandler\enhanceError;
 
 class HomeController extends Controller
 {
@@ -51,6 +52,12 @@ class HomeController extends Controller
     public function seo($part1 = "", $part2 = "", $part3 = "", $part4 = "", $part5 = "", $part6 = "")
     {
         $languages_codes = Language::where("status", 1)->pluck("code")->toarray();
+        $partsArr['part1'] = $part1;
+        $partsArr['part2'] = $part2;
+        $partsArr['part3'] = $part3;
+        $partsArr['part4'] = $part4;
+        $partsArr['part5'] = $part5;
+        $partsArr['part6'] = $part6;
         if (in_array(strtolower($part1), $languages_codes)) {
             // part1 is lang
             $lang = strtolower($part1);
@@ -85,7 +92,7 @@ class HomeController extends Controller
             // for direct landing pages like "website.com/about"
             $Topic = Topic::where('status', 1)->where("webmaster_id", 1)->where("seo_url_slug_" . $lang, $part1)->first();
             if (!empty($Topic)) {
-                return $this->post_page($lang, $Topic);
+                return $this->post_page(['lang' => $lang, 'topic' => $Topic, $partsArr]);
             }
         }
         if (!empty($WebmasterSection)) {
@@ -120,10 +127,10 @@ class HomeController extends Controller
                                             $Topic5 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part5))->first();
                                         }
                                         if (!empty($Topic5)) {
-                                            return $this->post_page($lang, $Topic5);
+                                            return $this->post_page(['lang' => $lang, 'topic' => $Topic5, $partsArr]);
                                         }
                                     } else {
-                                        return $this->list_page($lang, $WebmasterSection, $Section4);
+                                        return $this->list_page(['lang' => $lang, 'webmasterSection' => $WebmasterSection, 'category' => $Section4, $partsArr]);
                                     }
                                 } else {
                                     $Topic4 = Topic::where('status', 1)->where("seo_url_slug_" . $lang, $part4)->first();
@@ -131,11 +138,11 @@ class HomeController extends Controller
                                         $Topic4 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part4))->first();
                                     }
                                     if (!empty($Topic4)) {
-                                        return $this->post_page($lang, $Topic4);
+                                        return $this->post_page(['lang' => $lang, 'topic' => $Topic4, $partsArr]);
                                     }
                                 }
                             } else {
-                                return $this->list_page($lang, $WebmasterSection, $Section3);
+                                return $this->list_page(['lang' => $lang, 'webmasterSection' => $WebmasterSection, 'category' => $Section3, $partsArr]);
                             }
                         } else {
                             $Topic3 = Topic::where('status', 1)->where("seo_url_slug_" . $lang, $part3)->first();
@@ -143,45 +150,51 @@ class HomeController extends Controller
                                 $Topic3 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part3))->first();
                             }
                             if (!empty($Topic3)) {
-                                return $this->post_page($lang, $Topic3);
+                                return $this->post_page(['lang' => $lang, 'topic' => $Topic3, $partsArr]);
                             }
                         }
                     } else {
-                        return $this->list_page($lang, $WebmasterSection, $Section1);
+                        return $this->list_page(['lang' => $lang, 'webmasterSection' => $WebmasterSection, 'category' => $Section1, $partsArr]);
                     }
                 } else {
                     $Topic1 = Topic::where('status', 1)->where("seo_url_slug_" . $lang, $part2)->first();
                     if (!empty($Topic1)) {
-                        return $this->post_page($lang, $Topic1);
+                        return $this->post_page(['lang' => $lang, 'topic' => $Topic1, $partsArr]);
                     } else {
                         $Section2 = Section::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->where('is_speciality', 0)->first();
                         if (!empty($Section2)) {
-                            return $this->list_page($lang, $WebmasterSection, $Section2);
+                            return $this->list_page(['lang' => $lang, 'webmasterSection' => $WebmasterSection, 'category' => $Section2, $partsArr]);
                         } else {
                             $Topic2 = Topic::where('status', 1)->where("title_" . $lang, Helper::SlugToString($part2))->first();
                             if (!empty($Topic2)) {
-                                return $this->post_page($lang, $Topic2);
+                                return $this->post_page(['lang' => $lang, 'topic' => $Topic2, $partsArr]);
                             }
                         }
                     }
                 }
             }
-            return $this->list_page($lang, $WebmasterSection, [], $part1);
+            return $this->list_page(['lang' => $lang, 'webmasterSection' => $WebmasterSection, $partsArr]);
         }
         return $this->page_404();
     }
 
     /**
-     * @param $lang
-     * @param array $WebmasterSection
-     * @param array $Category
-     * @param null $part1
+     * @param $params
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function list_page($lang, $WebmasterSection = [], $Category = [], $part1 = null)
+    public function list_page($params)
     {
+        $lang = $params['lang'];
+        $WebmasterSection = $params['webmasterSection'];
+        $Category = !empty($params['category']) ? $params['category'] : [];
+        $part1 = $params[0]['part1'];
+        $part2 = $params[0]['part2'];
+        $part3 = $params[0]['part3'];
+        $part4 = $params[0]['part4'];
+        $part5 = $params[0]['part5'];
+        $part6 = $params[0]['part6'];
         if (!empty($WebmasterSection)) {
-
+            $subCategory = $mainCategory = '';
             $page_type = "section";
             $page_id = $WebmasterSection->id;
             $search_word = request()->input("search_word");
@@ -190,6 +203,26 @@ class HomeController extends Controller
                 $search_word = preg_replace('/[^\p{L}\p{N}\s]/u', '', $search_word);
             }
 
+            if (!empty($part3)) {
+                $urlCat = $part1 == 'ar' ? $part3 : $part2;
+                $mainCategory = Section::query()->where('status', 1)->where("seo_url_slug_" . $lang, $urlCat)->where('is_speciality', 0)->first();
+                if (empty($mainCategory)) {
+                    $mainCategory = Section::query()->where('status', 1)->where("title_" . $lang, Helper::SlugToString($urlCat))->where('is_speciality', 0)->first();
+                }
+                if ($mainCategory->{'seo_url_slug_' . $lang} == $urlCat && $part3 == $urlCat && empty($part4)) {
+                    $mainCategory = '';
+                }
+            }
+            if (!empty($part4)) {
+                $urlCat = $part1 == 'ar' ? $part4 : $part3;
+                $subCategory = Section::query()->where('status', 1)->where("seo_url_slug_" . $lang, $urlCat)->where('is_speciality', 0)->first();
+                if (empty($subCategory)) {
+                    $subCategory = Section::query()->where('status', 1)->where("title_" . $lang, Helper::SlugToString($urlCat))->where('is_speciality', 0)->first();
+                }
+                if ($subCategory->{'seo_url_slug_' . $lang} == $urlCat && $part4 == $urlCat) {
+                    $subCategory = '';
+                }
+            }
             // categories list
             if ($search_word != "" && $WebmasterSection->id == 1) {
                 // general search
@@ -224,7 +257,8 @@ class HomeController extends Controller
                     $FoundTopic = $FoundTopic->first();
                 }
                 if (!empty($FoundTopic)) {
-                    return $this->privateTopic($lang, $FoundTopic);
+                    dd(1);
+                    return $this->privateTopic(['lang' => $lang, 'topic' => $FoundTopic, $params]);
                 }
             }
             if ($WebmasterSection->type != 8 && $WebmasterSection->type != 7) {
@@ -315,7 +349,7 @@ class HomeController extends Controller
                 $MostViewedTopics = clone $TopicsList;
 
                 // order and paginate
-                $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(config('smartend.frontend_pagination'));
+                $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(12);
 
                 // Get Most Viewed Topics
                 $MostViewedTopics = $MostViewedTopics->orderby('visits', 'desc')->limit(3)->get();
@@ -379,7 +413,7 @@ class HomeController extends Controller
                     $TopicsList = Topic::query()->where([['webmaster_id', '=', 8], ['status',
                         1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['webmaster_id', '=', 8], ['status', 1], ['expire_date', null]]);
                     $TopicsList = $TopicsList->whereIn("id", $topicSpeciality);
-                    $TopicsList = $TopicsList->orderby('row_no', 'asc')->paginate(config('smartend.frontend_pagination'));
+                    $TopicsList = $TopicsList->orderby('row_no', 'asc')->paginate(12);
 
                     $cf_details_var = "title_" . Helper::currentLanguage()->code;
                     $cf_details_var2 = "title_" . config('smartend.default_language');
@@ -398,6 +432,8 @@ class HomeController extends Controller
                 "PageKeywords" => @$meta_tags["keywords"],
                 "WebmasterSection" => $WebmasterSection,
                 "specialities" => $specialities,
+                "mainCategory" => $mainCategory,
+                "subCategory" => $subCategory,
                 "speciality" => $speciality,
                 "currentSpeciality" => $currentSpeciality,
                 "Categories" => $CategoriesList,
@@ -414,8 +450,38 @@ class HomeController extends Controller
         return $this->page_404();
     }
 
-    public function post_page($lang, $Topic = [], $private_topic_view = 0)
+    /**
+     * @param $params
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function post_page($params)
     {
+        $lang = $params['lang'];
+        $Topic = $params['topic'];
+        $private_topic_view = !empty($params['private_topic_view']) ? $params['private_topic_view'] : 0;
+        $part1 = $params[0]['part1'];
+        $part2 = $params[0]['part2'];
+        $part3 = $params[0]['part3'];
+        $part4 = $params[0]['part4'];
+        $part5 = $params[0]['part5'];
+        $part6 = $params[0]['part6'];
+        $mainCategory = $subCategory = '';
+
+        if (!empty($part3)) {
+            $urlCat = $part1 == 'ar' ? $part3 : $part2;
+            $mainCategory = Section::query()->where('status', 1)->where("seo_url_slug_" . $lang, $urlCat)->where('is_speciality', 0)->first();
+            if (empty($mainCategory)) {
+                $mainCategory = Section::query()->where('status', 1)->where("title_" . $lang, Helper::SlugToString($urlCat))->where('is_speciality', 0)->first();
+            }
+        }
+        if (!empty($part4)) {
+            $urlCat = $part1 == 'ar' ? $part4 : $part3;
+            $subCategory = Section::query()->where('status', 1)->where("seo_url_slug_" . $lang, $urlCat)->where('is_speciality', 0)->first();
+            if (empty($subCategory)) {
+                $subCategory = Section::query()->where('status', 1)->where("title_" . $lang, Helper::SlugToString($urlCat))->where('is_speciality', 0)->first();
+            }
+        }
+
         if (!empty($Topic)) {
             $WebmasterSection = $Topic->webmasterSection;
             if (!empty($WebmasterSection)) {
@@ -486,6 +552,8 @@ class HomeController extends Controller
                     "PageKeywords" => @$meta_tags["keywords"],
                     "WebmasterSection" => $WebmasterSection,
                     "Categories" => $CategoriesList,
+                    "mainCategory" => $mainCategory,
+                    "subCategory" => $subCategory,
                     "Topic" => $Topic,
                     "CurrentCategory" => $Category,
                     "MostViewedTopics" => $MostViewedTopics,
@@ -1089,9 +1157,9 @@ class HomeController extends Controller
         ];
     }
 
-    private function privateTopic($lang, $privateTopic)
+    private function privateTopic($params)
     {
-        return $this->post_page($lang, $privateTopic, 1);
+        return $this->post_page(['lang' => $params['lang'], 'topic' => $params['topic'], 'private_topic_view' => 1, $params]);
     }
 
     private function topics_count_per_category($webmaster_id = 0): array

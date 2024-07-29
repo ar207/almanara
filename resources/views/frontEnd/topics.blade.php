@@ -61,6 +61,22 @@
                         @else
                             <li class="active">{{ $User->name }}</li>
                         @endif
+                        @if(!empty($mainCategory))
+                            <li class="active">
+                                @php
+                                    $mainTitle = "title_" . @Helper::currentLanguage()->code;
+                                @endphp
+                                <a href="{{ Helper::categoryURL(@$mainCategory->id) }}">{{ $mainCategory->$mainTitle }}</a>
+                            </li>
+                        @endif
+                        @if(!empty($subCategory))
+                            <li class="active">
+                                @php
+                                    $mainTitle = "title_" . @Helper::currentLanguage()->code;
+                                @endphp
+                                <a href="{{ Helper::categoryURL(@$subCategory->id) }}">{{ $subCategory->$mainTitle }}</a>
+                            </li>
+                        @endif
                         @if($category_title !="")
                             <li class="active"><a
                                     href="{{ Helper::categoryURL(@$CurrentCategory->id) }}">{{ $category_title }}</a>
@@ -123,8 +139,10 @@
                                         } else {
                                             $details = $details_var2;
                                         }
+                                        $mainCategoryId = !empty($mainCategory) ? $mainCategory->id : '';
+                                        $subCategoryId = !empty($subCategory) ? $subCategory->id : '';
 
-                                        $topic_link_url = Helper::topicURL($Topic->id);
+                                        $topic_link_url = Helper::topicURL($Topic->id, "", $CurrentCategory->id, $mainCategoryId, $subCategoryId);
                                         ?>
                                         <div
                                             class="col-lg-4 col-md-6 col-12">
@@ -140,14 +158,14 @@
                                 <div class="col-lg-8">
                                     {!! $Topics->appends($_GET)->links() !!}
                                 </div>
-                                <div class="col-lg-4 text-end">
-                                    <h5 style="padding-top: 18px"><span
-                                            class="badge bg-primary">{{ $Topics->firstItem() }}</span>
-                                        - <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>
-                                    <!--{{ __('backend.of') }}-->
-                                    <!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->
-                                    </h5>
-                                </div>
+                                {{--<div class="col-lg-4 text-end">--}}
+                                    {{--<h5 style="padding-top: 18px"><span--}}
+                                            {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
+                                        {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
+                                    {{--<!--{{ __('backend.of') }}-->--}}
+                                    {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
+                                    {{--</h5>--}}
+                                {{--</div>--}}
                             </div>
                         @endif
                     </div>

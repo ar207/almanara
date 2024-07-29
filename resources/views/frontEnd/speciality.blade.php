@@ -200,14 +200,14 @@
                             <div class="col-lg-8">
                                 {!! $Topics->appends($_GET)->links() !!}
                             </div>
-                            <div class="col-lg-4 text-end">
-                                <h5 style="padding-top: 18px"><span
-                                        class="badge bg-primary">{{ $Topics->firstItem() }}</span>
-                                    - <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>
-                                <!--{{ __('backend.of') }}-->
-                                <!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->
-                                </h5>
-                            </div>
+                            {{--<div class="col-lg-4 text-end">--}}
+                                {{--<h5 style="padding-top: 18px"><span--}}
+                                        {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
+                                    {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
+                                {{--<!--{{ __('backend.of') }}-->--}}
+                                {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
+                                {{--</h5>--}}
+                            {{--</div>--}}
                         </div>
                     @endif
                 @endif

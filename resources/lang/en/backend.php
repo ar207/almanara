@@ -729,5 +729,6 @@ return array(
     'sitemapLinks' => 'Sitemap links',
     'headerSearch' => 'Header search',
     'cookieAcceptMessage' => 'Cookies policy notification',
+    'tiktok' => 'Tiktok',
 
 );

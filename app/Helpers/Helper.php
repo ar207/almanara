@@ -789,15 +789,26 @@ class Helper
         return $category_url;
     }
 
-    static function topicURL($id, $lang = "")
+    /**
+     * @param $id
+     * @param string $lang
+     * @param string $currentCatId
+     * @param string $mainCatId
+     * @param string $subCatId
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    static function topicURL($id, $lang = "", $currentCatId = '', $mainCatId = '', $subCatId = '')
     {
         $topic_url = "";
+        $url = parse_url(request()->url());
+        $path = !empty($url['path']) ? ltrim($url['path'], '/') : '';
+        $urlParts = explode('/', $path);
         try {
             if ($lang == "") {
                 $lang = @Helper::currentLanguage()->code;
             }
             $title_var = "title_" . $lang;
-            $Topic = Topic::find($id);
+            $Topic = Topic::query()->find($id);
             if (!empty($Topic)) {
                 if ($Topic->{'seo_url_slug_' . $lang} != "") {
                     $topic_slug = $Topic->{'seo_url_slug_' . $lang};
@@ -830,9 +841,8 @@ class Helper
                 }
 
                 $Category = [];
-                $TopicCategory = TopicCategory::where('topic_id', $Topic->id)->first();
-                if (!empty($TopicCategory)) {
-                    $Category = Section::find($TopicCategory->section_id);
+                if (!empty($currentCatId)) {
+                    $Category = Section::query()->find($currentCatId);
                 }
 
                 if (!empty($Category)) {
@@ -845,7 +855,19 @@ class Helper
                         $cat_slug = Str::slug($Category->$title_var, '-');
                     }
 
-                    $fatherSection2 = @$Category->fatherSection;
+                    $subCategory = '';
+                    if (!empty($subCatId)) {
+                        $subCategory = Section::query()->find($subCatId);
+                        if ($subCategory->{'seo_url_slug_' . $lang} != "") {
+                            $cat_slug = $subCategory->{'seo_url_slug_' . $lang};
+                        } else {
+                            $cat_slug = $subCategory->{'seo_url_slug_' . config('smartend.default_language')};
+                        }
+                        if ($cat_slug == "") {
+                            $cat_slug = Str::slug($subCategory->$title_var, '-');
+                        }
+                    }
+                    $fatherSection2 = !empty($subCategory) ? $subCategory->fatherSection : $Category->fatherSection;
                     if (!empty($fatherSection2)) {
                         if ($fatherSection2->{'seo_url_slug_' . $lang} != "") {
                             $cat2_slug = $fatherSection2->{'seo_url_slug_' . $lang};

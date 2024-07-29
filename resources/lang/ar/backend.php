@@ -730,5 +730,6 @@ return array(
     'sitemapLinks' => 'روابط Sitemap',
     'headerSearch' => 'مربع البحث بالهيدر',
     'cookieAcceptMessage' => 'إشعار سياسة ملفات تعريف الارتباط',
+    'tiktok' => 'تيك توك',
 
 );

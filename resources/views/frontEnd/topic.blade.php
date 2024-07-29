@@ -84,6 +84,22 @@
                         @else
                             <li class="active">{{ $title }}</li>
                         @endif
+                        @if(!empty($mainCategory))
+                            <li class="active">
+                                @php
+                                    $mainTitle = "title_" . @Helper::currentLanguage()->code;
+                                @endphp
+                                <a href="{{ Helper::categoryURL(@$mainCategory->id) }}">{{ $mainCategory->$mainTitle }}</a>
+                            </li>
+                        @endif
+                        @if(!empty($subCategory))
+                            <li class="active">
+                                @php
+                                    $mainTitle = "title_" . @Helper::currentLanguage()->code;
+                                @endphp
+                                <a href="{{ Helper::categoryURL(@$subCategory->id) }}">{{ $subCategory->$mainTitle }}</a>
+                            </li>
+                        @endif
                         @if($category_title !="")
                             <li class="active">
                                 <a href="{{ Helper::categoryURL(@$CurrentCategory->id) }}">{{ $title }}</a>

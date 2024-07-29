@@ -161,59 +161,59 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4">
-                        <h3 class="sub-title">{{ __('frontend.contactDetails') }}</h3>
-                        <div class="info">
-                            @if(Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) !="")
-                                <div class="address">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h4>{{ __('frontend.address') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}</p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t3") !="")
-                                <div class="phone">
-                                    <i class="bi bi-telephone"></i>
-                                    <h4>{{ __('frontend.callPhone') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t3") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t5") !="")
-                                <div class="phone">
-                                    <i class="bi bi-telephone"></i>
-                                    <h4>{{ __('frontend.callMobile') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t5") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t4") !="")
-                                <div class="phone">
-                                    <i class="fa fa-fax"></i>
-                                    <h4>{{ __('frontend.callFax') }}:</h4>
-                                    <p><span
-                                            dir="ltr">{{ Helper::GeneralSiteSettings("contact_t4") }}</span></p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t6") !="")
-                                <div class="email">
-                                    <i class="bi bi-envelope"></i>
-                                    <h4>{{ __('frontend.email') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t6") }}</p>
-                                </div>
-                            @endif
-                            @if(Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) !="")
-                                <div class="email">
-                                    <i class="bi bi-clock"></i>
-                                    <h4>{{ __('frontend.callTimes') }}:</h4>
-                                    <p>{{ Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) }}</p>
-                                </div>
-                            @endif
-                        </div>
+                    {{--<div class="col-lg-4">--}}
+                        {{--<h3 class="sub-title">{{ __('frontend.contactDetails') }}</h3>--}}
+                        {{--<div class="info">--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) !="")--}}
+                                {{--<div class="address">--}}
+                                    {{--<i class="bi bi-geo-alt"></i>--}}
+                                    {{--<h4>{{ __('frontend.address') }}:</h4>--}}
+                                    {{--<p>{{ Helper::GeneralSiteSettings("contact_t1_" . @Helper::currentLanguage()->code) }}</p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t3") !="")--}}
+                                {{--<div class="phone">--}}
+                                    {{--<i class="bi bi-telephone"></i>--}}
+                                    {{--<h4>{{ __('frontend.callPhone') }}:</h4>--}}
+                                    {{--<p><span--}}
+                                            {{--dir="ltr">{{ Helper::GeneralSiteSettings("contact_t3") }}</span></p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t5") !="")--}}
+                                {{--<div class="phone">--}}
+                                    {{--<i class="bi bi-telephone"></i>--}}
+                                    {{--<h4>{{ __('frontend.callMobile') }}:</h4>--}}
+                                    {{--<p><span--}}
+                                            {{--dir="ltr">{{ Helper::GeneralSiteSettings("contact_t5") }}</span></p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t4") !="")--}}
+                                {{--<div class="phone">--}}
+                                    {{--<i class="fa fa-fax"></i>--}}
+                                    {{--<h4>{{ __('frontend.callFax') }}:</h4>--}}
+                                    {{--<p><span--}}
+                                            {{--dir="ltr">{{ Helper::GeneralSiteSettings("contact_t4") }}</span></p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t6") !="")--}}
+                                {{--<div class="email">--}}
+                                    {{--<i class="bi bi-envelope"></i>--}}
+                                    {{--<h4>{{ __('frontend.email') }}:</h4>--}}
+                                    {{--<p>{{ Helper::GeneralSiteSettings("contact_t6") }}</p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if(Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) !="")--}}
+                                {{--<div class="email">--}}
+                                    {{--<i class="bi bi-clock"></i>--}}
+                                    {{--<h4>{{ __('frontend.callTimes') }}:</h4>--}}
+                                    {{--<p>{{ Helper::GeneralSiteSettings("contact_t7_" . @Helper::currentLanguage()->code) }}</p>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
 
-                    </div>
+                    {{--</div>--}}
 
-                    <div class="col-lg-8 mt-5 mt-lg-0" id="contact-form-container">
+                    <div class="col-lg-12 mt-5 mt-lg-0" id="contact-form-container">
                         <h3 class="sub-title">{{ __('frontend.getInTouch') }}</h3>
                         {{Form::open(['route'=>['contactPageSubmit'],'method'=>'POST','class'=>'php-email-form','id'=>'contactForm'])}}
                         <div class="row">
