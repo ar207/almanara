@@ -584,7 +584,7 @@ class HomeController extends Controller
                 if ($lang == "") {
                     $lang = config('smartend.default_language');
                 }
-                return $this->post_page($lang, $Topic);
+                return $this->post_page(['lang' => $lang, 'topic' => $Topic]);
             }
         }
         return $this->page_404();
