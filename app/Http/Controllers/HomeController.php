@@ -459,12 +459,12 @@ class HomeController extends Controller
         $lang = $params['lang'];
         $Topic = $params['topic'];
         $private_topic_view = !empty($params['private_topic_view']) ? $params['private_topic_view'] : 0;
-        $part1 = $params[0]['part1'];
-        $part2 = $params[0]['part2'];
-        $part3 = $params[0]['part3'];
-        $part4 = $params[0]['part4'];
-        $part5 = $params[0]['part5'];
-        $part6 = $params[0]['part6'];
+        $part1 = !empty($params[0]) ? $params[0]['part1'] : '';
+        $part2 = !empty($params[0]) ? $params[0]['part2'] : '';
+        $part3 = !empty($params[0]) ? $params[0]['part3'] : '';
+        $part4 = !empty($params[0]) ? $params[0]['part4'] : '';
+        $part5 = !empty($params[0]) ? $params[0]['part5'] : '';
+        $part6 = !empty($params[0]) ? $params[0]['part6'] : '';
         $mainCategory = $subCategory = '';
 
         if (!empty($part3)) {
