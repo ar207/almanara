@@ -9,6 +9,8 @@ class Banner extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function webmasterBanner()
     {
         return $this->belongsTo('App\Models\WebmasterBanner', 'section_id');

@@ -63,27 +63,37 @@
 @endpush
 @push('after-scripts')
     <script>
-        $(document).ready(function(){
-            $(".video-slider").owlCarousel({
-                loop:true,
-                margin:10,
-                responsiveClass:true,
-                responsive:{
-                    0:{
-                        items:1,
-                        nav:true
-                    },
-                    600:{
-                        items:3,
-                        nav:false
-                    },
-                    1000:{
-                        items:5,
-                        nav:true,
-                        loop:false
-                    }
+        $(document).ready(function() {
+            manageBannersOnScreenChange();
+        });
+
+        $(window).resize(function () {
+            manageBannersOnScreenChange();
+        });
+
+        function manageBannersOnScreenChange() {
+            let deviceType = getDeviceType();
+            $('.carousel-item').each(function() {
+                if ($(this).data('type') === deviceType) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
                 }
             });
-        });
+            // Reinitialize the carousel (if needed, depending on your carousel implementation)
+            // $('#carouselExample').carousel('dispose').carousel();
+        }
+
+        function getDeviceType() {
+            const windowWidth = $(window).width();
+            if (windowWidth < 768) {
+                return 'mobile';
+            } else if (windowWidth >= 768 && windowWidth < 992) {
+                return 'tablet';
+            } else {
+                return 'web';
+            }
+        }
+
     </script>
 @endpush

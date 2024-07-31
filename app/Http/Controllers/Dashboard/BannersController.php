@@ -84,6 +84,7 @@ class BannersController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -140,8 +141,44 @@ class BannersController extends Controller
                             $request->file($formFileName)->move($path, $fileFinalName);
                         }
                     }
+
+                    $formFileName = "tablet_file_" . $ActiveLanguage->code;
+                    $tabletFileFinalName = "";
+                    if ($request->$formFileName != "") {
+                        $this->validate($request, [
+                            $formFileName => 'image'
+                        ]);
+
+                        $tabletFileFinalName = time() . rand(1111,
+                                9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                        $path = $this->uploadPath;
+                        $request->file($formFileName)->move($path, $tabletFileFinalName);
+
+                        // resize & optimize
+                        Helper::imageResize($path . $tabletFileFinalName, @$WebmasterBanner->width, @$WebmasterBanner->height);
+                        Helper::imageOptimize($path . $tabletFileFinalName);
+                    }
+
+                    $formFileName = "mobile_file_" . $ActiveLanguage->code;
+                    $mobileFileFinalName = "";
+                    if ($request->$formFileName != "") {
+                        $this->validate($request, [
+                            $formFileName => 'image'
+                        ]);
+
+                        $mobileFileFinalName = time() . rand(1111,
+                                9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                        $path = $this->uploadPath;
+                        $request->file($formFileName)->move($path, $mobileFileFinalName);
+
+                        // resize & optimize
+                        Helper::imageResize($path . $mobileFileFinalName, @$WebmasterBanner->width, @$WebmasterBanner->height);
+                        Helper::imageOptimize($path . $mobileFileFinalName);
+                    }
                     //save file name
                     $Banner->{"file_" . $ActiveLanguage->code} = $fileFinalName;
+                    $Banner->{"tablet_file_" . $ActiveLanguage->code} = $tabletFileFinalName;
+                    $Banner->{"mobile_file_" . $ActiveLanguage->code} = $mobileFileFinalName;
                 }
             }
 
@@ -202,6 +239,7 @@ class BannersController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -254,6 +292,40 @@ class BannersController extends Controller
                                 $request->file($formFileName)->move($path, $fileFinalName);
                             }
                         }
+
+                        $formFileName = "tablet_file_" . $ActiveLanguage->code;
+                        $tabletFinalName = "";
+                        if ($request->$formFileName != "") {
+                            $this->validate($request, [
+                                $formFileName => 'image'
+                            ]);
+
+                            $tabletFinalName = time() . rand(1111,
+                                    9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                            $path = $this->uploadPath;
+                            $request->file($formFileName)->move($path, $tabletFinalName);
+
+                            // resize & optimize
+                            Helper::imageResize($path . $tabletFinalName, @$WebmasterBanner->width, @$WebmasterBanner->height);
+                            Helper::imageOptimize($path . $tabletFinalName);
+                        }
+
+                        $formFileName = "mobile_file_" . $ActiveLanguage->code;
+                        $phoneFinalName = "";
+                        if ($request->$formFileName != "") {
+                            $this->validate($request, [
+                                $formFileName => 'image'
+                            ]);
+
+                            $phoneFinalName = time() . rand(1111,
+                                    9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                            $path = $this->uploadPath;
+                            $request->file($formFileName)->move($path, $phoneFinalName);
+
+                            // resize & optimize
+                            Helper::imageResize($path . $phoneFinalName, @$WebmasterBanner->width, @$WebmasterBanner->height);
+                            Helper::imageOptimize($path . $phoneFinalName);
+                        }
                         //save file name
                         if ($fileFinalName != "") {
                             // Delete a banner file
@@ -262,6 +334,22 @@ class BannersController extends Controller
                             }
 
                             $Banner->{"file_" . $ActiveLanguage->code} = $fileFinalName;
+                        }
+                        if ($tabletFinalName != "") {
+                            // Delete a banner file
+                            if ($Banner->{"tablet_file_" . $ActiveLanguage->code} != ""  && $Banner->{"tablet_file_" . $ActiveLanguage->code} != "noimg.png") {
+                                File::delete($this->uploadPath . $Banner->{"tablet_file_" . $ActiveLanguage->code});
+                            }
+
+                            $Banner->{"tablet_file_" . $ActiveLanguage->code} = $tabletFinalName;
+                        }
+                        if ($phoneFinalName != "") {
+                            // Delete a banner file
+                            if ($Banner->{"mobile_file_" . $ActiveLanguage->code} != ""  && $Banner->{"mobile_file_" . $ActiveLanguage->code} != "noimg.png") {
+                                File::delete($this->uploadPath . $Banner->{"mobile_file_" . $ActiveLanguage->code});
+                            }
+
+                            $Banner->{"mobile_file_" . $ActiveLanguage->code} = $phoneFinalName;
                         }
                     }
                 }
@@ -308,6 +396,12 @@ class BannersController extends Controller
                 if ($ActiveLanguage->box_status) {
                     if ($Banner->{"file_" . $ActiveLanguage->code} != ""   && $Banner->{"file_" . $ActiveLanguage->code} != "noimg.png") {
                         File::delete($this->uploadPath . $Banner->{"file_" . $ActiveLanguage->code});
+                    }
+                    if ($Banner->{"tablet_file_" . $ActiveLanguage->code} != ""   && $Banner->{"tablet_file_" . $ActiveLanguage->code} != "noimg.png") {
+                        File::delete($this->uploadPath . $Banner->{"tablet_file_" . $ActiveLanguage->code});
+                    }
+                    if ($Banner->{"mobile_file_" . $ActiveLanguage->code} != ""   && $Banner->{"mobile_file_" . $ActiveLanguage->code} != "noimg.png") {
+                        File::delete($this->uploadPath . $Banner->{"mobile_file_" . $ActiveLanguage->code});
                     }
                 }
             }
@@ -362,6 +456,12 @@ class BannersController extends Controller
                             if ($ActiveLanguage->box_status) {
                                 if ($banner->{"file_" . $ActiveLanguage->code} != ""   && $banner->{"file_" . $ActiveLanguage->code} != "noimg.png") {
                                     File::delete($this->uploadPath . $banner->{"file_" . $ActiveLanguage->code});
+                                }
+                                if ($banner->{"tablet_file_" . $ActiveLanguage->code} != ""   && $banner->{"tablet_file_" . $ActiveLanguage->code} != "noimg.png") {
+                                    File::delete($this->uploadPath . $banner->{"tablet_file_" . $ActiveLanguage->code});
+                                }
+                                if ($banner->{"mobile_file_" . $ActiveLanguage->code} != ""   && $banner->{"mobile_file_" . $ActiveLanguage->code} != "noimg.png") {
+                                    File::delete($this->uploadPath . $banner->{"mobile_file_" . $ActiveLanguage->code});
                                 }
                             }
                         }

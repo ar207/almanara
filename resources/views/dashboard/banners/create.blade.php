@@ -107,7 +107,7 @@
                             @if($ActiveLanguage->box_status)
                                 <div class="form-group row">
                                     <label
-                                        class="col-sm-2 form-control-label">{!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                        class="col-sm-2 form-control-label">Web {!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
                                     </label>
                                     <div class="col-sm-10">
                                         {!! Form::file($file_name.$ActiveLanguage->code, array('class' => 'form-control','accept'=>$file_allow)) !!}
@@ -128,75 +128,133 @@
                             </div>
                         </div>
                     </div>
-                @endif
-                @if($WebmasterBanner->desc_status)
-                    @foreach(Helper::languagesList() as $ActiveLanguage)
-                        @if($ActiveLanguage->box_status)
-                            <div class="form-group row">
-                                <label
-                                    class="col-sm-2 form-control-label">{!!  __('backend.bannerDetails') !!} {!! @Helper::languageName($ActiveLanguage) !!}
-                                </label>
-                                <div class="col-sm-10">
-                                    {!! Form::textarea('details_'.$ActiveLanguage->code,'', array('placeholder' => '','class' => 'form-control', 'dir'=>@$ActiveLanguage->direction,'rows'=>'3')) !!}
+                    @if($WebmasterBanner->type==1)
+                        <div id="tablet_files_div">
+                            @foreach(Helper::languagesList() as $ActiveLanguage)
+                                @if($ActiveLanguage->box_status)
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-sm-2 form-control-label">Tablet {!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                        </label>
+                                        <div class="col-sm-10">
+                                            {!! Form::file('tablet_file_'.$ActiveLanguage->code, array('class' => 'form-control','accept'=>$file_allow)) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        <b>Recommended Image size: 3:2</b>
+                                    </small>
                                 </div>
                             </div>
-                        @endif
-                    @endforeach
-                @endif
 
-                @if($WebmasterBanner->link_status)
-                    <div class="form-group row">
-                        <label for="link_url"
-                               class="col-sm-2 form-control-label">{!!  __('backend.bannerLinkUrl') !!}</label>
-                        <div class="col-sm-10">
-                            {!! Form::text('link_url','', array('placeholder' => 'http://www.site.com','class' => 'form-control','id'=>'link_url', 'dir'=>'ltr')) !!}
-                        </div>
-                    </div>
-                @endif
-
-                @if($WebmasterBanner->type==0)
-                    <div class="form-group row">
-                        <label for="code"
-                               class="col-sm-2 form-control-label">{!!  __('backend.bannerCode') !!}</label>
-                        <div class="col-sm-10">
-                            {!! Form::textarea('code','', array('placeholder' => '','class' => 'form-control', 'dir'=>'ltr','rows'=>'3')) !!}
-                        </div>
-                    </div>
-                @endif
-
-                @if($WebmasterBanner->icon_status)
-                    <div class="form-group row">
-                        <label for="icon"
-                               class="col-sm-2 form-control-label">{!!  __('backend.sectionIcon') !!}</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                {!! Form::text('icon','', array('autocomplete' => 'off','class' => 'form-control icp icp-auto','id'=>'icon', 'data-placement'=>'bottomRight')) !!}
-                                <span class="input-group-addon"></span>
+                            <div id="mobile_files_div">
+                                @foreach(Helper::languagesList() as $ActiveLanguage)
+                                    @if($ActiveLanguage->box_status)
+                                        <div class="form-group row">
+                                            <label
+                                                class="col-sm-2 form-control-label">Mobile {!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {!! Form::file('mobile_file_'.$ActiveLanguage->code, array('class' => 'form-control','accept'=>$file_allow)) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <small>
+                                            <i class="material-icons">&#xe8fd;</i>
+                                            {!!  __('backend.imagesTypes') !!}
+                                        </small>
+                                    </div>
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <small>
+                                            <i class="material-icons">&#xe8fd;</i>
+                                            <b>Recommended image size: 4:5</b>
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
+                            @endif
+                            @endif
+                            @if($WebmasterBanner->desc_status)
+                                @foreach(Helper::languagesList() as $ActiveLanguage)
+                                    @if($ActiveLanguage->box_status)
+                                        <div class="form-group row">
+                                            <label
+                                                class="col-sm-2 form-control-label">{!!  __('backend.bannerDetails') !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                            </label>
+                                            <div class="col-sm-10">
+                                                {!! Form::textarea('details_'.$ActiveLanguage->code,'', array('placeholder' => '','class' => 'form-control', 'dir'=>@$ActiveLanguage->direction,'rows'=>'3')) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+
+                            @if($WebmasterBanner->link_status)
+                                <div class="form-group row">
+                                    <label for="link_url"
+                                           class="col-sm-2 form-control-label">{!!  __('backend.bannerLinkUrl') !!}</label>
+                                    <div class="col-sm-10">
+                                        {!! Form::text('link_url','', array('placeholder' => 'http://www.site.com','class' => 'form-control','id'=>'link_url', 'dir'=>'ltr')) !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if($WebmasterBanner->type==0)
+                                <div class="form-group row">
+                                    <label for="code"
+                                           class="col-sm-2 form-control-label">{!!  __('backend.bannerCode') !!}</label>
+                                    <div class="col-sm-10">
+                                        {!! Form::textarea('code','', array('placeholder' => '','class' => 'form-control', 'dir'=>'ltr','rows'=>'3')) !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if($WebmasterBanner->icon_status)
+                                <div class="form-group row">
+                                    <label for="icon"
+                                           class="col-sm-2 form-control-label">{!!  __('backend.sectionIcon') !!}</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            {!! Form::text('icon','', array('autocomplete' => 'off','class' => 'form-control icp icp-auto','id'=>'icon', 'data-placement'=>'bottomRight')) !!}
+                                            <span class="input-group-addon"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="form-group row m-t-md">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
+                                            &#xe31b;</i> {!! __('backend.add') !!}</button>
+                                    <a href="{{route("Banners")}}"
+                                       class="btn btn-default m-t"><i class="material-icons">
+                                            &#xe5cd;</i> {!! __('backend.cancel') !!}</a>
+                                </div>
+                            </div>
+
+                            {{Form::close()}}
                         </div>
-                    </div>
-                @endif
-
-                <div class="form-group row m-t-md">
-                    <div class="offset-sm-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
-                                &#xe31b;</i> {!! __('backend.add') !!}</button>
-                        <a href="{{route("Banners")}}"
-                           class="btn btn-default m-t"><i class="material-icons">
-                                &#xe5cd;</i> {!! __('backend.cancel') !!}</a>
-                    </div>
-                </div>
-
-                {{Form::close()}}
             </div>
         </div>
-    </div>
-@endsection
-@push("after-scripts")
-    <script src="{{ asset("assets/dashboard/js/iconpicker/fontawesome-iconpicker.js") }}"></script>
-    <script>
-        $(function () {
-            $('.icp-auto').iconpicker({placement: '{{ (@Helper::currentLanguage()->direction=="rtl")?"topLeft":"topRight" }}'});
-        });
-    </script>
-@endpush
+        @endsection
+        @push("after-scripts")
+            <script src="{{ asset("assets/dashboard/js/iconpicker/fontawesome-iconpicker.js") }}"></script>
+            <script>
+                $(function () {
+                    $('.icp-auto').iconpicker({placement: '{{ (@Helper::currentLanguage()->direction=="rtl")?"topLeft":"topRight" }}'});
+                });
+            </script>
+    @endpush

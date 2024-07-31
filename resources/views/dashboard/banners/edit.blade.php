@@ -130,8 +130,9 @@
                                                 <div class="box p-a-xs">
 
                                                     <video width="380" height="230" controls>
-                                                        <source src="{{ asset('uploads/banners/'.$Banners->{"file_".$ActiveLanguage->code}) }}"
-                                                                type="video/mp4">
+                                                        <source
+                                                            src="{{ asset('uploads/banners/'.$Banners->{"file_".$ActiveLanguage->code}) }}"
+                                                            type="video/mp4">
                                                         Your browser does not support the video tag.
                                                     </video>
                                                     <br>
@@ -159,6 +160,127 @@
                             </div>
                         </div>
                     </div>
+                    @if($WebmasterBanner->type==1)
+                        <div id="tablet_files_div"
+                             style="display: {{ ($Banners->video_type == 0) ? "block" : "none" }}">
+                            @foreach(Helper::languagesList() as $ActiveLanguage)
+                                @if($ActiveLanguage->box_status)
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-sm-2 form-control-label">Tablet {!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                        </label>
+                                        <div class="col-sm-10">
+                                            @if($Banners->{"file_".$ActiveLanguage->code}!="")
+                                                @if($WebmasterBanner->type==1)
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-4 box p-a-xs">
+                                                                <a target="_blank"
+                                                                   href="{{ asset('uploads/banners/'.$Banners->{"tablet_file_".$ActiveLanguage->code}) }}"><img
+                                                                        src="{{ asset('uploads/banners/'.$Banners->{"tablet_file_".$ActiveLanguage->code}) }}"
+                                                                        class="img-responsive">
+                                                                    {{ $Banners->{"tablet_file_".$ActiveLanguage->code} }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="box p-a-xs">
+
+                                                        <video width="380" height="230" controls>
+                                                            <source
+                                                                src="{{ asset('uploads/banners/'.$Banners->{"tablet_file_".$ActiveLanguage->code}) }}"
+                                                                type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                        <br>
+                                                        <a target="_blank"
+                                                           href="{{ asset('uploads/banners/'.$Banners->{"tablet_file_".$ActiveLanguage->code}) }}">
+                                                            {!!  $Banners->{"tablet_file_".$ActiveLanguage->code} !!} </a>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                            {!! Form::file('tablet_file_'.$ActiveLanguage->code, array('class' => 'form-control','accept'=>$file_allow)) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        <b>Recommended Image size: 3:2</b>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mobile_files_div"
+                             style="display: {{ ($Banners->video_type == 0) ? "block" : "none" }}">
+                            @foreach(Helper::languagesList() as $ActiveLanguage)
+                                @if($ActiveLanguage->box_status)
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-sm-2 form-control-label">Mobile {!!  __('backend.'.$ttile) !!} {!! @Helper::languageName($ActiveLanguage) !!}
+                                        </label>
+                                        <div class="col-sm-10">
+                                            @if($Banners->{"mobile_file_".$ActiveLanguage->code}!="")
+                                                @if($WebmasterBanner->type==1)
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-4 box p-a-xs">
+                                                                <a target="_blank"
+                                                                   href="{{ asset('uploads/banners/'.$Banners->{"mobile_file_".$ActiveLanguage->code}) }}"><img
+                                                                        src="{{ asset('uploads/banners/'.$Banners->{"mobile_file_".$ActiveLanguage->code}) }}"
+                                                                        class="img-responsive">
+                                                                    {{ $Banners->{"mobile_file_".$ActiveLanguage->code} }}
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="box p-a-xs">
+
+                                                        <video width="380" height="230" controls>
+                                                            <source
+                                                                src="{{ asset('uploads/banners/'.$Banners->{"mobile_file_".$ActiveLanguage->code}) }}"
+                                                                type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                        <br>
+                                                        <a target="_blank"
+                                                           href="{{ asset('uploads/banners/'.$Banners->{"mobile_file_".$ActiveLanguage->code}) }}">
+                                                            {!!  $Banners->{"mobile_file_".$ActiveLanguage->code} !!} </a>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                            {!! Form::file('mobile_file_'.$ActiveLanguage->code, array('class' => 'form-control','accept'=>$file_allow)) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        <b>Recommended Image size: 4:5</b>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endif
                 @if($WebmasterBanner->desc_status)
                     @foreach(Helper::languagesList() as $ActiveLanguage)
