@@ -21,12 +21,12 @@
     <link rel="stylesheet" type="text/css"
           href="{{ asset('assets/keditor/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}"
           data-type="keditor-style"/>
-    <!-- Start of KEditor styles -->
+     Start of KEditor styles 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/keditor/dist/css/keditor.css') }}"
           data-type="keditor-style"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/keditor/dist/css/keditor-components.css') }}"
           data-type="keditor-style"/>
-    <!-- End of KEditor styles -->
+     End of KEditor styles 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/keditor/plugins/code-prettify/src/prettify.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/keditor/css/custom.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/dashboard/js/sweetalert/sweetalert.css') }}">
@@ -34,14 +34,10 @@
         .keditor-topbar {
             background: {{Helper::GeneralSiteSettings("style_color2")}};
         }
+
         .keditor-topbar-btn.active, .keditor-topbar-btn:hover {
             background: {{Helper::GeneralSiteSettings("style_color1")}};
             color: #fff !important;
-        }
-
-        .keditor-section {
-            background-size: cover;
-            background-position: center;
         }
     </style>
 </head>
@@ -62,10 +58,10 @@
         src="{{ asset('assets/keditor/plugins/formBuilder-2.5.3/form-builder.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('assets/keditor/plugins/formBuilder-2.5.3/form-render.min.js') }}"></script>
-<!-- Start of KEditor scripts -->
+ Start of KEditor scripts 
 <script type="text/javascript" src="{{ asset('assets/keditor/dist/js/keditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/keditor/dist/js/keditor-components.js') }}"></script>
-<!-- End of KEditor scripts -->
+ End of KEditor scripts 
 <script type="text/javascript" src="{{ asset('assets/keditor/plugins/code-prettify/src/prettify.js') }}"></script>
 <script type="text/javascript"
         src="{{ asset('assets/keditor/plugins/js-beautify-1.7.5/js/lib/beautify.js') }}"></script>
@@ -73,47 +69,181 @@
         src="{{ asset('assets/keditor/plugins/js-beautify-1.7.5/js/lib/beautify-html.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/keditor/js/custom.js') }}"></script>
 <script src="{{ asset('assets/dashboard/js/sweetalert/sweetalert.min.js') }}"></script>
-
 <script type="text/javascript" data-keditor="script">
     $(function () {
+        {{--$('#content-area').keditor({--}}
+            {{--title: '️ {{ __("backend.edit") }} : {{ $title }}',--}}
+            {{--snippetsUrl: '{{ route('keditorSnippets') }}',--}}
+            // locale: {
+            //     viewOnMobile: 'View on mobile',
+            //     viewOnTablet: 'View on tablet',
+            //     viewOnLaptop: 'View on laptop',
+            //     viewOnDesktop: 'View on desktop',
+            //     previewOn: 'Preview ON',
+            //     previewOff: 'Preview OFF',
+            //     fullscreenOn: 'Fullscreen ON',
+            //     fullscreenOff: 'Fullscreen Off',
+            //     save: 'Save',
+            //     addContent: 'Add content',
+            //     addContentBelow: 'Add content below',
+            //     pasteContent: 'Paste content',
+            //     pasteContentBelow: 'Paste content below',
+            //     move: 'Drag',
+            //     moveUp: 'Move up',
+            //     moveDown: 'Move down',
+            //     setting: 'Setting',
+            //     copy: 'Copy',
+            //     cut: 'Cut',
+            //     delete: 'Delete',
+            //     snippetCategoryLabel: 'Category',
+            //     snippetCategoryAll: 'All',
+            //     snippetCategorySearch: 'Type to search...',
+            //     columnResizeTitle: 'Drag to resize',
+            //     containerSetting: 'Container Settings',
+            //     confirmDeleteContainerText: 'Are you sure that you want to delete this container? This action can not be undone!',
+            //     confirmDeleteComponentText: 'Are you sure that you want to delete this component? This action can not be undone!',
+            // },
+            {{--widthMobile: 390,--}}
+            {{--widthTablet: 820,--}}
+            {{--widthLaptop: 1050,--}}
+            {{--minWidthDesktop: 1170,--}}
+            {{--contentStyles: [--}}
+                {{--{--}}
+                    {{--id: 'cssStyle',--}}
+                    {{--content: '.keditor-btn{padding:10px 20px;height: 40px;font-size: 20px;background-color: {{ Helper::GeneralSiteSettings("style_color2") }} !important;color:#fff!important;box-shadow:none;border:0!important;}'--}}
+                {{--}--}}
+            {{--],--}}
+            {{--onSave: function (content) {--}}
+                {{--var xhr = $.ajax({--}}
+                    {{--type: "POST",--}}
+                    {{--url: "<?php echo route("keditorSave"); ?>",--}}
+                    {{--data: {--}}
+                        {{--"_token": '{{ csrf_token() }}',--}}
+                        {{--"topic_id": '{{ $Topic->id }}',--}}
+                        {{--"html_content": content,--}}
+                        {{--"lang": '{{ $lang }}',--}}
+                    {{--},--}}
+                    {{--success: function (result) {--}}
+                        {{--var obj_result = jQuery.parseJSON(result);--}}
+                        {{--if (obj_result.stat == 'success') {--}}
+                            {{--swal({--}}
+                                {{--title: obj_result.msg,--}}
+                                {{--text: "",--}}
+                                {{--html: true,--}}
+                                {{--type: "success",--}}
+                                {{--confirmButtonText: "{{ __("backend.close") }}",--}}
+                                {{--confirmButtonColor: "#acacac",--}}
+                                {{--timer: 5000,--}}
+                            {{--});--}}
+                        {{--} else {--}}
+                            {{--swal({--}}
+                                {{--title: obj_result.msg,--}}
+                                {{--text: "",--}}
+                                {{--html: true,--}}
+                                {{--type: "error",--}}
+                                {{--confirmButtonText: "{{ __("backend.close") }}",--}}
+                                {{--confirmButtonColor: "#acacac",--}}
+                            {{--});--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--},--}}
+        {{--});--}}
+    });
+    $(function () {
         $('#content-area').keditor({
+            title: '️ {{ __("backend.edit") }} : {{ $title }}',
             snippetsUrl: '{{ route('keditorSnippets') }}',
-            onContainerSettingShow: function (form, container) {
-                // Add background color input
-                form.prepend(
-                    '<div class="form-group">' +
-                    '<label>Background Color</label>' +
-                    '<input type="color" class="form-control background-color" />' +
+            locale: {
+                viewOnMobile: 'View on mobile',
+                viewOnTablet: 'View on tablet',
+                viewOnLaptop: 'View on laptop',
+                viewOnDesktop: 'View on desktop',
+                previewOn: 'Preview ON',
+                previewOff: 'Preview OFF',
+                fullscreenOn: 'Fullscreen ON',
+                fullscreenOff: 'Fullscreen Off',
+                save: 'Save',
+                addContent: 'Add content',
+                addContentBelow: 'Add content below',
+                pasteContent: 'Paste content',
+                pasteContentBelow: 'Paste content below',
+                move: 'Drag',
+                moveUp: 'Move up',
+                moveDown: 'Move down',
+                setting: 'Setting',
+                copy: 'Copy',
+                cut: 'Cut',
+                delete: 'Delete',
+                snippetCategoryLabel: 'Category',
+                snippetCategoryAll: 'All',
+                snippetCategorySearch: 'Type to search...',
+                columnResizeTitle: 'Drag to resize',
+                containerSetting: 'Container Settings',
+                confirmDeleteContainerText: 'Are you sure that you want to delete this container? This action can not be undone!',
+                confirmDeleteComponentText: 'Are you sure that you want to delete this component? This action can not be undone!',
+            },
+            containerSettingEnabled: true,
+            containerSettingInitFunction: function (form, keditor) {
+                form.append(
+                    '<div class="form-horizontal">' +
+                    '   <div class="form-group">' +
+                    '       <div class="col-sm-12">' +
+                    '           <label>Background color</label>' +
+                    '           <input type="color" class="form-control txt-bg-color" />' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="form-horizontal">' +
+                    '   <div class="form-group">' +
+                    '       <div class="col-sm-12">' +
+                    '           <label>Background Image</label>' +
+                    '           <input type="file" accept="image/*" class="form-control bg-editor-image" />' +
+                    '       </div>' +
+                    '   </div>' +
                     '</div>'
                 );
 
-                // Add background image input
-                form.prepend(
-                    '<div class="form-group">' +
-                    '<label>Background Image</label>' +
-                    '<input type="text" class="form-control background-image" />' +
-                    '</div>'
-                );
-
-                // Set initial values
-                form.find('.background-color').val(container.css('background-color') || '#ffffff');
-                form.find('.background-image').val(container.css('background-image').replace(/url\(|\)|"|'/g, ''));
-
-                // Update container on change
-                form.on('change', '.background-color', function () {
-                    var color = $(this).val();
-                    container.css('background-color', color);
+                // Background color change event
+                form.find('.txt-bg-color').on('change', function () {
+                    var container = keditor.getSettingContainer();
+                    var row = container.find('.row').filter(function () {
+                        return $(this).parents('.keditor-container').length === 1;
+                    });
+                    row.css('background-color', this.value);
                 });
 
-                form.on('change', '.background-image', function () {
-                    var imageUrl = $(this).val();
-                    container.css('background-image', 'url(' + imageUrl + ')');
+                // Background image change event
+                form.find('.bg-editor-image').on('change', function (e) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var container = keditor.getSettingContainer();
+                        var row = container.find('.row').filter(function () {
+                            return $(this).parents('.keditor-container').length === 1;
+                        });
+                        row.css('background-image', 'url(' + e.target.result + ')');
+                    };
+                    reader.readAsDataURL(this.files[0]);
                 });
             },
+            containerSettingShowFunction: function (form, container, keditor) {
+                var row = container.find('.row');
+                var backgroundColor = row.css('background-color');
+                form.find('.txt-bg-color').val(backgroundColor);
+
+                var backgroundImage = row.css('background-image');
+                if (backgroundImage && backgroundImage !== 'none') {
+                    form.find('.bg-editor-image').val(''); // Clear file input
+                }
+            },
+            containerSettingHideFunction: function (form, keditor) {
+                form.find('.txt-bg-color').val('');
+                form.find('.bg-editor-image').val('');
+            },
             onSave: function (content) {
-                $.ajax({
+                var xhr = $.ajax({
                     type: "POST",
-                    url: "{{ route('keditorSave') }}",
+                    url: "<?php echo route("keditorSave"); ?>",
                     data: {
                         "_token": '{{ csrf_token() }}',
                         "topic_id": '{{ $Topic->id }}',
@@ -123,13 +253,28 @@
                     success: function (result) {
                         var obj_result = jQuery.parseJSON(result);
                         if (obj_result.stat == 'success') {
-                            alert('Content saved successfully!');
+                            swal({
+                                title: obj_result.msg,
+                                text: "",
+                                html: true,
+                                type: "success",
+                                confirmButtonText: "{{ __("backend.close") }}",
+                                confirmButtonColor: "#acacac",
+                                timer: 5000,
+                            });
                         } else {
-                            alert('Error saving content.');
+                            swal({
+                                title: obj_result.msg,
+                                text: "",
+                                html: true,
+                                type: "error",
+                                confirmButtonText: "{{ __("backend.close") }}",
+                                confirmButtonColor: "#acacac",
+                            });
                         }
                     }
                 });
-            }
+            },
         });
     });
 </script>
