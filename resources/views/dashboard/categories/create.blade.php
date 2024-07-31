@@ -183,7 +183,26 @@ if ($WebmasterSection->$title_var != "") {
     @include('dashboard.layouts.editor')
     <script>
         $(function () {
-            $('.icp-auto').iconpicker({placement: '{{ (@Helper::currentLanguage()->direction=="rtl")?"topLeft":"topRight" }}'});
+            // Define a subset of icons related to medical fields
+            var medicalIcons = [
+                'fa-ambulance',
+                'fa-hospital',
+                'fa-stethoscope',
+                'fa-user-md',
+                'fa-medkit',
+                'fa-heartbeat',
+                'fa-wheelchair',
+                'fa-thermometer',
+                'fa-pills',
+                'fa-syringe'
+                // Add other relevant medical icons here
+            ];
+
+            // Initialize icon picker with the specified icons
+            $('.icp-auto').iconpicker({
+                icons: medicalIcons,
+                placement: '{{ (@Helper::currentLanguage()->direction=="rtl") ? "topLeft" : "topRight" }}'
+            });
         });
     </script>
 @endpush
