@@ -92,7 +92,7 @@
                             $BDetails = $product->$details_var ?: $product->$details_var2;
                             ?>
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}"
-                                 style="height: 300px !important; background-image: url('{{ URL::to('uploads/topics/'.$product->photo_file) }}'); border: 2px solid; background-size: cover; background-repeat: no-repeat">
+                                 style="height: 300px !important; background-image: url('{{ !empty($product->cover_photo) ? URL::to('uploads/topics/'.$product->cover_photo) : URL::to('uploads/topics/'.$product->photo_file) }}'); border: 2px solid; background-size: cover; background-repeat: no-repeat">
                                 <div class="carousel-container"
                                      style="height: 100%; display: flex; align-items: center; justify-content: center;">
                                     <div class="carousel-content container" style="text-align: left;">
