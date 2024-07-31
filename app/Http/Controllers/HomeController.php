@@ -77,11 +77,13 @@ class HomeController extends Controller
         if ($part1 == "") {
             $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
             // home page
-            $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('id', 'desc')->get();
+            $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
             $webMaster = WebmasterSection::query()->where('status', 1)->where('id', 15)->first();
+            $videos = Topic::query()->where('webmaster_id', '=', 5)->where('status', 1)->orderBy('row_no', 'asc')->get();
+            $products = Topic::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderBy('row_no', 'asc')->get();
 
-            return view("frontEnd.home", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew, 'webMaster' => $webMaster]);
+            return view("frontEnd.home", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew, 'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products]);
         }
 
         $WebmasterSection = WebmasterSection::where('status', 1)->where("seo_url_slug_" . $lang, $part1)->first();
@@ -257,7 +259,6 @@ class HomeController extends Controller
                     $FoundTopic = $FoundTopic->first();
                 }
                 if (!empty($FoundTopic)) {
-                    dd(1);
                     return $this->privateTopic(['lang' => $lang, 'topic' => $FoundTopic, $params]);
                 }
             }

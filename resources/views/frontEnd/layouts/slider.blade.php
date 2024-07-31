@@ -42,39 +42,39 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                 <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                      data-bs-interval="5000">
 
-                    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+                            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-                    <div class="carousel-inner">
+                            <div class="carousel-inner">
 
-                        @php($i=0)
-                        @foreach($SliderBanners as $SliderBanner)
-                            <?php
-                            if ($SliderBanner->$title_var != "") {
-                                $BTitle = $SliderBanner->$title_var;
-                            } else {
-                                $BTitle = $SliderBanner->$title_var2;
-                            }
-                            $BDetails = $SliderBanner->$details_var;
-                            if ($SliderBanner->$file_var != "") {
-                                $BFile = $SliderBanner->$file_var;
-                            } else {
-                                $BFile = $SliderBanner->$file_var2;
-                            }
-                            ?>
-                            <div
-                                class="lazyload carousel-item {{ ($i==0)?"active":"" }} {{ ($BDetails =="" && $SliderBanner->link_url=="")?"carousel-item-clear":"" }}"
-                                style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}');">
-                                <div class="carousel-container">
-                                    <div class="carousel-content container">
-                                        <div class="slider-content">
-                                            @if($BDetails !="" || $SliderBanner->link_url!="")
-                                                @if($BTitle !="")
-                                                    <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
-                                                @endif
+                                @php($i=0)
+                                @foreach($SliderBanners as $SliderBanner)
+                                    <?php
+                                    if ($SliderBanner->$title_var != "") {
+                                        $BTitle = $SliderBanner->$title_var;
+                                    } else {
+                                        $BTitle = $SliderBanner->$title_var2;
+                                    }
+                                    $BDetails = $SliderBanner->$details_var;
+                                    if ($SliderBanner->$file_var != "") {
+                                        $BFile = $SliderBanner->$file_var;
+                                    } else {
+                                        $BFile = $SliderBanner->$file_var2;
+                                    }
+                                    ?>
+                                    <div
+                                        class="lazyload carousel-item {{ ($i==0)?"active":"" }} {{ ($BDetails =="" && $SliderBanner->link_url=="")?"carousel-item-clear":"" }}"
+                                        style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}');">
+                                        <div class="carousel-container">
+                                            <div class="carousel-content container">
+                                                <div class="slider-content">
+                                                    @if($BDetails !="" || $SliderBanner->link_url!="")
+                                                        @if($BTitle !="")
+                                                            <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
+                                                        @endif
 
-                                                @if($BDetails !="")
-                                                    <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
-                                                @endif
+                                                        @if($BDetails !="")
+                                                            <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
+                                                        @endif
 
                                                 @if($SliderBanner->link_url !="")
                                                     <a href="{!! $SliderBanner->link_url !!}"

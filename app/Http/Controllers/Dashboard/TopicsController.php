@@ -584,7 +584,6 @@ class TopicsController extends Controller
                 'photo_file' => 'image',
                 'cover_photo' => 'image',
                 'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
-                'video_file' => 'mimes:mp4,ogv,webm'
             ]);
             $topicArrangement = $request->input('topic_arrangement');
 
@@ -671,7 +670,6 @@ class TopicsController extends Controller
                     $path = $this->uploadPath;
                     $request->file($formFileName)->move($path, $videoFileFinalName);
                 }
-
             }
             // End of Upload Files
 
