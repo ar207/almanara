@@ -43,99 +43,34 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                 </div>
             @elseif($SliderBanner_type==1)
                 {{-- Photo Slider Banners--}}
-                <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                <div id="heroWebCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                      data-bs-interval="5000">
 
-                    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+                    <ol class="carousel-indicators" id="hero-web-carousel-indicators"></ol>
 
                     <div class="carousel-inner">
-
                         @php($i=0)
                         @foreach($SliderBanners as $SliderBanner)
                             <?php
-                            if ($SliderBanner->$title_var != "") {
-                                $BTitle = $SliderBanner->$title_var;
-                            } else {
-                                $BTitle = $SliderBanner->$title_var2;
-                            }
+                            $BTitle = $SliderBanner->$title_var ?: $SliderBanner->$title_var2;
                             $BDetails = $SliderBanner->$details_var;
-                            if ($SliderBanner->$file_var != "") {
-                                $BFile = $SliderBanner->$file_var;
-                            } else {
-                                $BFile = $SliderBanner->$file_var2;
-                            }
-                            if ($SliderBanner->$tablet_file_var != "") {
-                                $tabletFile = $SliderBanner->$tablet_file_var;
-                            } else {
-                                $tabletFile = $SliderBanner->$tablet_file_var2;
-                            }
-                            if ($SliderBanner->$mobile_file_var != "") {
-                                $mobileFile = $SliderBanner->$mobile_file_var;
-                            } else {
-                                $mobileFile = $SliderBanner->$mobile_file_var2;
-                            }
+                            $BFile = $SliderBanner->$file_var ?: $SliderBanner->$file_var2;
                             ?>
-                            <div class="carousel-item web-display {{ ($i==0)?"active":"" }}" data-type="web"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}'); background-size: contain">
+                            <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="web"
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}'); background-size: contain;">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
-                                            @if($BDetails !="" || $SliderBanner->link_url!="")
-                                                @if($BTitle !="")
+                                            @if($BDetails != "" || $SliderBanner->link_url != "")
+                                                @if($BTitle != "")
                                                     <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
                                                 @endif
 
-                                                @if($BDetails !="")
+                                                @if($BDetails != "")
                                                     <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
                                                 @endif
 
-                                                @if($SliderBanner->link_url !="")
-                                                    <a href="{!! $SliderBanner->link_url !!}"
-                                                       class="btn-theme animate__animated animate__fadeInUp slider-link">{{ __('frontend.moreDetails') }}</a>
-                                                @endif
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item tablet-display {{ ($i==0)?"active":"" }}" data-type="tablet"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}'); background-size: contain;">
-                                <div class="carousel-container">
-                                    <div class="carousel-content container">
-                                        <div class="slider-content">
-                                            @if($BDetails !="" || $SliderBanner->link_url!="")
-                                                @if($BTitle !="")
-                                                    <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
-                                                @endif
-
-                                                @if($BDetails !="")
-                                                    <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
-                                                @endif
-
-                                                @if($SliderBanner->link_url !="")
-                                                    <a href="{!! $SliderBanner->link_url !!}"
-                                                       class="btn-theme animate__animated animate__fadeInUp slider-link">{{ __('frontend.moreDetails') }}</a>
-                                                @endif
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                <div class="carousel-item mobile-display {{ ($i==0)?"active":"" }}" data-type="mobile" style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}'); background-size: contain;">
-                                <div class="carousel-container">
-                                    <div class="carousel-content container">
-                                        <div class="slider-content">
-                                            @if($BDetails !="" || $SliderBanner->link_url!="")
-                                                @if($BTitle !="")
-                                                    <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
-                                                @endif
-
-                                                @if($BDetails !="")
-                                                    <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
-                                                @endif
-
-                                                @if($SliderBanner->link_url !="")
+                                                @if($SliderBanner->link_url != "")
                                                     <a href="{!! $SliderBanner->link_url !!}"
                                                        class="btn-theme animate__animated animate__fadeInUp slider-link">{{ __('frontend.moreDetails') }}</a>
                                                 @endif
@@ -148,10 +83,120 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                         @endforeach
                     </div>
                     @if(count($SliderBanners) >1)
-                        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                        <a class="carousel-control-prev" href="#heroWebCarousel" role="button" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
                         </a>
-                        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                        <a class="carousel-control-next" href="#heroWebCarousel" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                        </a>
+                    @else
+                        <style>
+                            .carousel-indicators {
+                                display: none;
+                            }
+                        </style>
+                    @endif
+                </div>
+
+                <div id="heroTabletCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                     data-bs-interval="5000">
+
+                    <ol class="carousel-indicators" id="hero-tablet-carousel-indicators"></ol>
+
+                    <div class="carousel-inner">
+                        @php($i=0)
+                        @foreach($SliderBanners as $SliderBanner)
+                            <?php
+                            $BTitle = $SliderBanner->$title_var ?: $SliderBanner->$title_var2;
+                            $BDetails = $SliderBanner->$details_var;
+                            $tabletFile = $SliderBanner->$tablet_file_var ?: $SliderBanner->$tablet_file_var2;
+                            ?>
+                            <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="tablet"
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}'); background-size: contain;">
+                                <div class="carousel-container">
+                                    <div class="carousel-content container">
+                                        <div class="slider-content">
+                                            @if($BDetails != "" || $SliderBanner->link_url != "")
+                                                @if($BTitle != "")
+                                                    <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
+                                                @endif
+
+                                                @if($BDetails != "")
+                                                    <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
+                                                @endif
+
+                                                @if($SliderBanner->link_url != "")
+                                                    <a href="{!! $SliderBanner->link_url !!}"
+                                                       class="btn-theme animate__animated animate__fadeInUp slider-link">{{ __('frontend.moreDetails') }}</a>
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @php($i++)
+                        @endforeach
+                    </div>
+                    @if(count($SliderBanners) >1)
+                        <a class="carousel-control-prev" href="#heroTabletCarousel" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#heroTabletCarousel" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                        </a>
+                    @else
+                        <style>
+                            .carousel-indicators {
+                                display: none;
+                            }
+                        </style>
+                    @endif
+                </div>
+
+                <div id="heroMobileCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                     data-bs-interval="5000">
+
+                    <ol class="carousel-indicators" id="hero-mobile-carousel-indicators"></ol>
+
+                    <div class="carousel-inner">
+                        @php($i=0)
+                        @foreach($SliderBanners as $SliderBanner)
+                            <?php
+                            $BTitle = $SliderBanner->$title_var ?: $SliderBanner->$title_var2;
+                            $BDetails = $SliderBanner->$details_var;
+                            $mobileFile = $SliderBanner->$mobile_file_var ?: $SliderBanner->$mobile_file_var2;
+                            ?>
+                            <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="mobile"
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}'); background-size: contain;">
+                                <div class="carousel-container">
+                                    <div class="carousel-content container">
+                                        <div class="slider-content">
+                                            @if($BDetails != "" || $SliderBanner->link_url != "")
+                                                @if($BTitle != "")
+                                                    <h2 class="animate__animated animate__fadeInDown slider-title">{!! $BTitle !!}</h2>
+                                                @endif
+
+                                                @if($BDetails != "")
+                                                    <p class="animate__animated animate__fadeInUp slider-details">{!! nl2br($BDetails) !!}</p>
+                                                @endif
+
+                                                @if($SliderBanner->link_url != "")
+                                                    <a href="{!! $SliderBanner->link_url !!}"
+                                                       class="btn-theme animate__animated animate__fadeInUp slider-link">{{ __('frontend.moreDetails') }}</a>
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @php($i++)
+                        @endforeach
+                    </div>
+                    @if(count($SliderBanners) >1)
+                        <a class="carousel-control-prev" href="#heroMobileCarousel" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#heroMobileCarousel" role="button" data-bs-slide="next">
                             <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
                         </a>
                     @else

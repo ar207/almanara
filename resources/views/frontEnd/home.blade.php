@@ -72,16 +72,19 @@
         });
 
         function manageBannersOnScreenChange() {
-            let deviceType = getDeviceType();
-            $('.carousel-item').each(function() {
-                if ($(this).data('type') === deviceType) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            // Reinitialize the carousel (if needed, depending on your carousel implementation)
-            // $('#carouselExample').carousel('dispose').carousel();
+            const deviceType = getDeviceType();
+            if (deviceType === 'mobile') {
+                $('#heroMobileCarousel').show();
+                $('#heroWebCarousel, #heroTabletCarousel').hide();
+            }
+            if (deviceType === 'tablet') {
+                $('#heroTabletCarousel').show();
+                $('#heroWebCarousel, #heroMobileCarousel').hide();
+            }
+            if (deviceType === 'web') {
+                $('#heroWebCarousel').show();
+                $('#heroMobileCarousel, #heroTabletCarousel').hide();
+            }
         }
 
         function getDeviceType() {
@@ -94,6 +97,5 @@
                 return 'web';
             }
         }
-
     </script>
 @endpush

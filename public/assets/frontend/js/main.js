@@ -25,17 +25,17 @@
         };
         window.addEventListener("load", c), s(document, c)
     }
-    let d = e("#hero-carousel-indicators");
-    e("#heroCarousel .carousel-item", !0).forEach((e, t) => {
-        0 === t ? d.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : d.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + t + "'></li>"
+    let d = e("#hero-web-carousel-indicators");
+    e("#heroWebCarousel .carousel-item", !0).forEach((e, t) => {
+        0 === t ? d.innerHTML += "<li data-bs-target='#heroWebCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : d.innerHTML += "<li data-bs-target='#heroWebCarousel' data-bs-slide-to='" + t + "'></li>"
     });
-    let dne = e("#video-carousel-indicators");
-    e("#videoCarousel .carousel-item", !0).forEach((e, t) => {
-        0 === t ? dne.innerHTML += "<li data-bs-target='#videoCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : dne.innerHTML += "<li data-bs-target='#videoCarousel' data-bs-slide-to='" + t + "'></li>"
+    let dne = e("#hero-tablet-carousel-indicators");
+    e("#heroTabletCarousel .carousel-item", !0).forEach((e, t) => {
+        0 === t ? dne.innerHTML += "<li data-bs-target='#heroTabletCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : dne.innerHTML += "<li data-bs-target='#heroTabletCarousel' data-bs-slide-to='" + t + "'></li>"
     });
-    let dneee = e("#product-carousel-indicators");
-    e("#productCarousel .carousel-item", !0).forEach((e, t) => {
-        0 === t ? dneee.innerHTML += "<li data-bs-target='#productCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : dneee.innerHTML += "<li data-bs-target='#productCarousel' data-bs-slide-to='" + t + "'></li>"
+    let dneee = e("#hero-mobile-carousel-indicators");
+    e("#heroMobileCarousel .carousel-item", !0).forEach((e, t) => {
+        0 === t ? dneee.innerHTML += "<li data-bs-target='#heroMobileCarousel' data-bs-slide-to='" + t + "' class='active'></li>" : dneee.innerHTML += "<li data-bs-target='#heroMobileCarousel' data-bs-slide-to='" + t + "'></li>"
     });
     let h = e(".back-to-top");
     if (h) {

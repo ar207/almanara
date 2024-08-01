@@ -405,7 +405,7 @@ class HomeController extends Controller
 
             $specialities = [];
             $currentSpeciality = $speciality = '';
-            if ($part1 == 'specialities') {
+            if (($part1 == 'ar' && $part2 == 'specialities') || ($part1 == 'specialities')) {
                 $view = 'speciality';
                 $specialities = Section::where('webmaster_id', '=', 8)->where('is_speciality', 1)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
                 $specialityId = request()->speciality_id;

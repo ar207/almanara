@@ -47,14 +47,14 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>{{ __("backend.products") }}</h2>
+                    <h2>{{ $page_title }}</h2>
                     <ol>
                         <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
                         @if(@$search_word !="")
                             <li class="active">{!! __("backend.search") !!}</li>
                         @elseif($webmaster_section_title !="")
                             <li class="active">
-                                <a href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{{ __("backend.products") }}</a>
+                                <a href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{{ $page_title }}</a>
                             </li>
                         @elseif(@$search_word!="")
                             <li class="active">{{ @$search_word }}</li>
