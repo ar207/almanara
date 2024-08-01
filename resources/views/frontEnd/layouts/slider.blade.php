@@ -57,7 +57,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $BFile = $SliderBanner->$file_var ?: $SliderBanner->$file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="web"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}'); background-size: contain;">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}');">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
@@ -112,7 +112,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $tabletFile = $SliderBanner->$tablet_file_var ?: $SliderBanner->$tablet_file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="tablet"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}'); background-size: contain;">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}');">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
@@ -167,7 +167,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $mobileFile = $SliderBanner->$mobile_file_var ?: $SliderBanner->$mobile_file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="mobile"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}'); background-size: contain;">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}');">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
