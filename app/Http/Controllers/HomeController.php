@@ -275,8 +275,7 @@ class HomeController extends Controller
                     //general search
                     $TopicsList = Topic::query()->where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orWhere([['status', 1], ['expire_date', null]])->orderBy('row_no', 'asc');
                 } else {
-                    if ($part1 == 'news' || $part1 == 'الأخبار') {
-
+                    if ($part1 == 'news' || $part2 == 'الأخبار') {
                         $TopicsList = Topic::query()->where([['webmaster_id', '=', $WebmasterSection->id], ['status',
                             1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])
                             ->orWhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])

@@ -20,10 +20,10 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
             $details_var2 = "details_" . config('smartend.default_language');
             $file_var = "file_" . @Helper::currentLanguage()->code;
             $file_var2 = "file_" . config('smartend.default_language');
-            $tablet_file_var = "file_" . @Helper::currentLanguage()->code;
-            $tablet_file_var2 = "file_" . config('smartend.default_language');
-            $mobile_file_var = "file_" . @Helper::currentLanguage()->code;
-            $mobile_file_var2 = "file_" . config('smartend.default_language');
+            $tablet_file_var = "tablet_file_" . @Helper::currentLanguage()->code;
+            $tablet_file_var2 = "tablet_file_" . config('smartend.default_language');
+            $mobile_file_var = "mobile_file_" . @Helper::currentLanguage()->code;
+            $mobile_file_var2 = "mobile_file_" . config('smartend.default_language');
             ?>
             @if($SliderBanner_type==0)
                 {{-- Text/Code Banners--}}
@@ -57,7 +57,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $BFile = $SliderBanner->$file_var ?: $SliderBanner->$file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="web"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}');">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$BFile) }}'); background-size: cover">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
@@ -112,7 +112,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $tabletFile = $SliderBanner->$tablet_file_var ?: $SliderBanner->$tablet_file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="tablet"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}');">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$tabletFile) }}'); background-size: cover">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">
@@ -167,7 +167,7 @@ $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_bann
                             $mobileFile = $SliderBanner->$mobile_file_var ?: $SliderBanner->$mobile_file_var2;
                             ?>
                             <div class="carousel-item {{ ($i==0) ? 'active' : '' }}" data-type="mobile"
-                                 style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}');">
+                                 style="background-image: url('{{ URL::to('uploads/banners/'.$mobileFile) }}'); background-size: cover">
                                 <div class="carousel-container">
                                     <div class="carousel-content container">
                                         <div class="slider-content">

@@ -71,19 +71,44 @@
             manageBannersOnScreenChange();
         });
 
+        function addIndicators(carouselId, indicatorsId) {
+            let carouselItems = document.querySelectorAll(`${carouselId} .carousel-item`);
+            let indicators = document.querySelector(indicatorsId);
+
+            if (!indicators) {
+                console.error(`Indicators element not found for ${indicatorsId}`);
+                return;
+            }
+
+            indicators.innerHTML = '';
+
+            carouselItems.forEach((item, index) => {
+                let indicator = document.createElement('li');
+                indicator.setAttribute('data-bs-target', carouselId);
+                indicator.setAttribute('data-bs-slide-to', index);
+                if (index === 0) {
+                    indicator.classList.add('active');
+                }
+                indicators.appendChild(indicator);
+            });
+        }
+
         function manageBannersOnScreenChange() {
             const deviceType = getDeviceType();
             if (deviceType === 'mobile') {
                 $('#heroMobileCarousel').show();
                 $('#heroWebCarousel, #heroTabletCarousel').hide();
+                addIndicators('#heroMobileCarousel', '#hero-mobile-carousel-indicators');
             }
             if (deviceType === 'tablet') {
                 $('#heroTabletCarousel').show();
                 $('#heroWebCarousel, #heroMobileCarousel').hide();
+                addIndicators('#heroTabletCarousel', '#hero-tablet-carousel-indicators');
             }
             if (deviceType === 'web') {
                 $('#heroWebCarousel').show();
                 $('#heroMobileCarousel, #heroTabletCarousel').hide();
+                addIndicators('#heroWebCarousel', '#hero-web-carousel-indicators');
             }
         }
 
