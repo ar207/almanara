@@ -278,10 +278,10 @@
                                         <div class="col-lg-{{ $cols_lg }} col-md-{{ $cols_md }}">
                                             <div class="gallery-item">
                                                 <a href="{{ URL::to('uploads/topics/'.$photo->file) }}"
-                                                   class="galelry-lightbox" title="{{ $photo->title }}">
+                                                   class="galelry-lightbox">
                                                     <img src="{{ URL::to('uploads/topics/'.$photo->file) }}"
                                                          loading="lazy"
-                                                         alt="{{ $photo->title }}" class="img-fluid">
+                                                         class="img-fluid">
                                                 </a>
                                             </div>
                                         </div>
