@@ -402,6 +402,33 @@ if ($WebmasterSection->$title_var != "") {
                                 {!!  __('backend.imagesTypes') !!}
                             </small>
                         </div>
+                        <div class="offset-sm-2 col-sm-10">
+                            <small>
+                                <i class="material-icons">&#xe8fd;</i>
+                                <b>Recommended image size: 4:1</b>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="photo_file"
+                               class="col-sm-2 form-control-label">Mobile {!!  __('backend.coverPhoto') !!}</label>
+                        <div class="col-sm-10">
+                            {!! Form::file('mobile_cover_photo', array('class' => 'form-control','id'=>'mobile_cover_photo','accept'=>'image/*')) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                        <div class="offset-sm-2 col-sm-10">
+                            <small>
+                                <i class="material-icons">&#xe8fd;</i>
+                                {!!  __('backend.imagesTypes') !!}
+                            </small>
+                        </div>
+                        <div class="offset-sm-2 col-sm-10">
+                            <small>
+                                <i class="material-icons">&#xe8fd;</i>
+                                <b>Recommended image size: 4:5</b>
+                            </small>
+                        </div>
                     </div>
                 @endif
 

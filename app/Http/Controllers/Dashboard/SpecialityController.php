@@ -97,6 +97,7 @@ class SpecialityController extends Controller
         //
         $this->validate($request, [
             'photo' => 'image',
+            'mobile_photo' => 'image',
             'thumbnail' => 'image',
         ]);
 
@@ -111,8 +112,9 @@ class SpecialityController extends Controller
 
         // Start of Upload Files
         $formFileName = "photo";
+        $mobileFormFileName = "mobile_photo";
         $thumbnailInput = "thumbnail";
-        $fileFinalName = $thumbnailFileName = "";
+        $fileFinalName = $thumbnailFileName = $mobileFileFinalName = "";
         if ($request->$formFileName != "") {
             $fileFinalName = time() . rand(1111, 9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
             $path = $this->uploadPath;
@@ -121,6 +123,15 @@ class SpecialityController extends Controller
             // resize & optimize
             Helper::imageResize($path.$fileFinalName);
             Helper::imageOptimize($path.$fileFinalName);
+        }
+        if ($request->$mobileFormFileName != "") {
+            $mobileFileFinalName = time() . rand(1111, 9999) . '.' . $request->file($mobileFormFileName)->getClientOriginalExtension();
+            $path = $this->uploadPath;
+            $request->file($mobileFormFileName)->move($path, $mobileFileFinalName);
+
+            // resize & optimize
+            Helper::imageResize($path.$mobileFileFinalName);
+            Helper::imageOptimize($path.$mobileFileFinalName);
         }
         if ($request->$thumbnailInput != "") {
             $thumbnailFileName = time() . rand(1111, 9999) . '.' . $request->file($thumbnailInput)->getClientOriginalExtension();
@@ -151,6 +162,9 @@ class SpecialityController extends Controller
         $Section->icon = $request->icon;
         if ($fileFinalName != "") {
             $Section->photo = $fileFinalName;
+        }
+        if ($mobileFileFinalName != "") {
+            $Section->mobile_photo = $mobileFileFinalName;
         }
         if ($thumbnailFileName != "") {
             $Section->thumbnail = $thumbnailFileName;
@@ -218,14 +232,16 @@ class SpecialityController extends Controller
 
             $this->validate($request, [
                 'photo' => 'image',
+                'mobile_photo' => 'image',
                 'thumbnail' => 'image',
             ]);
 
 
             // Start of Upload Files
             $formFileName = "photo";
+            $mobileFormFileName = "mobile_photo";
             $thumbnailInputName = "thumbnail";
-            $fileFinalName = $thumbnailFileName = "";
+            $fileFinalName = $thumbnailFileName = $mobileFileFinalName = "";
             if ($request->$formFileName != "") {
                 // Delete a Section photo
                 if ($Section->photo != "") {
@@ -240,6 +256,20 @@ class SpecialityController extends Controller
                 // resize & optimize
                 Helper::imageResize($path.$fileFinalName);
                 Helper::imageOptimize($path.$fileFinalName);
+            }
+            if ($request->$mobileFormFileName != "") {
+                // Delete a Section photo
+                if ($Section->mobile_photo != "") {
+                    File::delete($this->uploadPath . $Section->mobile_photo);
+                }
+
+                $mobileFileFinalName = time() . rand(1111, 9999) . '.' . $request->file($mobileFormFileName)->getClientOriginalExtension();
+                $path = $this->uploadPath;
+                $request->file($mobileFormFileName)->move($path, $mobileFileFinalName);
+
+                // resize & optimize
+                Helper::imageResize($path.$mobileFileFinalName);
+                Helper::imageOptimize($path.$mobileFileFinalName);
             }
             if ($request->$thumbnailInputName != "") {
                 // Delete a Section photo
@@ -282,6 +312,10 @@ class SpecialityController extends Controller
 
             if ($fileFinalName != "") {
                 $Section->photo = $fileFinalName;
+            }
+
+            if ($mobileFileFinalName != "") {
+                $Section->mobile_photo = $mobileFileFinalName;
             }
 
             if ($thumbnailFileName != "") {
@@ -342,6 +376,9 @@ class SpecialityController extends Controller
             if ($Section->photo != "") {
                 File::delete($this->uploadPath . $Section->photo);
             }
+            if ($Section->mobile_photo != "") {
+                File::delete($this->uploadPath . $Section->mobile_photo);
+            }
             if ($Section->thumbnail != "") {
                 File::delete($this->uploadPath . $Section->thumbnail);
             }
@@ -391,6 +428,12 @@ class SpecialityController extends Controller
                     foreach ($Sections as $Section) {
                         if ($Section->photo != "") {
                             File::delete($this->uploadPath . $Section->photo);
+                        }
+                        if ($Section->mobile_photo != "") {
+                            File::delete($this->uploadPath . $Section->mobile_photo);
+                        }
+                        if ($Section->thumbnail != "") {
+                            File::delete($this->uploadPath . $Section->thumbnail);
                         }
                     }
                     Section::wherein('father_id', $request->ids)->delete();

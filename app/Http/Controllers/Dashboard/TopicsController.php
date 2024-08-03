@@ -583,6 +583,7 @@ class TopicsController extends Controller
             $this->validate($request, [
                 'photo_file' => 'image',
                 'cover_photo' => 'image',
+                'mobile_cover_photo' => 'image',
                 'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
             ]);
             $topicArrangement = $request->input('topic_arrangement');
@@ -622,7 +623,8 @@ class TopicsController extends Controller
             }
 
             $coverInputName = "cover_photo";
-            $coverFinalName = "";
+            $mobileCoverInputName = "mobile_cover_photo";
+            $coverFinalName = $mobileCoverFinalName = "";
             if ($request->$coverInputName != "") {
                 $coverFinalName = time() . rand(1111,
                         9999) . '.' . $request->file($coverInputName)->getClientOriginalExtension();
@@ -632,6 +634,16 @@ class TopicsController extends Controller
                 // resize & optimize
                 Helper::imageResize($path . $coverFinalName);
                 Helper::imageOptimize($path . $coverFinalName);
+            }
+            if ($request->$mobileCoverInputName != "") {
+                $mobileCoverFinalName = time() . rand(1111,
+                        9999) . '.' . $request->file($mobileCoverInputName)->getClientOriginalExtension();
+                $path = $this->uploadPath;
+                $request->file($mobileCoverInputName)->move($path, $mobileCoverFinalName);
+
+                // resize & optimize
+                Helper::imageResize($path . $mobileCoverFinalName);
+                Helper::imageOptimize($path . $mobileCoverFinalName);
             }
 
             $formFileName = "audio_file";
@@ -700,6 +712,9 @@ class TopicsController extends Controller
             }
             if ($coverFinalName != "") {
                 $Topic->cover_photo = $coverFinalName;
+            }
+            if ($mobileCoverFinalName != "") {
+                $Topic->mobile_cover_photo = $mobileCoverFinalName;
             }
             if ($audioFileFinalName != "") {
                 $Topic->audio_file = $audioFileFinalName;
@@ -865,6 +880,7 @@ class TopicsController extends Controller
                 $this->validate($request, [
                     'photo_file' => 'image',
                     'cover_photo' => 'image',
+                    'mobile_cover_photo' => 'image',
                     'audio_file' => 'mimes:mpga,wav,mp3', // mpga = mp3
                     'video_file' => 'mimes:mp4,ogv,webm'
                 ]);
@@ -891,7 +907,8 @@ class TopicsController extends Controller
 
 
                 $coverInputName = "cover_photo";
-                $coverFinalName = "";
+                $mobileCoverInputName = "mobile_cover_photo";
+                $coverFinalName = $mobileCoverFinalName = "";
                 if ($request->$coverInputName != "") {
                     // Delete a Topic photo
                     if ($Topic->$coverInputName != "" && $Topic->$coverInputName != "default.png") {
@@ -906,6 +923,21 @@ class TopicsController extends Controller
                     // resize & optimize
                     Helper::imageResize($path . $coverFinalName);
                     Helper::imageOptimize($path . $coverFinalName);
+                }
+                if ($request->$mobileCoverInputName != "") {
+                    // Delete a Topic photo
+                    if ($Topic->$mobileCoverInputName != "" && $Topic->$mobileCoverInputName != "default.png") {
+                        File::delete($this->uploadPath . $Topic->$mobileCoverInputName);
+                    }
+
+                    $mobileCoverFinalName = time() . rand(1111,
+                            9999) . '.' . $request->file($mobileCoverInputName)->getClientOriginalExtension();
+                    $path = $this->uploadPath;
+                    $request->file($mobileCoverInputName)->move($path, $mobileCoverFinalName);
+
+                    // resize & optimize
+                    Helper::imageResize($path . $mobileCoverFinalName);
+                    Helper::imageOptimize($path . $mobileCoverFinalName);
                 }
 
 
@@ -991,12 +1023,25 @@ class TopicsController extends Controller
                     $Topic->cover_photo = "";
                 }
 
+                if ($request->mobile_cover_photo_delete == 1) {
+                    // Delete cover_photo_file
+                    if ($Topic->mobile_cover_photo != "" && $Topic->mobile_cover_photo != "default.png") {
+                        File::delete($this->uploadPath . $Topic->mobile_cover_photo);
+                    }
+
+                    $Topic->mobile_cover_photo = "";
+                }
+
                 if ($fileFinalName != "") {
                     $Topic->photo_file = $fileFinalName;
                 }
 
                 if ($coverFinalName != "") {
                     $Topic->cover_photo = $coverFinalName;
+                }
+
+                if ($mobileCoverFinalName != "") {
+                    $Topic->mobile_cover_photo = $mobileCoverFinalName;
                 }
                 if ($audioFileFinalName != "") {
                     $Topic->audio_file = $audioFileFinalName;
@@ -1205,6 +1250,13 @@ class TopicsController extends Controller
                     $copied = File::copy($path . $Topic->cover_photo, $path . $new_file_name);
                     if ($copied) {
                         $NewTopic->cover_photo = $new_file_name;
+                    }
+                }
+                if ($Topic->mobile_cover_photo != "") {
+                    $new_file_name = "c" . $Topic->mobile_cover_photo;
+                    $copied = File::copy($path . $Topic->mobile_cover_photo, $path . $new_file_name);
+                    if ($copied) {
+                        $NewTopic->mobile_cover_photo = $new_file_name;
                     }
                 }
                 if ($Topic->audio_file != "") {
@@ -1428,6 +1480,9 @@ class TopicsController extends Controller
                 if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
                     File::delete($this->uploadPath . $Topic->cover_photo);
                 }
+                if ($Topic->mobile_cover_photo != "" && $Topic->mobile_cover_photo != "default.png") {
+                    File::delete($this->uploadPath . $Topic->mobile_cover_photo);
+                }
                 if ($Topic->attach_file != "") {
                     File::delete($this->uploadPath . $Topic->attach_file);
                 }
@@ -1519,6 +1574,9 @@ class TopicsController extends Controller
                             }
                             if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
                                 File::delete($this->uploadPath . $Topic->cover_photo);
+                            }
+                            if ($Topic->mobile_cover_photo != "" && $Topic->mobile_cover_photo != "default.png") {
+                                File::delete($this->uploadPath . $Topic->mobile_cover_photo);
                             }
                             if ($Topic->attach_file != "") {
                                 File::delete($this->uploadPath . $Topic->attach_file);
@@ -2706,6 +2764,9 @@ class TopicsController extends Controller
                             }
                             if ($Topic->cover_photo != "" && $Topic->cover_photo != "default.png") {
                                 File::delete($this->uploadPath . $Topic->cover_photo);
+                            }
+                            if ($Topic->mobile_cover_photo != "" && $Topic->mobile_cover_photo != "default.png") {
+                                File::delete($this->uploadPath . $Topic->mobile_cover_photo);
                             }
                             if ($Topic->attach_file != "") {
                                 File::delete($this->uploadPath . $Topic->attach_file);

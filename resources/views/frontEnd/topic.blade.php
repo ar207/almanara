@@ -33,7 +33,9 @@
         $category_title = "";
         $page_title = "";
         $coverImage = !empty($Topic->cover_photo) ? $Topic->cover_photo : $Topic->photo_file;
+        $mobileCoverImage = !empty($Topic->mobile_cover_photo) ? $Topic->mobile_cover_photo : $Topic->photo_file;
         $category_image = URL::to('uploads/topics/' . $coverImage);
+        $mobile_category_image = URL::to('uploads/topics/' . $mobileCoverImage);
 
         if (@$WebmasterSection != "none") {
             if (@$WebmasterSection->$title_var != "") {

@@ -10,7 +10,7 @@
         $webmaster_section_title = "";
         $category_title = $categoryDescription = "";
         $page_title = "";
-        $category_image = "";
+        $category_image = $mobile_category_image = "";
         if (@$WebmasterSection != "none") {
             if (@$WebmasterSection->$title_var != "") {
                 $webmaster_section_title = @$WebmasterSection->$title_var;
@@ -37,6 +37,9 @@
                 $page_title = $category_title;
                 if (@$CurrentCategory->photo != "") {
                     $category_image = URL::to('uploads/sections/' . @$CurrentCategory->photo);
+                }
+                if (@$CurrentCategory->mobile_photo != "") {
+                    $mobile_category_image = URL::to('uploads/sections/' . @$CurrentCategory->mobile_photo);
                 }
             }
         }

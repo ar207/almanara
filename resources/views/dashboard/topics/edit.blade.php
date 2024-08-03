@@ -641,12 +641,12 @@ if ($WebmasterSection->$title_var != "") {
                             </div>
                         @endif
 
-                        @if($WebmasterSection->photo_status)
+                        @if($WebmasterSection->is_cover_photo)
                             <div class="form-group row">
                                 <label for="photo_file"
                                        class="col-sm-2 form-control-label">{!!  __('backend.coverPhoto') !!}</label>
                                 <div class="col-sm-10">
-                                    @if($Topic->photo_file!="")
+                                    @if($Topic->cover_photo!="")
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div id="topic_cover_photo" class="col-sm-4 box p-a-xs">
@@ -680,6 +680,61 @@ if ($WebmasterSection->$title_var != "") {
                                     <small>
                                         <i class="material-icons">&#xe8fd;</i>
                                         {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        <b>Recommended image size: 4:1</b>
+                                    </small>
+                                </div>
+                            </div>
+
+                            {{-- Mobile cover image --}}
+                            <div class="form-group row">
+                                <label for="photo_file"
+                                       class="col-sm-2 form-control-label">Mobile {!!  __('backend.coverPhoto') !!}</label>
+                                <div class="col-sm-10">
+                                    @if($Topic->mobile_cover_photo!="")
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div id="topic_mobile_cover_photo" class="col-sm-4 box p-a-xs">
+                                                    <a target="_blank"
+                                                       href="{{ asset('uploads/topics/'.$Topic->mobile_cover_photo) }}"><img
+                                                            src="{{ asset('uploads/topics/'.$Topic->mobile_cover_photo) }}"
+                                                            class="img-responsive">
+                                                        {{ $Topic->mobile_cover_photo }}
+                                                    </a>
+                                                    <br>
+                                                    <a onclick="document.getElementById('topic_mobile_cover_photo').style.display='none';document.getElementById('mobile_cover_photo_delete').value='1';document.getElementById('mobile_cover_undo').style.display='block';"
+                                                       class="btn btn-sm btn-default">{!!  __('backend.delete') !!}</a>
+                                                </div>
+                                                <div id="mobile_cover_undo" class="col-sm-4 p-a-xs" style="display: none">
+                                                    <a onclick="document.getElementById('topic_mobile_cover_photo').style.display='block';document.getElementById('mobile_cover_photo_delete').value='0';document.getElementById('mobile_cover_undo').style.display='none';">
+                                                        <i class="material-icons">
+                                                            &#xe166;</i> {!!  __('backend.undoDelete') !!}</a>
+                                                </div>
+
+                                                {!! Form::hidden('mobile_cover_photo_delete','0', array('id'=>'mobile_cover_photo_delete')) !!}
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {!! Form::file('mobile_cover_photo', array('class' => 'form-control','id'=>'mobile_cover_photo','accept'=>'image/*')) !!}
+
+                                </div>
+                            </div>
+                            <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        {!!  __('backend.imagesTypes') !!}
+                                    </small>
+                                </div>
+                                <div class="offset-sm-2 col-sm-10">
+                                    <small>
+                                        <i class="material-icons">&#xe8fd;</i>
+                                        <b>Recommended image size: 4:5</b>
                                     </small>
                                 </div>
                             </div>

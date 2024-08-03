@@ -10,7 +10,7 @@
         $webmaster_section_title = "";
         $category_title = $specialityDescription = "";
         $page_title = "";
-        $category_image = "";
+        $category_image = $mobile_category_image = "";
         if (!empty($speciality)) {
             if (!empty($speciality->$description_var)) {
                 $specialityDescription = @$speciality->$description_var;
@@ -26,10 +26,16 @@
             }
             $page_title = $webmaster_section_title;
             if (@$WebmasterSection->photo != "") {
-                $category_image = URL::to('uploads/topics/' . @$WebmasterSection->photo);
+                $category_image = URL::to('uploads/sections/' . @$WebmasterSection->photo);
+            }
+            if (@$WebmasterSection->mobile_photo != "") {
+                $mobile_category_image = URL::to('uploads/sections/' . @$WebmasterSection->mobile_photo);
             }
             if (!empty($speciality)) {
                 $category_image = URL::to('uploads/sections/' . @$speciality->photo);
+                if (@$speciality->mobile_photo != "") {
+                    $mobile_category_image = URL::to('uploads/sections/' . @$speciality->mobile_photo);
+                }
             }
         }
         ?>
@@ -98,7 +104,7 @@
                                         $categoryThumbnail = !empty($speciality->photo) ? URL::to('uploads/sections/' . $speciality->photo) : '';
                                     }
                                     $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
-                                    $category_link_url = url($checkLocale.'specialities') . '?speciality_id=' . $speciality->id;
+                                    $category_link_url = url($checkLocale . 'specialities') . '?speciality_id=' . $speciality->id;
                                     ?>
                                     <div class="col-lg-3 col-md-6 col-sm-12">
                                         <article>
@@ -201,12 +207,12 @@
                                 {!! $Topics->appends($_GET)->links() !!}
                             </div>
                             {{--<div class="col-lg-4 text-end">--}}
-                                {{--<h5 style="padding-top: 18px"><span--}}
-                                        {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
-                                    {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
-                                {{--<!--{{ __('backend.of') }}-->--}}
-                                {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
-                                {{--</h5>--}}
+                            {{--<h5 style="padding-top: 18px"><span--}}
+                            {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
+                            {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
+                            {{--<!--{{ __('backend.of') }}-->--}}
+                            {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
+                            {{--</h5>--}}
                             {{--</div>--}}
                         </div>
                     @endif

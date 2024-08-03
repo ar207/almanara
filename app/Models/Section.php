@@ -9,6 +9,8 @@ class Section extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     //Relation to webmasterSections
     public function webmasterSection()
     {

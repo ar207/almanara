@@ -174,6 +174,60 @@ if ($WebmasterSection->$title_var != "") {
                                     {!!  __('backend.imagesTypes') !!}
                                 </small>
                             </div>
+                            <div class="offset-sm-2 col-sm-10">
+                                <small>
+                                    <i class="material-icons">&#xe8fd;</i>
+                                    <b>Recommended image size: 4:1</b>
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mobile_photo"
+                                   class="col-sm-2 form-control-label">Mobile {!!  __('backend.coverPhoto') !!}</label>
+                            <div class="col-sm-10">
+                                @if($Sections->mobile_photo!="")
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="section_mobile_photo" class="col-sm-4 box p-a-xs">
+                                                <a target="_blank"
+                                                   href="{{ asset('uploads/sections/'.$Sections->mobile_photo) }}"><img
+                                                        src="{{ asset('uploads/sections/'.$Sections->mobile_photo) }}"
+                                                        class="img-responsive">
+                                                    {{ $Sections->mobile_photo }}
+                                                </a>
+                                                <br>
+                                                <a onclick="document.getElementById('section_mobile_photo').style.display='none';document.getElementById('mobile_photo_delete').value='1';document.getElementById('mobile_undo').style.display='block';"
+                                                   class="btn btn-sm btn-default">{!!  __('backend.delete') !!}</a>
+                                            </div>
+                                            <div id="mobile_undo" class="col-sm-4 p-a-xs" style="display: none">
+                                                <a onclick="document.getElementById('section_mobile_photo').style.display='block';document.getElementById('mobile_photo_delete').value='0';document.getElementById('mobile_undo').style.display='none';">
+                                                    <i class="material-icons">
+                                                        &#xe166;</i> {!!  __('backend.undoDelete') !!}</a>
+                                            </div>
+
+                                            {!! Form::hidden('mobile_photo_delete','0', array('id'=>'mobile_photo_delete')) !!}
+                                        </div>
+                                    </div>
+
+                                @endif
+                                {!! Form::file('mobile_photo', array('class' => 'form-control','id'=>'mobile_photo','accept'=>'image/*')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row m-t-md" style="margin-top: 0 !important;">
+                            <div class="offset-sm-2 col-sm-10">
+                                <small>
+                                    <i class="material-icons">&#xe8fd;</i>
+                                    {!!  __('backend.imagesTypes') !!}
+                                </small>
+                            </div>
+                            <div class="offset-sm-2 col-sm-10">
+                                <small>
+                                    <i class="material-icons">&#xe8fd;</i>
+                                    <b>Recommended image size: 4:5</b>
+                                </small>
+                            </div>
                         </div>
 
                         <div class="form-group row">
@@ -214,7 +268,7 @@ if ($WebmasterSection->$title_var != "") {
                                 <small>
                                     <i class="material-icons">&#xe8fd;</i>
                                     {!!  __('backend.imagesTypes') !!} <br>
-                                    {!! __('backend.recommendedImageSize') !!}
+                                    <b>{!! __('backend.recommendedImageSize') !!}</b>
                                 </small>
                             </div>
                         </div>
