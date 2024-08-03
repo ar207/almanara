@@ -76,7 +76,7 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>{!! (@$WebmasterSection->id ==1)?$title:$webmaster_section_title !!}</h2>
+                    <h2>{!! $title !!}</h2>
                     <ol>
                         <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
                         @if($webmaster_section_title !="")

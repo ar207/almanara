@@ -50,7 +50,7 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>{{  (@$search_word !="")?(__('backend.resultsFoundFor')." [ ".@$search_word." ]"):$page_title }}</h2>
+                    <h2>{{ !empty($category_title) ? $category_title : $page_title }}</h2>
                     <ol>
                         <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
                         @if(@$search_word !="")
