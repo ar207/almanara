@@ -26,7 +26,7 @@
             }
             $page_title = $webmaster_section_title;
             if (@$WebmasterSection->photo != "") {
-                $category_image = URL::to('uploads/sections/' . @$WebmasterSection->photo);
+                $category_image = URL::to('uploads/topics/' . @$WebmasterSection->photo);
             }
             if (@$WebmasterSection->mobile_photo != "") {
                 $mobile_category_image = URL::to('uploads/sections/' . @$WebmasterSection->mobile_photo);
