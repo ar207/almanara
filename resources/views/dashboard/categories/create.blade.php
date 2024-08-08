@@ -50,7 +50,7 @@ if ($WebmasterSection->$title_var != "") {
                 @if($WebmasterSection->sections_status > 2)
                     <div class="form-group row">
                         <label for="father_id"
-                               class="col-sm-2 form-control-label">{!!  __('backend.categoryFather') !!} </label>
+                               class="col-sm-2 form-control-label">{!!  __('backHomeend.categoryFather') !!} </label>
                         <div class="col-sm-10">
                             <select name="father_id" id="father_id" class="form-control c-select">
                                 <option value="0">- - {!!  __('backend.categoryNoFather') !!} - -</option>

@@ -35,61 +35,63 @@ class SiteMenu
                     if (count($MenuLink->webmasterSection->sections) > 0) {
                         // category list
                         foreach ($MenuLink->webmasterSection->sections as $MnuCategory) {
-                            if ($MnuCategory->father_id == 0) {
-                                // get sub cats
-                                $Sub2 = [];
-                                $SubCategories = $MnuCategory->fatherSections;
-                                foreach ($SubCategories as $SubCategory) {
-                                    $Sub3 = [];
-                                    $SubCategories2 = $SubCategory->fatherSections;
-                                    foreach ($SubCategories2 as $SubCategory2) {
-                                        if ($SubCategory2->$_title_var != "") {
-                                            $category2_title = $SubCategory2->$_title_var;
-                                        } else {
-                                            $category2_title = $SubCategory2->$_title_var2;
+                            if ($MnuCategory->status == 1) {
+                                if ($MnuCategory->father_id == 0) {
+                                    // get sub cats
+                                    $Sub2 = [];
+                                    $SubCategories = $MnuCategory->fatherSections;
+                                    foreach ($SubCategories as $SubCategory) {
+                                        $Sub3 = [];
+                                        $SubCategories2 = $SubCategory->fatherSections;
+                                        foreach ($SubCategories2 as $SubCategory2) {
+                                            if ($SubCategory2->$_title_var != "") {
+                                                $category2_title = $SubCategory2->$_title_var;
+                                            } else {
+                                                $category2_title = $SubCategory2->$_title_var2;
+                                            }
+                                            $Sub3[] = [
+                                                "id" => $SubCategory2->id,
+                                                "title" => $category2_title,
+                                                "url" => Helper::categoryURL($SubCategory2->id),
+                                                "target" => "",
+                                                "icon" => ($SubCategory2->icon != "") ? "fa " . $SubCategory2->icon : "",
+                                                "category_id" => $SubCategory2->id,
+                                                "webmaster_id" => $MenuLink->cat_id,
+                                                "sub" => [],
+                                            ];
                                         }
-                                        $Sub3[] = [
-                                            "id" => $SubCategory2->id,
-                                            "title" => $category2_title,
-                                            "url" => Helper::categoryURL($SubCategory2->id),
+                                        if ($SubCategory->$_title_var != "") {
+                                            $category_title = $SubCategory->$_title_var;
+                                        } else {
+                                            $category_title = $SubCategory->$_title_var2;
+                                        }
+                                        $Sub2[] = [
+                                            "id" => $SubCategory->id,
+                                            "title" => $category_title,
+                                            "url" => Helper::categoryURL($SubCategory->id),
                                             "target" => "",
-                                            "icon" => ($SubCategory2->icon != "") ? "fa " . $SubCategory2->icon : "",
-                                            "category_id" => $SubCategory2->id,
+                                            "icon" => ($SubCategory->icon != "") ? "fa " . $SubCategory->icon : "",
+                                            "category_id" => $SubCategory->id,
                                             "webmaster_id" => $MenuLink->cat_id,
-                                            "sub" => [],
+                                            "sub" => $Sub3,
                                         ];
                                     }
-                                    if ($SubCategory->$_title_var != "") {
-                                        $category_title = $SubCategory->$_title_var;
+                                    if ($MnuCategory->$_title_var != "") {
+                                        $category_title = $MnuCategory->$_title_var;
                                     } else {
-                                        $category_title = $SubCategory->$_title_var2;
+                                        $category_title = $MnuCategory->$_title_var2;
                                     }
-                                    $Sub2[] = [
-                                        "id" => $SubCategory->id,
+                                    $Sub[] = [
+                                        "id" => $MnuCategory->id,
                                         "title" => $category_title,
-                                        "url" => Helper::categoryURL($SubCategory->id),
+                                        "url" => Helper::categoryURL($MnuCategory->id),
                                         "target" => "",
-                                        "icon" => ($SubCategory->icon != "") ? "fa " . $SubCategory->icon : "",
-                                        "category_id" => $SubCategory->id,
+                                        "icon" => ($MnuCategory->icon != "") ? "fa " . $MnuCategory->icon : "",
+                                        "category_id" => $MnuCategory->id,
                                         "webmaster_id" => $MenuLink->cat_id,
-                                        "sub" => $Sub3,
+                                        "sub" => $Sub2,
                                     ];
                                 }
-                                if ($MnuCategory->$_title_var != "") {
-                                    $category_title = $MnuCategory->$_title_var;
-                                } else {
-                                    $category_title = $MnuCategory->$_title_var2;
-                                }
-                                $Sub[] = [
-                                    "id" => $MnuCategory->id,
-                                    "title" => $category_title,
-                                    "url" => Helper::categoryURL($MnuCategory->id),
-                                    "target" => "",
-                                    "icon" => ($MnuCategory->icon != "") ? "fa " . $MnuCategory->icon : "",
-                                    "category_id" => $MnuCategory->id,
-                                    "webmaster_id" => $MenuLink->cat_id,
-                                    "sub" => $Sub2,
-                                ];
                             }
                         }
                     } elseif (count($MenuLink->webmasterSection->topics) > 0) {
