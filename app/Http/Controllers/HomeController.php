@@ -76,14 +76,17 @@ class HomeController extends Controller
 
         if ($part1 == "") {
             $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
+            $categoryWithSpeciality = Section::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
             // home page
             $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
             $webMaster = WebmasterSection::query()->where('status', 1)->where('id', 15)->first();
             $videos = Topic::query()->where('webmaster_id', '=', 5)->where('status', 1)->orderBy('row_no', 'asc')->get();
             $products = Topic::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderBy('row_no', 'asc')->get();
+            $webmasterNews = WebmasterSection::query()->find(3);
 
-            return view("frontEnd.home", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew, 'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products]);
+            return view("frontEndhome", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew,
+                'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products, 'categoryWithSpeciality' => $categoryWithSpeciality, 'webmasterNews' => $webmasterNews]);
         }
 
         $WebmasterSection = WebmasterSection::where('status', 1)->where("seo_url_slug_" . $lang, $part1)->first();
@@ -426,7 +429,7 @@ class HomeController extends Controller
                 }
             }
 
-            return view('frontEnd.' . $view, [
+            return view('frontEnd' . $view, [
                 "PageTitle" => @$meta_tags["title"],
                 "PageDescription" => @$meta_tags["desc"],
                 "PageKeywords" => @$meta_tags["keywords"],
@@ -546,7 +549,7 @@ class HomeController extends Controller
                     $view = "custom." . $Topic->id;
                 }
 
-                return view('frontEnd.' . $view, [
+                return view('frontEnd' . $view, [
                     "PageTitle" => @$meta_tags["title"],
                     "PageDescription" => @$meta_tags["desc"],
                     "PageKeywords" => @$meta_tags["keywords"],
@@ -596,7 +599,7 @@ class HomeController extends Controller
             // page meta tags
             $meta_tags = $this->get_meta_tags($WebmasterSection, $lang);
 
-            return view('frontEnd.form_page', [
+            return view('frontEndform_page', [
                 "PageTitle" => @$meta_tags["title"],
                 "PageDescription" => @$meta_tags["desc"],
                 "PageKeywords" => @$meta_tags["keywords"],
@@ -1103,7 +1106,7 @@ class HomeController extends Controller
         if (!Auth::check()) {
             $site_status = Helper::GeneralSiteSettings("site_status");
             if ($site_status == 0) {
-                echo view("frontEnd.closed", ["close_message" => Helper::GeneralSiteSettings("close_msg")])->render();
+                echo view("frontEndclosed", ["close_message" => Helper::GeneralSiteSettings("close_msg")])->render();
                 exit();
             }
         }
