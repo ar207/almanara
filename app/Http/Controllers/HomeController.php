@@ -85,7 +85,7 @@ class HomeController extends Controller
             $products = Topic::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderBy('row_no', 'asc')->get();
             $webmasterNews = WebmasterSection::query()->find(3);
 
-            return view("frontEndhome", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew,
+            return view("frontEnd.home", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew,
                 'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products, 'categoryWithSpeciality' => $categoryWithSpeciality, 'webmasterNews' => $webmasterNews]);
         }
 
