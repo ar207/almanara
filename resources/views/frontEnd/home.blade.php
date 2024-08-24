@@ -1,7 +1,8 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('assets/owlcarousel/owl.carousel.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/owlcarousel/owl.theme.green.css')}}" rel="stylesheet">
     <style>
         #hero .carousel-item::before {
             background: transparent !important;
@@ -117,6 +118,65 @@
             height: 400px!important;
             width: 100%;
         }
+        .our-services h2 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .our-services .text-muted {
+            color: #6c757d;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-image 0.3s ease;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .service-card img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .service-card h5 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .service-card .btn-primary {
+            background-color: #5a67d8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background-image: url('{{asset('assets/home-page/pikaso_texttoimage_a-busy-medical-lab-during-the-day-showcasing-a-His.jpeg')}}');
+            color: white; /* Optional: change text color to stand out on the background image */
+        }
+
+        .service-card:hover img,
+        .service-card:hover h5,
+        .service-card:hover p,
+        .service-card:hover .btn-primary {
+            color: white; /* Optional: adjust these to suit your design */
+        }
+        .section-background {
+            background-color: #f2f2f2;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
     </style>
     <div class="home-page">
         <?php
@@ -129,117 +189,100 @@
 
         @include('frontEnd.layouts.slider')
         @include('frontEnd.homepage.row1')
-
             <section class="our-services py-5">
                 <div class="container">
                     <div class="text-center mb-4">
                         <h2 class="text-uppercase">Specialties</h2>
                         <p class="text-muted">Technical Service</p>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="service-card p-3 text-center">
-                                <img src="{{asset('assets/home-page/services_card_1.svg')}}" alt="Internal Medicine" class="mb-3">
-                                <h5> Dental Care</h5>
-                                <p class="text-muted">30+ Doctors</p>
-                                <button class="btn btn-primary">Read More</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="service-card p-3 text-center">
-                                <img src="{{asset('assets/home-page/service_card_2.svg')}}" alt="Dental Care" class="mb-3">
-                                <h5>Internal Medicine</h5>
-                                <p class="text-muted">20+ Doctors</p>
-                                <button class="btn btn-primary">Read More</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="service-card p-3 text-center">
-                                <img src="{{asset('assets/home-page/service_card_3.svg')}}" alt="Urology Care" class="mb-3">
-                                <h5>Urology Care</h5>
-                                <p class="text-muted">20+ Doctors</p>
-                                <button class="btn btn-primary">Read More</button>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="service-card p-3 text-center">
-                                <img src="{{asset('assets/home-page/service_card_4.svg')}}" alt="Neurology Care" class="mb-3">
-                                <h5>Neurology Care</h5>
-                                <p class="text-muted">10+ Doctors</p>
-                                <button class="btn btn-primary">Read More</button>
-                            </div>
-                        </div>
+                    <div id="servicesCarousel" class="carousel slide owl-carousel">
+                            {{--<div class="carousel-item">--}}
+                                    <div class="col-md-3 item" style="width: 200px!important;">
+                                        <div class="service-card p-3 text-center">
+                                            <img src="{{asset('assets/home-page/services_card_1.svg')}}" alt="Internal Medicine" class="mb-3">
+                                            <h5>Dental Care</h5>
+                                            <p class="text-muted">30+ Doctors</p>
+                                            <button class="btn btn-primary">Read More</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 item" style="width: 200px!important;">
+                                        <div class="service-card p-3 text-center">
+                                            <img src="{{asset('assets/home-page/service_card_2.svg')}}" alt="Dental Care" class="mb-3">
+                                            <h5>Internal Medicine</h5>
+                                            <p class="text-muted">20+ Doctors</p>
+                                            <button class="btn btn-primary">Read More</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 item" style="width: 200px!important;">
+                                        <div class="service-card p-3 text-center">
+                                            <img src="{{asset('assets/home-page/service_card_3.svg')}}" alt="Urology Care" class="mb-3">
+                                            <h5>Urology Care</h5>
+                                            <p class="text-muted">20+ Doctors</p>
+                                            <button class="btn btn-primary">Read More</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 item" style="width: 200px!important;">
+                                        <div class="service-card p-3 text-center">
+                                            <img src="{{asset('assets/home-page/service_card_4.svg')}}" alt="Neurology Care" class="mb-3">
+                                            <h5>Neurology Care</h5>
+                                            <p class="text-muted">10+ Doctors</p>
+                                            <button class="btn btn-primary">Read More</button>
+                                        </div>
+                                    </div>
+                            {{--</div>--}}
                     </div>
                 </div>
             </section>
-            <div class="container my-5">
-                <div id="productCarousel" class="carousel slide product-slider" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{asset('assets/home-page/pikaso_texttoimage_a-busy-medical-lab-during-the-day-showcasing-a-His.jpeg')}}"
-                                 class="d-block" alt="Product 1">
-                            <div class="product-details">
-                                <h5>Product 1</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('assets/home-page/pikaso_texttoimage_35mm-film-photography-a-clean-medical-lab-in-the-a.jpeg')}}"
-                                 class="d-block " alt="Product 2">
-                            <div class="product-details">
-                                <h5>Product 2</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('assets/home-page/pikaso_texttoimage_35mm-film-photography-a-hightech-medical-lab-fille.jpeg')}}"
-                                 class="d-block " alt="Product 3">
-                            <div class="product-details">
-                                <h5>Product 3</h5>
-                            </div>
+            <div class="container my-5 section-background">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="productCarousel" class="owl-carousel carousel slide product-slider">
+                                <div class="item">
+                                    <img src="{{asset('assets/home-page/pikaso_texttoimage_a-busy-medical-lab-during-the-day-showcasing-a-His.jpeg')}}"
+                                         class="d-block" alt="Product 1">
+                                    <div class="product-details">
+                                        <h5>Product 1</h5>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="{{asset('assets/home-page/pikaso_texttoimage_35mm-film-photography-a-clean-medical-lab-in-the-a.jpeg')}}"
+                                         class="d-block " alt="Product 2">
+                                    <div class="product-details">
+                                        <h5>Product 2</h5>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="{{asset('assets/home-page/pikaso_texttoimage_35mm-film-photography-a-hightech-medical-lab-fille.jpeg')}}"
+                                         class="d-block " alt="Product 3">
+                                    <div class="product-details">
+                                        <h5>Product 3</h5>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <div class="col-sm-6">
+                        <div id="videoCarousel" class="owl-carousel carousel slide product-slider">
+                                <div class="item">
+                                    <video class="d-block w-100" style="border-radius: 10px!important;" height="400px" autoplay loop muted>
+                                        <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="item">
+                                    <video class="d-block w-100" style="border-radius: 10px!important;" height="400px" autoplay loop muted>
+                                        <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="item">
+                                    <video class="d-block w-100" style="border-radius: 10px!important;" height="400px" autoplay loop muted>
+                                        <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
+                                    </video>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="container my-5">
-                <div id="videoCarousel" class="carousel slide product-slider" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <video class="d-block w-100" height="400px" autoplay loop muted>
-                                <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
-                                {{--Your browser does not support the video tag.--}}
-                            </video>
-                        </div>
-                        <div class="carousel-item">
-                            <video class="d-block w-100" height="400px" autoplay loop muted>
-                                <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
-                                {{--Your browser does not support the video tag.--}}
-                            </video>
-                        </div>
-                        <div class="carousel-item">
-                            <video class="d-block w-100" height="400px" autoplay loop muted>
-                                <source src="{{asset('assets/home-page/videoplayback (1).webm')}}" type="video/mp4">
-                                {{--Your browser does not support the video tag.--}}
-                            </video>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#videoCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#videoCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-
-                <div class="container my-5">
+              <div class="container my-5">
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="news-card">
@@ -272,6 +315,7 @@
                                         <p class="text-muted mb-0">Dec 9, 2024</p>
                                     </div>
                                 </div>
+
                                 <div class="news-list-item d-flex mb-4">
                                     <img src="{{asset('assets/home-page/afternoon-with-a-Black-3.jpeg')}}"
                                          style="height: 90px;width: 120px" alt="News Thumbnail" class="mr-3">
@@ -291,7 +335,7 @@
                             </div>
                         </div>
                     </div>
-                </div>        </div>
+                </div> </div>
 
         {{--@include('frontEnd.homepage.row2')--}}
         {{--@include('frontEnd.homepage.row3')--}}
@@ -339,13 +383,77 @@
     @endif
 @endpush
 @push('after-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>
     <script>
         $(document).ready(function () {
             manageBannersOnScreenChange();
         });
-
+        $('#servicesCarousel').owlCarousel({
+            loop:true,
+            // nav:true,
+            margin:0,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                960:{
+                    items:3
+                },
+                1200:{
+                    items:4
+                }
+            },
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+        });
+        $('#productCarousel').owlCarousel({
+            loop:true,
+            // nav:true,
+            margin:0,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                960:{
+                    items:1
+                },
+                1200:{
+                    items:1
+                }
+            },
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+        });
+        $('#videoCarousel').owlCarousel({
+            loop:true,
+            // nav:true,
+            margin:0,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                960:{
+                    items:1
+                },
+                1200:{
+                    items:1
+                }
+            },
+            autoplay:true,
+            autoplayTimeout:3600000,
+            autoplayHoverPause:true
+        });
         $(window).resize(function () {
             manageBannersOnScreenChange();
         });
