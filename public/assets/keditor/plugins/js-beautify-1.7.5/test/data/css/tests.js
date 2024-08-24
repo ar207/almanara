@@ -301,9 +301,9 @@ exports.test_data = {
             name: "Comments",
             description: "",
             tests: [
-                { unchanged: '/* test */' },
-                { input: '.tabs{/* test */}', output: '.tabs {\n\t/* test */\n}' },
-                { input: '.tabs{/* test */}', output: '.tabs {\n\t/* test */\n}' },
+                { unchanged: '/* home-page */' },
+                { input: '.tabs{/* home-page */}', output: '.tabs {\n\t/* home-page */\n}' },
+                { input: '.tabs{/* home-page */}', output: '.tabs {\n\t/* home-page */\n}' },
                 { input: '/* header */.tabs {}', output: '/* header */\n\n.tabs {}' },
                 { input: '.tabs {\n/* non-header */\nwidth:10px;}', output: '.tabs {\n\t/* non-header */\n\twidth: 10px;\n}' },
                 { unchanged: '/* header' },
@@ -339,7 +339,7 @@ exports.test_data = {
                 { input: 'tag{ dynamic-@{prop}: none;}', output: 'tag {\n\tdynamic-@{prop}: none;\n}' },
             ],
         }, {
-            name: "Handle LESS property name interpolation, test #631",
+            name: "Handle LESS property name interpolation, home-page #631",
             description: "",
             tests: [
                 { unchanged: '.generate-columns(@n, @i: 1) when (@i =< @n) {\n\t.column-@{i} {\n\t\twidth: (@i * 100% / @n);\n\t}\n\t.generate-columns(@n, (@i + 1));\n}' },

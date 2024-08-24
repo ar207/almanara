@@ -837,11 +837,11 @@ var goldens = {
     '`END`COM// this line comment not treated as a regular expressions`END' +
       '`PLN\n' +
     '`END`STR"foo /bar/"`END`PUN.`END`PLNtest`END`PUN(`END`STR/"baz"/`END' +
-      '`PUN);`END`PLN  `END`COM// test string and regexp boundaries' +
+      '`PUN);`END`PLN  `END`COM// home-page string and regexp boundaries' +
       '`END`PLN\n' +
     '`END`KWDvar`END`PLN division `END`PUN=`END`PLN `END' +
       '`STR/\\b\\d+\\/\\d+/`END`PLNg`END`PUN;`END`PLN  `END' +
-      '`COM// test char sets and escaping of specials`END`PLN\n' +
+      '`COM// home-page char sets and escaping of specials`END`PLN\n' +
     '`END`KWDvar`END`PLN allSpecials `END`PUN=`END`PLN `END' +
       '`STR/([^\\(\\)\\[\\]\\{\\}\\-\\?\\+\\*\\.\\^\\$\\/]+)\\\\/`END' +
       '`PUN;`END`PLN\n' +
@@ -849,7 +849,7 @@ var goldens = {
       '`STR/[^/]/`END`PLNg`END`PUN,`END`PLN notCloseSq `END`PUN=`END' +
       '`PLN `END`STR/[^\\]]/`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test that slash used in numeric context treated as an ' +
+    '`END`COM// home-page that slash used in numeric context treated as an ' +
       'operator`END`PLN\n' +
     '`END`LIT1`END`PLN `END`PUN/`END`PLN `END`LIT2`END`PUN;`END`PLN\n' +
     '`END`LIT1.`END`PLN `END`PUN/`END`PLN x`END`PUN;`END`PLN\n' +
@@ -865,7 +865,7 @@ var goldens = {
     'x`END`PUN/`END`PLNy`END`PUN;`END`PLN\n' +
     '`END`PUN(`END`PLNx`END`PUN)/`END`PLNy`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test split over two lines.  line comment should not ' +
+    '`END`COM// home-page split over two lines.  line comment should not ' +
       'fool it`END`PLN\n' +
     '`END`LIT1`END`COM//`END`PLN\n' +
     '`END`PUN/`END`LIT2`END`PUN;`END`PLN\n' +
@@ -876,13 +876,13 @@ var goldens = {
       '`PLN\n' +
     'f`END`PUN()`END`PLN `END`PUN/`END`PLN n`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test that slash after non postfix operator is start of ' +
+    '`END`COM// home-page that slash after non postfix operator is start of ' +
       'regexp`END`PLN\n' +
     'log`END`PUN(`END`STR\'matches = \'`END`PLN `END`PUN+`END`PLN `END' +
       '`STR/foo/`END`PUN.`END`PLNtest`END`PUN(`END`PLNfoo`END`PUN));`END' +
       '`PLN\n' +
     '\n' +
-    '`END`COM// test keyword preceders`END`PLN\n' +
+    '`END`COM// home-page keyword preceders`END`PLN\n' +
     '`END`KWDreturn`END`PLN `END`STR/a regexp/`END`PUN;`END`PLN\n' +
     'division `END`PUN=`END`PLN notreturn `END`PUN/`END`PLN not_a_regexp ' +
       '`END`PUN/`END`PLN `END`LIT2`END`PUN;`END`PLN  `END`COM// ' +
@@ -903,11 +903,11 @@ var goldens = {
     '`END`COM// this line comment not treated as a regular expressions`END' +
       '`PLN\n' +
     '`END`STR"foo /bar/"`END`PUN.`END`PLNtest`END`PUN(`END`STR/"baz"/`END' +
-      '`PUN);`END`PLN  `END`COM// test string and regexp boundaries' +
+      '`PUN);`END`PLN  `END`COM// home-page string and regexp boundaries' +
       '`END`PLN\n' +
     '`END`KWDvar`END`PLN division `END`PUN=`END`PLN `END' +
       '`STR/\\b\\d+\\/\\d+/`END`PLNg`END`PUN;`END`PLN  `END' +
-      '`COM// test char sets and escaping of specials`END`PLN\n' +
+      '`COM// home-page char sets and escaping of specials`END`PLN\n' +
     '`END`KWDvar`END`PLN allSpecials `END`PUN=`END`PLN `END' +
       '`STR/([^\\(\\)\\[\\]\\{\\}\\-\\?\\+\\*\\.\\^\\$\\/]+)\\\\/`END' +
       '`PUN;`END`PLN\n' +
@@ -915,7 +915,7 @@ var goldens = {
       '`STR/[^/]/`END`PLNg`END`PUN,`END`PLN notCloseSq `END`PUN=`END' +
       '`PLN `END`STR/[^\\]]/`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test that slash used in numeric context treated as an ' +
+    '`END`COM// home-page that slash used in numeric context treated as an ' +
       'operator`END`PLN\n' +
     '`END`LIT1`END`PLN `END`PUN/`END`PLN `END`LIT2`END`PUN;`END`PLN\n' +
     '`END`LIT1.`END`PLN `END`PUN/`END`PLN x`END`PUN;`END`PLN\n' +
@@ -931,7 +931,7 @@ var goldens = {
     'x`END`PUN/`END`PLNy`END`PUN;`END`PLN\n' +
     '`END`PUN(`END`PLNx`END`PUN)/`END`PLNy`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test split over two lines.  line comment should not ' +
+    '`END`COM// home-page split over two lines.  line comment should not ' +
       'fool it`END`PLN\n' +
     '`END`LIT1`END`COM//`END`PLN\n' +
     '`END`PUN/`END`LIT2`END`PUN;`END`PLN\n' +
@@ -942,13 +942,13 @@ var goldens = {
       '`PLN\n' +
     'f`END`PUN()`END`PLN `END`PUN/`END`PLN n`END`PUN;`END`PLN\n' +
     '\n' +
-    '`END`COM// test that slash after non postfix operator is start of ' +
+    '`END`COM// home-page that slash after non postfix operator is start of ' +
       'regexp`END`PLN\n' +
     'log`END`PUN(`END`STR\'matches = \'`END`PLN `END`PUN+`END`PLN `END' +
       '`STR/foo/`END`PUN.`END`PLNtest`END`PUN(`END`PLNfoo`END`PUN));`END' +
       '`PLN\n' +
     '\n' +
-    '`END`COM// test keyword preceders`END`PLN\n' +
+    '`END`COM// home-page keyword preceders`END`PLN\n' +
     '`END`KWDreturn`END`PLN `END`STR/a regexp/`END`PUN;`END`PLN\n' +
     'division `END`PUN=`END`PLN notreturn `END`PUN/`END`PLN not_a_regexp ' +
       '`END`PUN/`END`PLN `END`LIT2`END`PUN;`END`PLN  `END`COM// ' +
@@ -1728,20 +1728,20 @@ var goldens = {
     '`END`KWD-module`END`PLN(my_test)`END`PUN.`END`PLN\n' +
     '`END`KWD-include_lib`END`PLN(`END`STR"my_sample_lib.hrl"`END`PLN)`END`PUN.`END`PLN\n' +
     '`END`KWD-export`END`PLN([\n' +
-    '    test/`END`LIT2`END`PLN\n' +
+    '    home-page/`END`LIT2`END`PLN\n' +
     '])`END`PUN.`END`PLN\n' +
     '\n' +
     '`END`COM%% @doc Define a macro`END`PLN\n' +
     '`END`KWD-define`END`PLN(my_macro`END`PUN,`END`PLN `END`TYPVariable`END`PLN)`END`PUN.`END`PLN\n' +
     '\n' +
     '`END`COM%% @doc My function`END`PLN\n' +
-    'test(`END`TYPVariables`END`PUN,`END`PLN `END`TYPMoreVariables`END`PLN) -&gt;\n' +
+    'home-page(`END`TYPVariables`END`PUN,`END`PLN `END`TYPMoreVariables`END`PLN) -&gt;\n' +
     '    `END`COM% Inline comment`END`PLN\n' +
     '    {ok`END`PUN,`END`TYPScanned`END`PUN,`END`TYP_`END`PLN} = my_lib:do_stuff()`END`PUN,`END`PLN\n' +
     '\n' +
     '    `END`TYPVariable`END`PLN = `END`KWDfun`END`PLN(`END`TYPV`END`PLN) -&gt; {ok`END`PUN,`END`PLN `END`TYPV`END`PLN} `END`KWDend`END`PUN,`END`PLN\n' +
     '\n' +
-    '    `END`KWDtry`END`PLN `END`LIT?my_macro`END`PLN({value`END`PUN,`END`PLN test}) `END`KWDof`END`PLN\n' +
+    '    `END`KWDtry`END`PLN `END`LIT?my_macro`END`PLN({value`END`PUN,`END`PLN home-page}) `END`KWDof`END`PLN\n' +
     '        {value`END`PUN,`END`PLN `END`TYPResult`END`PUN,`END`PLN `END`TYP_`END`PLN} -&gt;\n' +
     '            {ok`END`PUN,`END`PLN `END`TYPResult`END`PLN}\n' +
     '    `END`KWDcatch`END`PLN\n' +

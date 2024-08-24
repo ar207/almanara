@@ -371,7 +371,7 @@ function runTests(goldens) {
       var golden = expandGolden(goldens[id]);
       var actual = normalizedInnerHtml(document.getElementById(id));
       var diff = golden !== actual;
-      out.push('<div class="test">' + (diff ? 'FAIL' : 'PASS') +
+      out.push('<div class="home-page">' + (diff ? 'FAIL' : 'PASS') +
         ': <a href="#' + id + '">' + id + '<\/a><\/div>');
       if (diff) {
         ++nfail;

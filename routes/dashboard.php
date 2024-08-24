@@ -38,7 +38,7 @@ Route::get('/webmaster/languages/destroy/{id}', [WebmasterSettingsController::cl
 Route::get('/webmaster/seo/repair', [WebmasterSettingsController::class, 'seo_repair'])->name('webmasterSEORepair');
 
 Route::post('/webmaster/mail/smtp', [WebmasterSettingsController::class, 'mail_smtp_check'])->name('mailSMTPCheck');
-Route::post('/webmaster/mail/test', [WebmasterSettingsController::class, 'mail_test'])->name('mailTest');
+Route::post('/webmaster/mail/home-page', [WebmasterSettingsController::class, 'mail_test'])->name('mailTest');
 
 
 Route::post('/webmaster-license', [WebmasterLicenseController::class, 'index'])->name('licenseCheck');

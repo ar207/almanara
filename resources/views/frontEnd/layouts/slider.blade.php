@@ -2,8 +2,8 @@
 $SliderBanners = Helper::BannersList(Helper::GeneralWebmasterSettings("home_banners_section_id"));
 ?>
 @if(count($SliderBanners)>0)
-    <section id="hero">
-        <div class="hero-container hero-slider">
+    <section id="hero" style="height: 450px!important;">
+        <div class="hero-container hero-slider" style="margin-top: 150px!important;">
             @foreach($SliderBanners->slice(0,1) as $SliderBanner)
                 <?php
                 try {

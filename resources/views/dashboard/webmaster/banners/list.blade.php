@@ -80,7 +80,7 @@
                                 </td>
                                 <td class="text-center">{{ $WebmasterBanner->width }}* {{ $WebmasterBanner->height }}</td>
                                 <td class="text-center">
-                                    <textarea dir="ltr" rows="2" class="form-control" readonly>{{ "@"."include('frontEnd.includes.banners'".',["BannersSettingsId"=>'.$WebmasterBanner->id.'])' }}</textarea>
+                                    <textarea dir="ltr" rows="2" class="form-control" readonly>{{ "@"."frontEnd".',["BannersSettingsId"=>'.$WebmasterBanner->id.'])' }}</textarea>
                                 </td>
                                 <td class="text-center">
                                     <i class="fa {{ ($WebmasterBanner->status==1) ? "fa-check text-success":"fa-times text-danger" }} inline"></i>

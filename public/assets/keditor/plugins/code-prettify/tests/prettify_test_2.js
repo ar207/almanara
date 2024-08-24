@@ -316,10 +316,10 @@ var goldens = {
     '\t\t`END`KWDthen`END`PLN `END<span class="var pln">$book`END`PLN\n' +
     '\t`END`KWDelse`END`PLN `END<span class="var pln">$book`END`PLN/`END`KWDtext`END`PLN()\n' +
     '\t\n' +
-    '\t`END`KWDlet`END`PLN `END<span class="var pln">$let`END`PLN := `END`TAG&lt;x&gt;`END`STR"test"`END`TAG&lt;/x&gt;`END`PLN\n' +
+    '\t`END`KWDlet`END`PLN `END<span class="var pln">$let`END`PLN := `END`TAG&lt;x&gt;`END`STR"home-page"`END`TAG&lt;/x&gt;`END`PLN\n' +
     '\t`END`KWDreturn`END`PLN `END`KWDelement`END`PLN `END`KWDelement`END`PLN {\n' +
     '\t`END`KWDattribute`END`PLN `END`KWDattribute`END`PLN { 1 },\n' +
-    '\t`END`KWDelement`END`PLN test { `END`STR\'a\'`END`PLN },\n' +
+    '\t`END`KWDelement`END`PLN home-page { `END`STR\'a\'`END`PLN },\n' +
     '\t`END`KWDattribute`END`PLN foo { `END`STR"bar"`END`PLN },\n' +
     '\t`END<span class="fun pln">fn:doc`END`PLN()[ foo/`END`LIT@bar`END`PLN `END`KWDeq`END`PLN `END<span class="var pln">$let`END`PLN ],\n' +
     '\t//x }\n' +
@@ -393,8 +393,8 @@ var goldens = {
     '`END`TAG&lt;/script&gt;`END'
   ),
   clojure: (
-    '`COM; Clojure test comment`END`PLN\n' +
-    '`END`OPN(`END`KWDns`END`PLN test\n' +
+    '`COM; Clojure home-page comment`END`PLN\n' +
+    '`END`OPN(`END`KWDns`END`PLN home-page\n' +
     ' `END`OPN(`END`TYP:gen-class`END`CLO))`END`PLN\n' +
     '\n' +
     '`END`OPN(`END`KWDdef`END`PLN foo `END`STR"bar"`END`CLO)`END`PLN\n' +
@@ -432,7 +432,7 @@ var goldens = {
     '`END`KWDpart`END`PLN `END`STR\'something.dart\'`END`PUN;`END`PLN\n' +
     '\n' +
     '`END`KWDimport`END`PLN `END`STR\'dart:math\'`END`PLN `END' +
-      '`KWDas`END`PLN test `END`KWDshow`END`PLN foo`END`PUN,`END`PLN bar`END`PUN;`END' +
+      '`KWDas`END`PLN home-page `END`KWDshow`END`PLN foo`END`PUN,`END`PLN bar`END`PUN;`END' +
       '`PLN\n' +
     '\n' +
     '`END`KWDclass`END`PLN `END`TYPPoint`END`PLN `END`PUN{`END`PLN\n' +
@@ -474,8 +474,8 @@ var goldens = {
       '`STR\'It\\\'s awesome!\'`END`PUN;`END`PLN\n' +
     '  `END`TYPString`END`PLN thing2 `END`PUN=`END`PLN `END' +
       '`STR\'\'\'\n' +
-    'This is a test! \\\'\'\'\n' +
-    'This is the end of the test\'\'\'`END`PUN;`END`PLN\n' +
+    'This is a home-page! \\\'\'\'\n' +
+    'This is the end of the home-page\'\'\'`END`PUN;`END`PLN\n' +
     '  `END`TYPString`END`PLN thing3 `END`PUN=`END`PLN `END' +
       '`STRr\"\"\"\n' +
     'This is a raw\n' +
@@ -709,7 +709,7 @@ var goldens = {
     '`END`KWDEND`END`PUN;`END'
   ),
   kotlin: (
-      '`KWDpackage`END`PLN test`END`PUN;`END`PLN\n' +
+      '`KWDpackage`END`PLN home-page`END`PUN;`END`PLN\n' +
       '\n' +
       '`END`KWDimport`END`PLN kotlin`END`PUN.`END`TYPInt`END`PLN\n' +
       '\n' +

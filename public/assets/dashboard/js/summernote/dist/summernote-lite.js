@@ -613,7 +613,7 @@ function find(array, pred) {
   }
 }
 /**
- * returns true if all of the values in the array pass the predicate truth test.
+ * returns true if all of the values in the array pass the predicate truth home-page.
  */
 
 

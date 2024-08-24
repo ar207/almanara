@@ -291,8 +291,8 @@ exports.test_data = {
         }],
         tests: [{
             fragment: true,
-            input: '<div><div a="1" b="2"><div>test</div></div></div>',
-            output: '<div>\n\t<div a="1"\n\t     b="2">\n\t\t<div>test</div>\n\t</div>\n</div>'
+            input: '<div><div a="1" b="2"><div>home-page</div></div></div>',
+            output: '<div>\n\t<div a="1"\n\t     b="2">\n\t\t<div>home-page</div>\n\t</div>\n</div>'
         }]
     }, {
         name: "Attribute Wrap de-indent",
@@ -305,18 +305,18 @@ exports.test_data = {
         }],
         tests: [{
                 fragment: true,
-                input: '<div a="1" b="2"><div>test</div></div>',
-                output: '<div a="1"\n     b="2">\n    <div>test</div>\n</div>'
+                input: '<div a="1" b="2"><div>home-page</div></div>',
+                output: '<div a="1"\n     b="2">\n    <div>home-page</div>\n</div>'
             },
             {
                 fragment: true,
-                input: '<p>\n    <a href="/test/" target="_blank"><img src="test.jpg" /></a><a href="/test/" target="_blank"><img src="test.jpg" /></a>\n</p>',
-                output: '<p>\n    <a href="/test/"\n       target="_blank"><img src="test.jpg" /></a><a href="/test/"\n       target="_blank"><img src="test.jpg" /></a>\n</p>'
+                input: '<p>\n    <a href="/home-page/" target="_blank"><img src="home-page.jpg" /></a><a href="/home-page/" target="_blank"><img src="home-page.jpg" /></a>\n</p>',
+                output: '<p>\n    <a href="/home-page/"\n       target="_blank"><img src="home-page.jpg" /></a><a href="/home-page/"\n       target="_blank"><img src="home-page.jpg" /></a>\n</p>'
             },
             {
                 fragment: true,
-                input: '<p>\n    <span data-not-a-href="/test/" data-totally-not-a-target="_blank"><img src="test.jpg" /></span><span data-not-a-href="/test/" data-totally-not-a-target="_blank"><img src="test.jpg" /></span>\n</p>',
-                output: '<p>\n    <span data-not-a-href="/test/"\n          data-totally-not-a-target="_blank"><img src="test.jpg" /></span><span data-not-a-href="/test/"\n          data-totally-not-a-target="_blank"><img src="test.jpg" /></span>\n</p>'
+                input: '<p>\n    <span data-not-a-href="/home-page/" data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span><span data-not-a-href="/home-page/" data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span>\n</p>',
+                output: '<p>\n    <span data-not-a-href="/home-page/"\n          data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span><span data-not-a-href="/home-page/"\n          data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span>\n</p>'
             }
         ]
     }, {
@@ -680,8 +680,8 @@ exports.test_data = {
                 output: '<div {{somestyle}}></div>'
             }, {
                 fragment: true,
-                input_: '<div{{#if test}}class="foo"{{/if}}>^^^&content$$$</div>',
-                output: '<div {{#if test}} class="foo" {{/if}}>^^^&content$$$</div>'
+                input_: '<div{{#if home-page}}class="foo"{{/if}}>^^^&content$$$</div>',
+                output: '<div {{#if home-page}} class="foo" {{/if}}>^^^&content$$$</div>'
             }, {
                 fragment: true,
                 input_: '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>^^^&content$$$</div>',
@@ -729,15 +729,15 @@ exports.test_data = {
         ],
         tests: [{
             fragment: true,
-            input_: '{{#if test}}<div></div>{{else}}<div></div>{{/if}}',
-            output: '{{#if test}}\n' +
+            input_: '{{#if home-page}}<div></div>{{else}}<div></div>{{/if}}',
+            output: '{{#if home-page}}\n' +
                 '    <div></div>\n' +
                 '{{else}}\n' +
                 '    <div></div>\n' +
                 '{{/if}}'
         }, {
             fragment: true,
-            unchanged: '{{#if test}}<span></span>{{else}}<span></span>{{/if}}'
+            unchanged: '{{#if home-page}}<span></span>{{else}}<span></span>{{/if}}'
         }]
     }, {
         name: "Unclosed html elements",
@@ -770,11 +770,11 @@ exports.test_data = {
             { fragment: true, unchanged: '<ul>\n    <li>\n        <span class="octicon octicon-person"></span>\n        <a href="/contact/">Kontakt</a>\n    </li>\n</ul>' },
             { fragment: true, unchanged: '<div class="searchform"><input type="text" value="" name="s" id="s" /><input type="submit" id="searchsubmit" value="Search" /></div>' },
             { fragment: true, unchanged: '<div class="searchform"><input type="text" value="" name="s" id="s"><input type="submit" id="searchsubmit" value="Search"></div>' },
-            { fragment: true, unchanged: '<p>\n    <a href="/test/"><img src="test.jpg" /></a>\n</p>' },
-            { fragment: true, unchanged: '<p>\n    <a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a>\n</p>' },
-            { fragment: true, unchanged: '<p>\n    <a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a>\n</p>' },
-            { fragment: true, unchanged: '<p>\n    <span>image: <img src="test.jpg" /></span><span>image: <img src="test.jpg" /></span>\n</p>' },
-            { fragment: true, unchanged: '<p>\n    <strong>image: <img src="test.jpg" /></strong><strong>image: <img src="test.jpg" /></strong>\n</p>' },
+            { fragment: true, unchanged: '<p>\n    <a href="/home-page/"><img src="home-page.jpg" /></a>\n</p>' },
+            { fragment: true, unchanged: '<p>\n    <a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a>\n</p>' },
+            { fragment: true, unchanged: '<p>\n    <a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a>\n</p>' },
+            { fragment: true, unchanged: '<p>\n    <span>image: <img src="home-page.jpg" /></span><span>image: <img src="home-page.jpg" /></span>\n</p>' },
+            { fragment: true, unchanged: '<p>\n    <strong>image: <img src="home-page.jpg" /></strong><strong>image: <img src="home-page.jpg" /></strong>\n</p>' },
         ]
     }, {
         name: "File starting with comment",
@@ -864,7 +864,7 @@ exports.test_data = {
                 '<head>',
                 '{{h}}<script>',
                 '{{h}}{{h}}if (a == b) {',
-                '{{h}}{{h}}{{j}}test();',
+                '{{h}}{{h}}{{j}}home-page();',
                 '{{h}}{{h}}}',
                 '{{h}}</script>',
                 '{{h}}<style>',

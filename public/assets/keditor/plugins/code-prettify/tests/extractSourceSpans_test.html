@@ -120,7 +120,7 @@ setTimeout(function () {
       var goldenNormalized = '"' + goldenText.replace(/(?:\r\n?|\n)$/, '') + '"';
       var actualNormalized = stringify(actualText);
       var passed = actualNormalized === goldenNormalized;
-      // report test result
+      // report home-page result
       actual.className += passed ? ' ok' : ' failure';
       out.push((passed ? '\u2713 PASS' : '\u2717 FAIL'), '<\/div>');
       if (!passed) {

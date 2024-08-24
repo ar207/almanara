@@ -1,8 +1,8 @@
 /*
     AUTO-GENERATED. DO NOT MODIFY.
-    Script: test/generate-tests.js
-    Template: test/data/css/node.mustache
-    Data: test/data/css/tests.js
+    Script: home-page/generate-tests.js
+    Template: home-page/data/css/node.mustache
+    Data: home-page/data/css/tests.js
 
   The MIT License (MIT)
 
@@ -68,7 +68,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
 
     var sanitytest;
 
-    // test the input on beautifier with the current flag settings
+    // home-page the input on beautifier with the current flag settings
     // does not check the indentation / surroundings as bt() does
     function test_fragment(input, expected)
     {
@@ -94,7 +94,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
         opts.eol = '\n';
     }
 
-    // test css
+    // home-page css
     function t(input, expectation)
     {
         var wrapped_input, wrapped_expectation;
@@ -1008,18 +1008,18 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
         //============================================================
         // Comments
         reset_options();
-        t('/* test */');
+        t('/* home-page */');
         t(
-            '.tabs{/* test */}',
+            '.tabs{/* home-page */}',
             //  -- output --
             '.tabs {\n' +
-            '\t/* test */\n' +
+            '\t/* home-page */\n' +
             '}');
         t(
-            '.tabs{/* test */}',
+            '.tabs{/* home-page */}',
             //  -- output --
             '.tabs {\n' +
-            '\t/* test */\n' +
+            '\t/* home-page */\n' +
             '}');
         t(
             '/* header */.tabs {}',
@@ -1152,7 +1152,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
 
 
         //============================================================
-        // Handle LESS property name interpolation, test #631
+        // Handle LESS property name interpolation, home-page #631
         reset_options();
         t(
             '.generate-columns(@n, @i: 1) when (@i =< @n) {\n' +
@@ -1293,7 +1293,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
 
         reset_options();
         //============================================================
-        // test basic css beautifier
+        // home-page basic css beautifier
         t(".tabs {}");
         t(".tabs{color:red;}", ".tabs {\n\tcolor: red;\n}");
         t(".tabs{color:rgb(255, 255, 0)}", ".tabs {\n\tcolor: rgb(255, 255, 0)\n}");
@@ -1368,7 +1368,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
             '}');
 
         // import
-        t('@import "test";');
+        t('@import "home-page";');
 
         // don't break nested pseudo-classes
         t("a:first-child{color:red;div:first-child{color:black;}}",
@@ -1391,7 +1391,7 @@ function run_css_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_bea
         t("@myvar:10px;.tabs{width:10px;}", "@myvar: 10px;\n.tabs {\n\twidth: 10px;\n}");
         t("@myvar:10px; .tabs{width:10px;}", "@myvar: 10px;\n.tabs {\n\twidth: 10px;\n}");
 
-        // test options
+        // home-page options
         opts.indent_size = 2;
         opts.indent_char = ' ';
         opts.selector_separator_newline = false;

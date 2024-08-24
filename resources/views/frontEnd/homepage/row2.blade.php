@@ -114,13 +114,17 @@
     }
 
     .border-2px {
-        border: 2px solid;
+        border: 1px solid;
+        border-radius: 20px!important;
     }
 
     .news-item img {
         width: 100%;
         height: auto;
         margin-bottom: 10px;
+    }
+    img {
+        border-radius: 10px 20px 30px 40px; /* top-left, top-right, bottom-right, bottom-left */
     }
 </style>
 
@@ -144,16 +148,16 @@ $image = '';
             } else {
                 $title = $new->$title_var2;
             }
-            $newsImage = !empty($new->photo_file) ? URL::to('uploads/topics/' . $new->photo_file) : URL::to('uploads/topics/default.png');
+            $newsImage = !empty($new->photo_file) ? 'https://t3.ftcdn.net/jpg/05/51/72/76/360_F_551727662_JxdTsQxz1QzlIEkhu1DJYClss9xl3Z6G.webp' : 'https://t3.ftcdn.net/jpg/05/51/72/76/360_F_551727662_JxdTsQxz1QzlIEkhu1DJYClss9xl3Z6G.webp';
             ?>
         @endif
     @endforeach
     <div class="row">
         <div class="col-md-8">
-            <div class="border-2px">
+            <div class="border-2px rounded " style="height: 400px!important; width: 570px!important;">
                 <img
                     src="{{ $newsImage }}"
-                    class="large-image" alt="{{ $title }}">
+                    class="large-image rounded w-100" alt="{{ $title }}">
                 <div class="whats-new-title">{{ $title }}</div>
             </div>
         </div>

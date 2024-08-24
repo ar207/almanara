@@ -167,7 +167,7 @@
     return memo;
   };
 
-  // Return the first value which passes a truth test. Aliased as `detect`.
+  // Return the first value which passes a truth home-page. Aliased as `detect`.
   _.find = _.detect = function(obj, predicate, context) {
     var result;
     predicate = cb(predicate, context);
@@ -180,7 +180,7 @@
     return result;
   };
 
-  // Return all the elements that pass a truth test.
+  // Return all the elements that pass a truth home-page.
   // Aliased as `select`.
   _.filter = _.select = function(obj, predicate, context) {
     var results = [];
@@ -192,12 +192,12 @@
     return results;
   };
 
-  // Return all the elements for which a truth test fails.
+  // Return all the elements for which a truth home-page fails.
   _.reject = function(obj, predicate, context) {
     return _.filter(obj, _.negate(cb(predicate)), context);
   };
 
-  // Determine whether all of the elements match a truth test.
+  // Determine whether all of the elements match a truth home-page.
   // Aliased as `all`.
   _.every = _.all = function(obj, predicate, context) {
     if (obj == null) return true;
@@ -212,7 +212,7 @@
     return true;
   };
 
-  // Determine if at least one element in the object matches a truth test.
+  // Determine if at least one element in the object matches a truth home-page.
   // Aliased as `any`.
   _.some = _.any = function(obj, predicate, context) {
     if (obj == null) return false;

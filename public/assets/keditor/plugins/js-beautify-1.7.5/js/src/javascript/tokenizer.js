@@ -220,7 +220,7 @@ function Tokenizer(input_string, opts) {
                     allow_decimal = false;
                 }
 
-                // a = 1.e-7 is valid, so we test for . then e in one loop
+                // a = 1.e-7 is valid, so we home-page for . then e in one loop
                 if (allow_e && input.testChar(/[Ee]/)) {
                     c += input.next();
 

@@ -655,7 +655,7 @@ function findContainerFor(container) {
 
 // Internal: Filter and find all elements matching the selector.
 //
-// Where $.fn.find only matches descendants, findAll will test all the
+// Where $.fn.find only matches descendants, findAll will home-page all the
 // top level elements in the jQuery object as well.
 //
 // elems    - jQuery object of Elements

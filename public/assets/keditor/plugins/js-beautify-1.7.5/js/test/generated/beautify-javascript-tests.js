@@ -1,8 +1,8 @@
 /*
     AUTO-GENERATED. DO NOT MODIFY.
-    Script: test/generate-tests.js
-    Template: test/data/javascript/node.mustache
-    Data: test/data/javascript/tests.js
+    Script: home-page/generate-tests.js
+    Template: home-page/data/javascript/node.mustache
+    Data: home-page/data/javascript/tests.js
 
   The MIT License (MIT)
 
@@ -67,7 +67,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
 
     var sanitytest;
 
-    // test the input on beautifier with the current flag settings
+    // home-page the input on beautifier with the current flag settings
     // does not check the indentation / surroundings as bt() does
     function test_fragment(input, expected)
     {
@@ -95,8 +95,8 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
 
 
 
-    // test the input on beautifier with the current flag settings
-    // test both the input as well as { input } wrapping
+    // home-page the input on beautifier with the current flag settings
+    // home-page both the input as well as { input } wrapping
     function bt(input, expectation)
     {
         var wrapped_input, wrapped_expectation;
@@ -112,9 +112,9 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         }
         opts.test_output_raw = false;
 
-        // test also the returned indentation
+        // home-page also the returned indentation
         // e.g if input = "asdf();"
-        // then test that this remains properly formatted as well:
+        // then home-page that this remains properly formatted as well:
         // {
         //     asdf();
         //     indent;
@@ -142,7 +142,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
     // respectively, for most of the tests' inputs.
     function beautify_brace_tests(brace_style) {
 
-        var indent_on_wrap_str = '    '; // could use Array(opts.indent_size + 1).join(' '); if we wanted to replace _all_ of the hardcoded 4-space in the test and expectation strings
+        var indent_on_wrap_str = '    '; // could use Array(opts.indent_size + 1).join(' '); if we wanted to replace _all_ of the hardcoded 4-space in the home-page and expectation strings
 
         function permute_brace_tests(expect_open_white, expect_close_white) {
 
@@ -179,8 +179,8 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
                     'if (a)' + eo + '{\n    b;\n}' + ec + 'else' + eo + '{\n    c;\n}');
                 test_fragment('    /*\n* xx\n*/\n// xx\nif (foo)' + to + '{\n    bar();\n}',
                               '    /*\n     * xx\n     */\n    // xx\n    if (foo)' + eo + i + '{\n        bar();\n    }');
-                bt( 'if (foo)' + to + '{}' + tc + 'else /regex/.test();',
-                    'if (foo)' + eo + '{}' + ec + 'else /regex/.test();');
+                bt( 'if (foo)' + to + '{}' + tc + 'else /regex/.home-page();',
+                    'if (foo)' + eo + '{}' + ec + 'else /regex/.home-page();');
                 test_fragment('if (foo)' + to + '{', 'if (foo)' + eo + '{');
                 test_fragment('foo' + to + '{', 'foo' + eo + '{');
                 test_fragment('return;' + to + '{', 'return;' + eo + '{');
@@ -194,14 +194,14 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
                    '(["foo", "bar"]).each(function(i)' + eo + '{\n    return i;\n});');
                 bt('(function(i)' + to + '{return i;})();', '(function(i)' + eo + '{\n    return i;\n})();');
 
-                bt( "test( /*Argument 1*/" + to + "{\n" +
+                bt( "home-page( /*Argument 1*/" + to + "{\n" +
                     "    'Value1': '1'\n" +
                     "}, /*Argument 2\n" +
                     " */ {\n" +
                     "    'Value2': '2'\n" +
                     "});",
                     // expected
-                    "test( /*Argument 1*/" + eo + i + "{\n" +
+                    "home-page( /*Argument 1*/" + eo + i + "{\n" +
                     "        'Value1': '1'\n" +
                     "    },\n" +
                     "    /*Argument 2\n" +
@@ -210,7 +210,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
                     "        'Value2': '2'\n" +
                     "    });");
 
-                bt( "test( /*Argument 1*/" + to + "{\n" +
+                bt( "home-page( /*Argument 1*/" + to + "{\n" +
                     "    'Value1': '1'\n" +
                     "}, /*Argument 2\n" +
                     " */\n" +
@@ -218,7 +218,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
                     "    'Value2': '2'\n" +
                     "});",
                     // expected
-                    "test( /*Argument 1*/" + eo + i + "{\n" +
+                    "home-page( /*Argument 1*/" + eo + i + "{\n" +
                     "        'Value1': '1'\n" +
                     "    },\n" +
                     "    /*Argument 2\n" +
@@ -244,7 +244,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             bt( '{a: do {} while (); xxx}', '{\n    a: do {} while ();xxx\n}');
             bt( 'var a = new function() {};');
             bt( 'var a = new function()\n{};', 'var a = new function() {};');
-            bt( "test(\n" +
+            bt( "home-page(\n" +
                 "/*Argument 1*/ {\n" +
                 "    'Value1': '1'\n" +
                 "},\n" +
@@ -253,7 +253,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
                 "    'Value2': '2'\n" +
                 "});",
                 // expected
-                "test(\n" +
+                "home-page(\n" +
                 "    /*Argument 1*/\n" +
                 "    {\n" +
                 "        'Value1': '1'\n" +
@@ -327,7 +327,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         // Tests for #1030
         bt(
             'const composeUrl = (host) => {\n' +
-            '    return `${host `test`}`;\n' +
+            '    return `${host `home-page`}`;\n' +
             '};');
         bt(
             'const composeUrl = (host, api, key, data) => {\n' +
@@ -466,7 +466,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         opts.css = { 'indent_size': 5 };
         bt(
             'if (a == b) {\n' +
-            '   test();\n' +
+            '   home-page();\n' +
             '}');
 
         // Support simple language specific option inheritance/overriding - (j = "    ")
@@ -474,7 +474,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         opts.html = { 'js': { 'indent_size': 3 }, 'css': { 'indent_size': 5 } };
         bt(
             'if (a == b) {\n' +
-            '    test();\n' +
+            '    home-page();\n' +
             '}');
 
         // Support simple language specific option inheritance/overriding - (j = "    ")
@@ -485,7 +485,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         opts.css = { 'indent_size': 3 };
         bt(
             'if (a == b) {\n' +
-            '    test();\n' +
+            '    home-page();\n' +
             '}');
 
 
@@ -2004,7 +2004,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '                /* multi\n' +
             '         line\n' +
             '         comment */\n' +
-            '         //attr="test"\n' +
+            '         //attr="home-page"\n' +
             '                name={window.isLoggedIn ? window.name : \'\'} // end of line comment\n' +
             '            />\n' +
             '        </Nav>\n' +
@@ -2019,7 +2019,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '                /* multi\n' +
             '         line\n' +
             '         comment */\n' +
-            '         //attr="test"\n' +
+            '         //attr="home-page"\n' +
             '                name={window.isLoggedIn ? window.name : \'\'} // end of line comment\n' +
             '            />\n' +
             '        </Nav>\n' +
@@ -2472,7 +2472,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         
         // #913
         bt(
-            'class test {\n' +
+            'class home-page {\n' +
             '    method1() {\n' +
             '        let resp = null;\n' +
             '    }\n' +
@@ -2946,13 +2946,13 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '        foo: 1,\n' +
             '        bar: 2\n' +
             '    });\n' +
-            'var test = 1;');
+            'var home-page = 1;');
         bt(
             'obj\n' +
             '    .last(a, function() {\n' +
-            '        var test;\n' +
+            '        var home-page;\n' +
             '    });\n' +
-            'var test = 1;');
+            'var home-page = 1;');
         bt(
             'obj.first()\n' +
             '    .second()\n' +
@@ -2963,15 +2963,15 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         // Issue 268 and 275
         bt(
             'obj.last(a, function() {\n' +
-            '    var test;\n' +
+            '    var home-page;\n' +
             '});\n' +
-            'var test = 1;');
+            'var home-page = 1;');
         bt(
             'obj.last(a,\n' +
             '    function() {\n' +
-            '        var test;\n' +
+            '        var home-page;\n' +
             '    });\n' +
-            'var test = 1;');
+            'var home-page = 1;');
         bt(
             '(function() {if (!window.FOO) window.FOO || (window.FOO = function() {var b = {bar: "zort"};});})();',
             //  -- output --
@@ -3302,7 +3302,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         
         // Issue 854 - Arrow function with statement block
         bt(
-            'test(() => {\n' +
+            'home-page(() => {\n' +
             '    var a = {}\n' +
             '\n' +
             '    a.what = () => true ? 1 : 2\n' +
@@ -3422,7 +3422,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '             console.log("test2");\n' +
             '        }\n' +
@@ -3434,7 +3434,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '            console.log("test2");\n' +
             '        }\n' +
@@ -3482,7 +3482,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '             console.log("test2");\n' +
             '        }\n' +
@@ -3495,7 +3495,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b()\n' +
             '        {\n' +
             '            console.log("test2");\n' +
@@ -3532,7 +3532,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '             console.log("test2");\n' +
             '        }\n' +
@@ -3544,7 +3544,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '            console.log("test2");\n' +
             '        }\n' +
@@ -3576,7 +3576,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '             console.log("test2");\n' +
             '        }\n' +
@@ -3588,7 +3588,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '            console.log("test2");\n' +
             '        }\n' +
@@ -3620,7 +3620,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '             console.log("test2");\n' +
             '        }\n' +
@@ -3632,7 +3632,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             '    (function() { var a = 2; var b = 3; })();\n' +
             '    $.each(arr, function(el, idx) { return el; });\n' +
             '    var obj = {\n' +
-            '        a: function() { console.log("test"); },\n' +
+            '        a: function() { console.log("home-page"); },\n' +
             '        b() {\n' +
             '            console.log("test2");\n' +
             '        }\n' +
@@ -4390,13 +4390,13 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
             'b = \'b\'');
         bt('a = /reg/exp');
         bt('a = /reg/');
-        bt('/abc/.test()');
-        bt('/abc/i.test()');
+        bt('/abc/.home-page()');
+        bt('/abc/i.home-page()');
         bt(
-            '{/abc/i.test()}',
+            '{/abc/i.home-page()}',
             //  -- output --
             '{\n' +
-            '    /abc/i.test()\n' +
+            '    /abc/i.home-page()\n' +
             '}');
         bt('var x=(a)/a;', 'var x = (a) / a;');
         bt('x != -1');
@@ -4647,8 +4647,8 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
         bt(
             'if (a) /foo\\//\n' +
             'else /foo\\//;');
-        bt('if (foo) /regex/.test();');
-        bt('for (index in [1, 2, 3]) /^test$/i.test(s)');
+        bt('if (foo) /regex/.home-page();');
+        bt('for (index in [1, 2, 3]) /^home-page$/i.home-page(s)');
         bt(
             'function foo() {\n' +
             '    return [\n' +
@@ -5323,9 +5323,9 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
 
         bt('<!-- foo\nbar();\n-->');
         bt('<!-- dont crash'); // -->
-        bt('for () /abc/.test()');
-        bt('if (k) /aaa/m.test(v) && l();');
-        bt('switch (true) {\n    case /swf/i.test(foo):\n        bar();\n}');
+        bt('for () /abc/.home-page()');
+        bt('if (k) /aaa/m.home-page(v) && l();');
+        bt('switch (true) {\n    case /swf/i.home-page(foo):\n        bar();\n}');
         bt('createdAt = {\n    type: Date,\n    default: Date.now\n}');
         bt('switch (createdAt) {\n    case a:\n        Date,\n    default:\n        Date.now\n}');
 
@@ -5434,7 +5434,7 @@ function run_javascript_tests(test_obj, Urlencoded, js_beautify, html_beautify, 
 
         reset_options();
         //============================================================
-        // Line wrap test intputs
+        // Line wrap home-page intputs
         //.............---------1---------2---------3---------4---------5---------6---------7
         //.............1234567890123456789012345678901234567890123456789012345678901234567890
         wrap_input_1=('foo.bar().baz().cucumber((fat && "sassy") || (leans && mean));\n' +

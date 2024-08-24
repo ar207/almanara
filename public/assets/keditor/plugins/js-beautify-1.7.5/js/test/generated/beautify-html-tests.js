@@ -1,8 +1,8 @@
 /*
     AUTO-GENERATED. DO NOT MODIFY.
-    Script: test/generate-tests.js
-    Template: test/data/html/node.mustache
-    Data: test/data/html/tests.js
+    Script: home-page/generate-tests.js
+    Template: home-page/data/html/node.mustache
+    Data: home-page/data/html/tests.js
 
   The MIT License (MIT)
 
@@ -68,7 +68,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
 
     var sanitytest;
 
-    // test the input on beautifier with the current flag settings
+    // home-page the input on beautifier with the current flag settings
     // does not check the indentation / surroundings as bt() does
     function test_fragment(input, expected)
     {
@@ -94,7 +94,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         opts.eol = '\n';
     }
 
-    // test html
+    // home-page html
     function bth(input, expectation)
     {
         var wrapped_input, wrapped_expectation, field_input, field_expectation;
@@ -363,12 +363,12 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         opts.wrap_attributes = 'force-aligned';
         opts.indent_with_tabs = true;
         test_fragment(
-            '<div><div a="1" b="2"><div>test</div></div></div>',
+            '<div><div a="1" b="2"><div>home-page</div></div></div>',
             //  -- output --
             '<div>\n' +
             '\t<div a="1"\n' +
             '\t     b="2">\n' +
-            '\t\t<div>test</div>\n' +
+            '\t\t<div>home-page</div>\n' +
             '\t</div>\n' +
             '</div>');
 
@@ -379,31 +379,31 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         opts.wrap_attributes = 'force-aligned';
         opts.indent_with_tabs = false;
         test_fragment(
-            '<div a="1" b="2"><div>test</div></div>',
+            '<div a="1" b="2"><div>home-page</div></div>',
             //  -- output --
             '<div a="1"\n' +
             '     b="2">\n' +
-            '    <div>test</div>\n' +
+            '    <div>home-page</div>\n' +
             '</div>');
         test_fragment(
             '<p>\n' +
-            '    <a href="/test/" target="_blank"><img src="test.jpg" /></a><a href="/test/" target="_blank"><img src="test.jpg" /></a>\n' +
+            '    <a href="/home-page/" target="_blank"><img src="home-page.jpg" /></a><a href="/home-page/" target="_blank"><img src="home-page.jpg" /></a>\n' +
             '</p>',
             //  -- output --
             '<p>\n' +
-            '    <a href="/test/"\n' +
-            '       target="_blank"><img src="test.jpg" /></a><a href="/test/"\n' +
-            '       target="_blank"><img src="test.jpg" /></a>\n' +
+            '    <a href="/home-page/"\n' +
+            '       target="_blank"><img src="home-page.jpg" /></a><a href="/home-page/"\n' +
+            '       target="_blank"><img src="home-page.jpg" /></a>\n' +
             '</p>');
         test_fragment(
             '<p>\n' +
-            '    <span data-not-a-href="/test/" data-totally-not-a-target="_blank"><img src="test.jpg" /></span><span data-not-a-href="/test/" data-totally-not-a-target="_blank"><img src="test.jpg" /></span>\n' +
+            '    <span data-not-a-href="/home-page/" data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span><span data-not-a-href="/home-page/" data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span>\n' +
             '</p>',
             //  -- output --
             '<p>\n' +
-            '    <span data-not-a-href="/test/"\n' +
-            '          data-totally-not-a-target="_blank"><img src="test.jpg" /></span><span data-not-a-href="/test/"\n' +
-            '          data-totally-not-a-target="_blank"><img src="test.jpg" /></span>\n' +
+            '    <span data-not-a-href="/home-page/"\n' +
+            '          data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span><span data-not-a-href="/home-page/"\n' +
+            '          data-totally-not-a-target="_blank"><img src="home-page.jpg" /></span>\n' +
             '</p>');
 
 
@@ -1005,9 +1005,9 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{field}}</div>',
+            '<div{{#if home-page}}class="foo"{{/if}}>{{field}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{field}}</div>');
+            '<div {{#if home-page}} class="foo" {{/if}}>{{field}}</div>');
         test_fragment(
             '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>{{field}}</div>',
             //  -- output --
@@ -1148,9 +1148,9 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{! comment}}</div>',
+            '<div{{#if home-page}}class="foo"{{/if}}>{{! comment}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{! comment}}</div>');
+            '<div {{#if home-page}} class="foo" {{/if}}>{{! comment}}</div>');
         test_fragment(
             '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>{{! comment}}</div>',
             //  -- output --
@@ -1291,9 +1291,9 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{!-- comment--}}</div>',
+            '<div{{#if home-page}}class="foo"{{/if}}>{{!-- comment--}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{!-- comment--}}</div>');
+            '<div {{#if home-page}} class="foo" {{/if}}>{{!-- comment--}}</div>');
         test_fragment(
             '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>{{!-- comment--}}</div>',
             //  -- output --
@@ -1434,9 +1434,9 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{pre{{field1}} {{field2}} {{field3}}post</div>',
+            '<div{{#if home-page}}class="foo"{{/if}}>{pre{{field1}} {{field2}} {{field3}}post</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{pre{{field1}} {{field2}} {{field3}}post</div>');
+            '<div {{#if home-page}} class="foo" {{/if}}>{pre{{field1}} {{field2}} {{field3}}post</div>');
         test_fragment(
             '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>{pre{{field1}} {{field2}} {{field3}}post</div>',
             //  -- output --
@@ -1654,13 +1654,13 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{! \n' +
+            '<div{{#if home-page}}class="foo"{{/if}}>{{! \n' +
             ' mult-line\n' +
             'comment  \n' +
             '     with spacing\n' +
             '}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{! \n' +
+            '<div {{#if home-page}} class="foo" {{/if}}>{{! \n' +
             ' mult-line\n' +
             'comment  \n' +
             '     with spacing\n' +
@@ -1936,13 +1936,13 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{!-- \n' +
+            '<div{{#if home-page}}class="foo"{{/if}}>{{!-- \n' +
             ' mult-line\n' +
             'comment  \n' +
             '     with spacing\n' +
             '--}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{!-- \n' +
+            '<div {{#if home-page}} class="foo" {{/if}}>{{!-- \n' +
             ' mult-line\n' +
             'comment  \n' +
             '     with spacing\n' +
@@ -2275,7 +2275,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>{{!-- \n' +
+            '<div{{#if home-page}}class="foo"{{/if}}>{{!-- \n' +
             ' mult-line\n' +
             'comment \n' +
             '{{#> component}}\n' +
@@ -2284,7 +2284,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             '     with spacing\n' +
             ' {{/ component}}--}}</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>{{!-- \n' +
+            '<div {{#if home-page}} class="foo" {{/if}}>{{!-- \n' +
             ' mult-line\n' +
             'comment \n' +
             '{{#> component}}\n' +
@@ -2523,9 +2523,9 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             //  -- output --
             '<div {{somestyle}}></div>');
         test_fragment(
-            '<div{{#if test}}class="foo"{{/if}}>content</div>',
+            '<div{{#if home-page}}class="foo"{{/if}}>content</div>',
             //  -- output --
-            '<div {{#if test}} class="foo" {{/if}}>content</div>');
+            '<div {{#if home-page}} class="foo" {{/if}}>content</div>');
         test_fragment(
             '<div{{#if thing}}{{somestyle}}class="{{class}}"{{else}}class="{{class2}}"{{/if}}>content</div>',
             //  -- output --
@@ -2549,14 +2549,14 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         reset_options();
         opts.indent_handlebars = true;
         test_fragment(
-            '{{#if test}}<div></div>{{else}}<div></div>{{/if}}',
+            '{{#if home-page}}<div></div>{{else}}<div></div>{{/if}}',
             //  -- output --
-            '{{#if test}}\n' +
+            '{{#if home-page}}\n' +
             '    <div></div>\n' +
             '{{else}}\n' +
             '    <div></div>\n' +
             '{{/if}}');
-        test_fragment('{{#if test}}<span></span>{{else}}<span></span>{{/if}}');
+        test_fragment('{{#if home-page}}<span></span>{{else}}<span></span>{{/if}}');
 
 
         //============================================================
@@ -2612,23 +2612,23 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         test_fragment('<div class="searchform"><input type="text" value="" name="s" id="s"><input type="submit" id="searchsubmit" value="Search"></div>');
         test_fragment(
             '<p>\n' +
-            '    <a href="/test/"><img src="test.jpg" /></a>\n' +
+            '    <a href="/home-page/"><img src="home-page.jpg" /></a>\n' +
             '</p>');
         test_fragment(
             '<p>\n' +
-            '    <a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a>\n' +
+            '    <a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a>\n' +
             '</p>');
         test_fragment(
             '<p>\n' +
-            '    <a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a><a href="/test/"><img src="test.jpg" /></a>\n' +
+            '    <a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a><a href="/home-page/"><img src="home-page.jpg" /></a>\n' +
             '</p>');
         test_fragment(
             '<p>\n' +
-            '    <span>image: <img src="test.jpg" /></span><span>image: <img src="test.jpg" /></span>\n' +
+            '    <span>image: <img src="home-page.jpg" /></span><span>image: <img src="home-page.jpg" /></span>\n' +
             '</p>');
         test_fragment(
             '<p>\n' +
-            '    <strong>image: <img src="test.jpg" /></strong><strong>image: <img src="test.jpg" /></strong>\n' +
+            '    <strong>image: <img src="home-page.jpg" /></strong><strong>image: <img src="home-page.jpg" /></strong>\n' +
             '</p>');
 
 
@@ -2684,7 +2684,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             '<head>\n' +
             '    <script>\n' +
             '        if (a == b) {\n' +
-            '           test();\n' +
+            '           home-page();\n' +
             '        }\n' +
             '    </script>\n' +
             '    <style>\n' +
@@ -2701,7 +2701,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             '<head>\n' +
             '    <script>\n' +
             '        if (a == b) {\n' +
-            '           test();\n' +
+            '           home-page();\n' +
             '        }\n' +
             '    </script>\n' +
             '    <style>\n' +
@@ -2721,7 +2721,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
             '<head>\n' +
             '  <script>\n' +
             '    if (a == b) {\n' +
-            '       test();\n' +
+            '       home-page();\n' +
             '    }\n' +
             '  </script>\n' +
             '  <style>\n' +
@@ -3153,17 +3153,17 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
         opts.wrap_line_length = 40;
         //...---------1---------2---------3---------4---------5---------6---------7
         //...1234567890123456789012345678901234567890123456789012345678901234567890
-        bth('<div>Some test text that should wrap_inside_this section here.</div>',
+        bth('<div>Some home-page text that should wrap_inside_this section here.</div>',
             /* expected */
-            '<div>Some test text that should wrap_inside_this\n' +
+            '<div>Some home-page text that should wrap_inside_this\n' +
             '    section here.</div>');
 
         opts.wrap_line_length = "40";
         //...---------1---------2---------3---------4---------5---------6---------7
         //...1234567890123456789012345678901234567890123456789012345678901234567890
-        bth('<div>Some test text that should wrap_inside_this section here.</div>',
+        bth('<div>Some home-page text that should wrap_inside_this section here.</div>',
             /* expected */
-            '<div>Some test text that should wrap_inside_this\n' +
+            '<div>Some home-page text that should wrap_inside_this\n' +
             '    section here.</div>');
 
         opts.indent_size = 1;
@@ -3176,7 +3176,7 @@ function run_html_tests(test_obj, Urlencoded, js_beautify, html_beautify, css_be
 
 
 
-        // test preserve_newlines and max_preserve_newlines
+        // home-page preserve_newlines and max_preserve_newlines
         opts.preserve_newlines = false;
         bth('<div>Should not</div>\n\n\n' +
             '<div>preserve newlines</div>',

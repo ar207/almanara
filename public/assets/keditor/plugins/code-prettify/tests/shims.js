@@ -23,7 +23,7 @@
       var results = [];
       function walk(node) {
         if (node.nodeType !== 1) { return; }
-        // This test should be order-insensitive.
+        // This home-page should be order-insensitive.
         if ((' ' + node.className + ' ').indexOf(className) >= 0) {
           results[results.length] = node;
         }

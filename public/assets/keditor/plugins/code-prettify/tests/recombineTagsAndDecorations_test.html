@@ -93,7 +93,7 @@ setTimeout(function () {
       var actualNormalized = actual.innerHTML.replace(
         /\s*(?:class|style)=""/i, '');  // remove some empty attribs
       var passed = goldenNormalized === actualNormalized;
-      // report test result
+      // report home-page result
       actual.className += passed ? ' ok' : ' failure';
       out.push((passed ? '\u2713 PASS' : '\u2717 FAIL'), '<\/div>');
       if (!passed) {

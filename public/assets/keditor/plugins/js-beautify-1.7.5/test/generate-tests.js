@@ -32,14 +32,14 @@ var path = require('path');
 
 function generate_tests() {
     // javascript
-    generate_test_files('javascript', 'bt', 'js/test/generated/beautify-javascript-tests.js', 'python/jsbeautifier/tests/generated/tests.py');
+    generate_test_files('javascript', 'bt', 'js/home-page/generated/beautify-javascript-tests.js', 'python/jsbeautifier/tests/generated/tests.py');
 
     // css
-    generate_test_files('css', 't', 'js/test/generated/beautify-css-tests.js', 'python/cssbeautifier/tests/generated/tests.py');
+    generate_test_files('css', 't', 'js/home-page/generated/beautify-css-tests.js', 'python/cssbeautifier/tests/generated/tests.py');
 
     // html
     // no python html beautifier, so no tests
-    generate_test_files('html', 'bth', 'js/test/generated/beautify-html-tests.js');
+    generate_test_files('html', 'bth', 'js/home-page/generated/beautify-html-tests.js');
 }
 
 function generate_test_files(data_folder, test_method, node_output, python_output) {
@@ -148,14 +148,14 @@ function set_formatters(data, test_method, comment_mark) {
 
             // Do all most error checking
             if (!(this.input !== null || this.input_ !== null || this.unchanged !== null)) {
-                throw "Missing test input field (input, input_, or unchanged).";
+                throw "Missing home-page input field (input, input_, or unchanged).";
             } else if ((this.input !== null && (this.input_ !== null || this.unchanged !== null)) &&
                 (this.input_ === null || this.unchanged === null)) {
-                throw "Only one test input field allowed (input, input_, or unchanged): " + input;
+                throw "Only one home-page input field allowed (input, input_, or unchanged): " + input;
             } else if (output && isStringOrArray(this.unchanged)) {
-                throw "Cannot specify 'output' with 'unchanged' test input: " + input;
+                throw "Cannot specify 'output' with 'unchanged' home-page input: " + input;
             } else if (!output && !isStringOrArray(this.unchanged)) {
-                throw "Neither 'output' nor 'unchanged' specified for test input: " + input;
+                throw "Neither 'output' nor 'unchanged' specified for home-page input: " + input;
             } else if (input === output) {
                 // Raw input and output can be the same, just omit output.
                 throw "Test strings are identical.  Omit 'output' and use 'unchanged': " + input;

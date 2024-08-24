@@ -61,7 +61,7 @@ exports.test_data = {
                 comment: 'Tests for #1030',
                 unchanged: [
                     'const composeUrl = (host) => {',
-                    '    return `${host `test`}`;',
+                    '    return `${host `home-page`}`;',
                     '};'
                 ]
             }, {
@@ -216,7 +216,7 @@ exports.test_data = {
         tests: [{
             unchanged: [
                 'if (a == b) {',
-                '{{j}}test();',
+                '{{j}}home-page();',
                 '}'
             ]
         }, ]
@@ -1085,7 +1085,7 @@ exports.test_data = {
                     '                /* multi',
                     '         line',
                     '         comment */',
-                    '         //attr="test"',
+                    '         //attr="home-page"',
                     '                name={window.isLoggedIn ? window.name : \\\'\\\'} // end of line comment',
                     '            />',
                     '        </Nav>',
@@ -1101,7 +1101,7 @@ exports.test_data = {
                     '                /* multi',
                     '         line',
                     '         comment */',
-                    '         //attr="test"',
+                    '         //attr="home-page"',
                     '                name={window.isLoggedIn ? window.name : \\\'\\\'} // end of line comment',
                     '            />',
                     '        </Nav>',
@@ -1576,7 +1576,7 @@ exports.test_data = {
                 comment: '#913',
 
                 unchanged: [
-                    'class test {',
+                    'class home-page {',
                     '    method1() {',
                     '        let resp = null;',
                     '    }',
@@ -1777,16 +1777,16 @@ exports.test_data = {
                     '        foo: 1,',
                     '        bar: 2',
                     '    });',
-                    'var test = 1;'
+                    'var home-page = 1;'
                 ]
             },
             {
                 unchanged: [
                     'obj',
                     '    .last(a, function() {',
-                    '        var test;',
+                    '        var home-page;',
                     '    });',
-                    'var test = 1;'
+                    'var home-page = 1;'
                 ]
             },
             {
@@ -1802,18 +1802,18 @@ exports.test_data = {
                 comment: "Issue 268 and 275",
                 unchanged: [
                     'obj.last(a, function() {',
-                    '    var test;',
+                    '    var home-page;',
                     '});',
-                    'var test = 1;'
+                    'var home-page = 1;'
                 ]
             },
             {
                 unchanged: [
                     'obj.last(a,',
                     '    function() {',
-                    '        var test;',
+                    '        var home-page;',
                     '    });',
-                    'var test = 1;'
+                    'var home-page = 1;'
                 ]
             },
             {
@@ -2231,7 +2231,7 @@ exports.test_data = {
             {
                 comment: "Issue 854 - Arrow function with statement block",
                 unchanged: [
-                    'test(() => {',
+                    'home-page(() => {',
                     '    var a = {}',
                     '',
                     '    a.what = () => true ? 1 : 2',
@@ -2348,7 +2348,7 @@ exports.test_data = {
         description: "brace_style *,preserve-inline varying different brace_styles",
         template: "< >",
         matrix: [
-            //test for all options of brace_style
+            //home-page for all options of brace_style
             {
                 options: [
                     { name: "brace_style", value: "'collapse,preserve-inline'" }
@@ -2404,7 +2404,7 @@ exports.test_data = {
                 options: [
                     { name: "brace_style", value: "'collapse-preserve-inline'" }
                 ],
-                //Equivalent to the output of the first test
+                //Equivalent to the output of the first home-page
                 obo: ' ',
                 obot: '',
                 oao: '\n',
@@ -2472,7 +2472,7 @@ exports.test_data = {
                     '    (function() { var a = 2; var b = 3; })();',
                     '    $.each(arr, function(el, idx) { return el; });',
                     '    var obj = {',
-                    '        a: function() { console.log("test"); },',
+                    '        a: function() { console.log("home-page"); },',
                     '        b() {',
                     '             console.log("test2");',
                     '        }',
@@ -2486,7 +2486,7 @@ exports.test_data = {
                     '    (function() { var a = 2; var b = 3; })();',
                     '    $.each(arr, function(el, idx) { return el; });',
                     '    var obj = {<oao>' + //NL in templates
-                    '<oaot><oaot>a: function() { console.log("test"); },',
+                    '<oaot><oaot>a: function() { console.log("home-page"); },',
                     '        b()<obo><obot><obot>{<oao>' + //NL in templates
                     '<oaot><oaot><oaot>console.log("test2");' +
                     '<obc>        }' + //NL in templates
@@ -2633,7 +2633,7 @@ exports.test_data = {
         // =======================================================
         // New tests groups should be added above this line.
         // Everything below is a work in progress - converting
-        // old test to generated form.
+        // old home-page to generated form.
         // =======================================================
         name: "Old tests",
         description: "Largely unorganized pile of tests",
@@ -2909,9 +2909,9 @@ exports.test_data = {
             { unchanged: "a = \\'a\\'\nb = \\'b\\'" },
             { unchanged: "a = /reg/exp" },
             { unchanged: "a = /reg/" },
-            { unchanged: '/abc/.test()' },
-            { unchanged: '/abc/i.test()' },
-            { input: "{/abc/i.test()}", output: "{\n    /abc/i.test()\n}" },
+            { unchanged: '/abc/.home-page()' },
+            { unchanged: '/abc/i.home-page()' },
+            { input: "{/abc/i.home-page()}", output: "{\n    /abc/i.home-page()\n}" },
             { input: 'var x=(a)/a;', output: 'var x = (a) / a;' },
 
             { unchanged: 'x != -1' },
@@ -3011,8 +3011,8 @@ exports.test_data = {
             { unchanged: 'switch (a) {\n    case /foo\\\\//:\n        b\n}' },
             { unchanged: 'if (a) /foo\\\\//\nelse /foo\\\\//;' },
 
-            { unchanged: 'if (foo) /regex/.test();' },
-            { unchanged: "for (index in [1, 2, 3]) /^test$/i.test(s)" },
+            { unchanged: 'if (foo) /regex/.home-page();' },
+            { unchanged: "for (index in [1, 2, 3]) /^home-page$/i.home-page(s)" },
 
             { unchanged: 'function foo() {\n    return [\n        "one",\n        "two"\n    ];\n}' },
             { input: 'a=[[1,2],[4,5],[7,8]]', output: "a = [\n    [1, 2],\n    [4, 5],\n    [7, 8]\n]" },
