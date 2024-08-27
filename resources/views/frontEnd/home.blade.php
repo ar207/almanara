@@ -604,7 +604,7 @@
             touchDrag: true, // Enable touch drag
             pullDrag: true, // Enable pull drag
             freeDrag: true, // Free drag mode
-            rtl: false, // Right-to-left support
+            rtl: true, // Right-to-left support
             autoWidth: false, // Auto width for items
             autoHeight: false, // Auto height for items
             responsiveClass: true, // Add 'owl-responsive-X' class to items
@@ -650,7 +650,7 @@
             touchDrag: true, // Enable touch drag
             pullDrag: true, // Enable pull drag
             freeDrag: true, // Free drag mode
-            rtl: false, // Right-to-left support
+            rtl: true, // Right-to-left support
             autoWidth: false, // Auto width for items
             autoHeight: false, // Auto height for items
             responsiveClass: true, // Add 'owl-responsive-X' class to items
@@ -695,7 +695,7 @@
             touchDrag: true, // Enable touch drag
             pullDrag: true, // Enable pull drag
             freeDrag: true, // Free drag mode
-            rtl: false, // Right-to-left support
+            rtl: true, // Right-to-left support
             autoWidth: false, // Auto width for items
             autoHeight: false, // Auto height for items
             responsiveClass: true, // Add 'owl-responsive-X' class to items
