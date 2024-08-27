@@ -103,9 +103,7 @@
                             </li>
                         @endif
                         @if($category_title !="")
-                            <li class="active">
-                                <a href="{{ Helper::categoryURL(@$CurrentCategory->id) }}">{{ $title }}</a>
-                            </li>
+                            
                         @endif
                     </ol>
                 </div>
