@@ -79,7 +79,7 @@ if ($WebmasterSection->$title_var != "") {
                     <div class="box-body">
                         {{Form::open(['route'=>['categoriesUpdate',"webmasterId"=>$WebmasterSection->id,"id"=>$Sections->id],'method'=>'POST', 'files' => true])}}
 
-                        @if($WebmasterSection->sections_status==2)
+                        @if($WebmasterSection->sections_status > 2)
                             <div class="form-group row">
                                 <label for="father_id"
                                        class="col-sm-2 form-control-label">{!!  __('backend.categoryFather') !!} </label>

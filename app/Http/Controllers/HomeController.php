@@ -81,12 +81,13 @@ class HomeController extends Controller
             $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
             $webMaster = WebmasterSection::query()->where('status', 1)->where('id', 15)->first();
-            $videos = Topic::query()->where('webmaster_id', '=', 5)->where('status', 1)->orderBy('row_no', 'asc')->get();
-            $products = Topic::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderBy('row_no', 'asc')->get();
+            $videos = Topic::query()->where('webmaster_id', '=', 5)->where('status', 1)->orderBy('id', 'desc')->take(5)->get();
+            $products = Topic::query()->where('webmaster_id', '=', 8)->where('status', 1)->orderBy('id', 'desc')->take(10)->get();
             $webmasterNews = WebmasterSection::query()->find(3);
 
             return view("frontEnd.home", ["page_type" => "home", 'categories' => $CategoriesList, 'news' => $news, 'whatsNew' => $whatsNew,
-                'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products, 'categoryWithSpeciality' => $categoryWithSpeciality, 'webmasterNews' => $webmasterNews]);
+                'webMaster' => $webMaster, 'videos' => $videos, 'products' => $products, 'categoryWithSpeciality' => $categoryWithSpeciality,
+                'webmasterNews' => $webmasterNews]);
         }
 
         $WebmasterSection = WebmasterSection::where('status', 1)->where("seo_url_slug_" . $lang, $part1)->first();
