@@ -1,9 +1,44 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
-    <link href="{{asset('assets/owlcarousel/owl.carousel.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/owlcarousel/owl.theme.green.css')}}" rel="stylesheet">
+    {{--    <link href="{{asset('assets/owlcarousel/owl.carousel.css')}}" rel="stylesheet">--}}
+    {{--    <link href="{{asset('assets/owlcarousel/owl.theme.green.css')}}" rel="stylesheet">--}}
     <style>
+        .owl-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .owl-nav .owl-prev {
+            position: absolute;
+            left: -25px; /* Adjust this value as needed */
+        }
+
+        .owl-nav .owl-next {
+            position: absolute;
+            right: -25px; /* Adjust this value as needed */
+        }
+
+        .owl-nav .owl-prev, .owl-nav .owl-next {
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .owl-nav .owl-prev:hover, .owl-nav .owl-next:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .owl-nav .owl-prev i, .owl-nav .owl-next i {
+            font-size: 18px;
+        }
+
         #hero, #hero .carousel-item {
             height: calc(100vh - 100px);
             width: 100%;
@@ -81,7 +116,7 @@
         }
 
         .news-list-item {
-           border-bottom: 1px solid #d9d8d8;
+            border-bottom: 1px solid #d9d8d8;
             margin-bottom: 15px;
         }
 
@@ -258,7 +293,7 @@
         ?>
 
         @include('frontEnd.layouts.slider')
-        @include('frontEnd.homepage.row1')
+        {{--        @include('frontEnd.homepage.row1')--}}
         @if(!empty($categoryWithSpeciality))
             <section class="our-services py-5">
                 <div class="container">
@@ -461,8 +496,8 @@
                                         ?>
                                         <div class="news-list-item d-flex mb-4">
                                             {{--<img src="{{ $newsImage }}"--}}
-                                                 {{--style="height: 120px !important; width: 120px !important;"--}}
-                                                 {{--alt="{{ $title }}" class="mr-3">--}}
+                                            {{--style="height: 120px !important; width: 120px !important;"--}}
+                                            {{--alt="{{ $title }}" class="mr-3">--}}
                                             <div style="margin-left: 5px;">
                                                 <h6>{{ $title }}</h6>
                                                 <p class="text-muted mb-0">{{ Helper::formatDate($new->date) }}</p>
@@ -523,7 +558,7 @@
     @endif
 @endpush
 @push('after-scripts')
-    <script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>
+    {{--    <script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>--}}
     <script>
         $(document).ready(function () {
             manageBannersOnScreenChange();
@@ -553,6 +588,7 @@
                     items: 4 // Items for extra-large screens
                 }
             },
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             slideBy: 1, // Number of items to slide
             rewind: true, // Rewind to the first slide
             autoplaySpeed: 1000, // Speed for autoplay
@@ -597,7 +633,30 @@
             },
             autoplay: true,
             autoplayTimeout: 5000,
-            autoplayHoverPause: true
+            autoplayHoverPause: true,
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+            slideBy: 1, // Number of items to slide
+            rewind: true, // Rewind to the first slide
+            autoplaySpeed: 1000, // Speed for autoplay
+            dragEndSpeed: 500, // Speed for drag end
+            lazyLoad: true, // Lazy load images
+            center: true, // Center items
+            URLhashListener: true, // Enable URL Hash navigation
+            startPosition: 'URLHash', // Start position based on URL hash
+            video: true, // Enable video support
+            animateOut: 'fadeOut', // Animation out
+            animateIn: 'fadeIn', // Animation in
+            mouseDrag: true, // Enable mouse drag
+            touchDrag: true, // Enable touch drag
+            pullDrag: true, // Enable pull drag
+            freeDrag: true, // Free drag mode
+            rtl: false, // Right-to-left support
+            autoWidth: false, // Auto width for items
+            autoHeight: false, // Auto height for items
+            responsiveClass: true, // Add 'owl-responsive-X' class to items
+            stagePadding: 0, // Padding on stage (can create space around items)
+            navSpeed: 800, // Speed of navigation buttons
+            dotsSpeed: 800, // Speed of pagination dots
         });
         $('#videoCarousel').owlCarousel({
             loop: true,
@@ -619,7 +678,30 @@
             },
             autoplay: true,
             autoplayTimeout: 3600000,
-            autoplayHoverPause: true
+            autoplayHoverPause: true,
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+            slideBy: 1, // Number of items to slide
+            rewind: true, // Rewind to the first slide
+            autoplaySpeed: 1000, // Speed for autoplay
+            dragEndSpeed: 500, // Speed for drag end
+            lazyLoad: true, // Lazy load images
+            center: true, // Center items
+            URLhashListener: true, // Enable URL Hash navigation
+            startPosition: 'URLHash', // Start position based on URL hash
+            video: true, // Enable video support
+            animateOut: 'fadeOut', // Animation out
+            animateIn: 'fadeIn', // Animation in
+            mouseDrag: true, // Enable mouse drag
+            touchDrag: true, // Enable touch drag
+            pullDrag: true, // Enable pull drag
+            freeDrag: true, // Free drag mode
+            rtl: false, // Right-to-left support
+            autoWidth: false, // Auto width for items
+            autoHeight: false, // Auto height for items
+            responsiveClass: true, // Add 'owl-responsive-X' class to items
+            stagePadding: 0, // Padding on stage (can create space around items)
+            navSpeed: 800, // Speed of navigation buttons
+            dotsSpeed: 800, // Speed of pagination dots
         });
         $(window).resize(function () {
             manageBannersOnScreenChange();
