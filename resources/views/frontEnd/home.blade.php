@@ -175,6 +175,10 @@
 
         .service-card img {
             border-radius: 50%;
+            height: 100px;
+            -o-object-fit: cover;
+            object-fit: cover;
+            width: 100px;
         }
 
         .service-card:hover img {
@@ -248,13 +252,6 @@
         .service-card p {
             color: #6c757d;
             margin-bottom: 20px;
-        }
-
-        .service-card .btn-primary {
-            background-color: #5a67d8;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
         }
 
         .service-card:hover {

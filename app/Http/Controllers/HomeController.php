@@ -430,7 +430,7 @@ class HomeController extends Controller
                 }
             }
 
-            return view('frontEnd' . $view, [
+            return view('frontEnd.' . $view, [
                 "PageTitle" => @$meta_tags["title"],
                 "PageDescription" => @$meta_tags["desc"],
                 "PageKeywords" => @$meta_tags["keywords"],
@@ -550,7 +550,7 @@ class HomeController extends Controller
                     $view = "custom." . $Topic->id;
                 }
 
-                return view('frontEnd' . $view, [
+                return view('frontEnd.' . $view, [
                     "PageTitle" => @$meta_tags["title"],
                     "PageDescription" => @$meta_tags["desc"],
                     "PageKeywords" => @$meta_tags["keywords"],
@@ -600,7 +600,7 @@ class HomeController extends Controller
             // page meta tags
             $meta_tags = $this->get_meta_tags($WebmasterSection, $lang);
 
-            return view('frontEndform_page', [
+            return view('frontEnd.form_page', [
                 "PageTitle" => @$meta_tags["title"],
                 "PageDescription" => @$meta_tags["desc"],
                 "PageKeywords" => @$meta_tags["keywords"],
@@ -1107,7 +1107,7 @@ class HomeController extends Controller
         if (!Auth::check()) {
             $site_status = Helper::GeneralSiteSettings("site_status");
             if ($site_status == 0) {
-                echo view("frontEndclosed", ["close_message" => Helper::GeneralSiteSettings("close_msg")])->render();
+                echo view("frontEnd.closed", ["close_message" => Helper::GeneralSiteSettings("close_msg")])->render();
                 exit();
             }
         }
