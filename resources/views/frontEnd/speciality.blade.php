@@ -45,7 +45,7 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>{{  (@$search_word !="")?(__('backend.resultsFoundFor')." [ ".@$search_word." ]"):$page_title }}</h2>
+                    <h2>{{  (@$search_word !="")?(__('backend.resultsFoundFor')." [ ".@$search_word." ]"):$currentSpeciality  }}</h2>
                     <ol>
                         <li><a href="{{ Helper::homeURL() }}">{{ __("backend.home") }}</a></li>
                         @if(@$search_word !="")
@@ -60,7 +60,7 @@
                             <li class="active">{{ $User->name }}</li>
                         @endif
                         @if(!empty($currentSpeciality))
-                            <li class="active">{{ $currentSpeciality }}</li>
+                            
                         @endif
                     </ol>
                 </div>

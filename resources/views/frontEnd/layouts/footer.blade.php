@@ -110,7 +110,7 @@ if (!Helper::GeneralSiteSettings("style_subscribe")) {
                             </div>
                         @endif
                     @endif
-                    @include('frontEnd.layouts.subscribe')
+                    
                 </div>
             </div>
         </div>

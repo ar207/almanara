@@ -96,10 +96,7 @@
                 @include("frontEnd.topic.fields",["cols"=>12,"Fields"=>@$Topic->webmasterSection->customFields->where("in_listing",true)])
 
                 @if(strip_tags($Topic->$details) !="")
-                    <p class="card-text mb-0 mt-2">
-                        {!! mb_substr(strip_tags($Topic->$details),0, 180)."..." !!} <a
-                            href="{{ $topic_link_url }}" class="read-more-link">{{ __("frontend.moreDetails") }}</a>
-                    </p>
+                    
                 @endif
             </div>
         </div>
