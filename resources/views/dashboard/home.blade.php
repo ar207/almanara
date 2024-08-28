@@ -106,7 +106,7 @@
                                                  onclick="location.href='{{ route('topics',$headerWebmasterSection->id) }}'">
                                                 <a href="{{ route('topics',$headerWebmasterSection->id) }}">
                                                     <div class="pull-left m-r">
-                                                        <i class="material-icons  text-2x text-{{@$clr_ary[$ik]}} m-y-sm">{!! $LiIcon !!}</i>
+                                                        <i class="material-icons text-2x text-{{@$clr_ary[$ik]}} m-y-sm">{!! $LiIcon !!}</i>
                                                     </div>
                                                     <div class="clear">
                                                         <div
@@ -122,6 +122,45 @@
                                     @endif
                                 @endif
                             @endforeach
+                            <div class="col-xs-3">
+                                <div class="box p-a" style="cursor: pointer">
+                                    <a href="#!">
+                                        <div class="pull-left m-r">
+                                            <i class="material-icons text-2x text-danger m-y-sm">group</i>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="text-muted">Monthly visitors</div>
+                                            <h4 class="m-a-0 text-md _600">{{ $monthlyVisitors }}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="box p-a" style="cursor: pointer">
+                                    <a href="#!">
+                                        <div class="pull-left m-r">
+                                            <i class="material-icons text-2x text-accent m-y-sm">supervisor_account</i>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="text-muted">Weekly visitors</div>
+                                            <h4 class="m-a-0 text-md _600">{{ $weeklyVisitors }}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="box p-a" style="cursor: pointer">
+                                    <a href="#!">
+                                        <div class="pull-left m-r">
+                                            <i class="material-icons text-2x text-info m-y-sm">person</i>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="text-muted">Today visitors</div>
+                                            <h4 class="m-a-0 text-md _600">{{ $TodayVisitors }}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                             @if (config('smartend.geoip_status'))
                                 <div class="col-xs-12">
                                     <div class="row-col box-color text-center primary">

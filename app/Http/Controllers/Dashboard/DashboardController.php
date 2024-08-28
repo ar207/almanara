@@ -13,6 +13,7 @@ use App\Models\Topic;
 use App\Models\Webmail;
 use App\Models\WebmasterSection;
 use Auth;
+use Carbon\Carbon;
 use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -66,8 +67,22 @@ class DashboardController extends Controller
             $Contacts = Contact::orderby('id', 'desc')->limit(5)->get();
         }
         // Analytics
-        $TodayVisitors = AnalyticsVisitor::where('date', date('Y-m-d'))->count();
-        $TodayPages = AnalyticsPage::where('date', date('Y-m-d'))->count();
+        $monthlyVisitors = AnalyticsVisitor::query()
+            ->whereMonth('date', Carbon::now()->month) // Current month
+            ->whereYear('date', Carbon::now()->year)   // Current year
+            ->count();
+
+        $weeklyVisitors = AnalyticsVisitor::query()
+            ->whereBetween('date', [
+                Carbon::now()->startOfWeek(), // Start of the current week
+                Carbon::now()->endOfWeek()    // End of the current week
+            ])
+            ->count();
+
+        $TodayVisitors = AnalyticsVisitor::query()
+            ->whereDate('date', Carbon::today()) // Current date
+            ->count();
+        $TodayPages = AnalyticsPage::query()->where('date', date('Y-m-d'))->count();
 
         // Last 7 Days
         $daterangepicker_start = date('Y-m-d', strtotime('-6 day'));
@@ -235,7 +250,7 @@ class DashboardController extends Controller
         return view('dashboard.home',
             compact("GeneralWebmasterSections", "Webmails", "Events", "Contacts", "TodayVisitors", "TodayPages",
                 "Last7DaysVisitors", "TodayByCountry", "TodayByBrowser1", "TodayByBrowser1_val", "TodayByBrowser2",
-                "TodayByBrowser2_val", "TodayVisitorsRate"));
+                "TodayByBrowser2_val", "TodayVisitorsRate", "monthlyVisitors", "weeklyVisitors"));
     }
 
     /**
