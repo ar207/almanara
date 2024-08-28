@@ -1,8 +1,6 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
-    {{--    <link href="{{asset('assets/owlcarousel/owl.carousel.css')}}" rel="stylesheet">--}}
-    {{--    <link href="{{asset('assets/owlcarousel/owl.theme.green.css')}}" rel="stylesheet">--}}
     <style>
         .owl-nav {
             position: absolute;
@@ -176,14 +174,7 @@
         }
 
         .service-card img {
-            width: 50px;
-            height: 50px;
-            background-color: #ffffff;
             border-radius: 50%;
-            padding: 10px;
-            transition: background-color 0.3s ease;
-            z-index: 2;
-            position: relative;
         }
 
         .service-card:hover img {
@@ -244,15 +235,9 @@
         }
 
         .service-card .service-icon {
-            background-color: #e6e9ee;
-            padding: 5px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px; /* Add some space between the icon and the title */
+            width: 100px;
+            height: 100px;
         }
 
         .service-card h5 {
@@ -274,13 +259,30 @@
 
         .service-card:hover {
             transform: translateY(-10px);
-            /* Dynamic background image */
         }
 
         .section-background {
             background-color: #f2f2f2;
             padding: 40px;
             border-radius: 10px;
+        }
+
+        .service-title {
+            background: #949fff;
+            opacity: 1.1;
+            color: white !important;
+            padding: 5px;
+            border-radius: 30px;
+        }
+        
+        .service-link {
+            color: #000000 !important;
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .service-link:hover {
+            color: #000000 !important;
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.5) !important;
         }
     </style>
     <div class="home-page">
@@ -333,11 +335,10 @@
                                     <!-- Content -->
                                     <div class="content d-flex flex-column justify-content-between h-100">
                                         <div class="service-icon">
-                                            <i class="fa {!! $speciality->icon !!} "></i>&nbsp;
+                                            <img src="{{ $categoryThumbnail }}" alt="{{ $title }}">
                                         </div>
                                         <div class="mt-auto">
-                                            <h5 style="color: #000;">{{ $title }}</h5>
-                                            <a href="{{ $category_link_url }}" class="btn btn-primary">Read More</a>
+                                            <a href="{{ $category_link_url }}" class="service-link" style="font-weight: bold; font-size: 18px;">{{ $title }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -558,7 +559,6 @@
     @endif
 @endpush
 @push('after-scripts')
-    {{--    <script src="{{asset('assets/owlcarousel/owl.carousel.min.js')}}"></script>--}}
     <script>
         $(document).ready(function () {
             manageBannersOnScreenChange();
