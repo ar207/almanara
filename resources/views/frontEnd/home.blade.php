@@ -271,7 +271,7 @@
             padding: 5px;
             border-radius: 30px;
         }
-        
+
         .service-link {
             color: #000000 !important;
             box-shadow: 0 0 1px rgba(255, 255, 255, 0.5) !important;
@@ -292,7 +292,7 @@
         ?>
 
         @include('frontEnd.layouts.slider')
-        {{--        @include('frontEnd.homepage.row1')--}}
+        @include('frontEnd.homepage.row1')
         @if(!empty($categoryWithSpeciality))
             <section class="our-services py-5">
                 <div class="container">
@@ -323,7 +323,7 @@
                                 $category_link_url = Helper::categoryURL($speciality->id);
                             }
                             ?>
-                            <div class="col-md-3 item" style="width: 250px !important;">
+                            <div class="col-md-3 item" style="width: 100% !important;">
                                 <div class="service-card p-3 text-center" style="height: 250px !important;">
                                     <!-- Background Image for Hover -->
                                     <div class="background-hover"
@@ -335,7 +335,8 @@
                                             <img src="{{ $categoryThumbnail }}" alt="{{ $title }}">
                                         </div>
                                         <div class="mt-auto">
-                                            <a href="{{ $category_link_url }}" class="service-link" style="font-weight: bold; font-size: 18px;">{{ $title }}</a>
+                                            <a href="{{ $category_link_url }}" class="service-link"
+                                               style="font-weight: bold; font-size: 18px;">{{ $title }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -361,6 +362,7 @@
 
                                 $video_link_url = Helper::topicURL($product->id);
                                 ?>
+                                @include('frontEnd.layouts.banners',["BannersSettingsId"=>6])
                                 <div class="item">
                                     <img src="{{ URL::to('uploads/topics/'.$product->photo_file) }}" loading="lazy"
                                          class="d-block" alt="{{ $title }}">
@@ -386,6 +388,7 @@
 
                                     $video_link_url = Helper::topicURL($video->id);
                                     ?>
+                                    @include('frontEnd.layouts.banners',["BannersSettingsId"=>5])
                                     <div class="item">
                                         @if($video->video_type ==1)
                                             <?php
@@ -395,7 +398,7 @@
                                                 {{-- Youtube Video --}}
                                                 <div class="video-container">
                                                     <iframe allowfullscreen
-                                                            src="https://www.youtube.com/embed/{{ $Youtube_id }}?autoplay=1&mute=1"
+                                                            src="https://www.youtube.com/embed/{{ $Youtube_id }}?mute=1"
                                                             allow="autoplay">
                                                     </iframe>
                                                 </div>
@@ -421,7 +424,7 @@
                                             </div>
 
                                         @else
-                                            <video class="video-js" controls autoplay preload="auto" width="100%"
+                                            <video class="video-js" controls preload="auto" width="100%"
                                                    height="500"
                                                    poster="{{ URL::to('uploads/topics/'.$video->photo_file) }}"
                                                    data-setup="{}">
@@ -448,74 +451,12 @@
             </div>
         </div>
 
-        <div class="container my-5">
-            <div class="container my-5">
-                @foreach($news as $index => $new)
-                    @if($index == 0)
-                        <?php
-                        if ($new->$title_var != "") {
-                            $title = $new->$title_var;
-                        } else {
-                            $title = $new->$title_var2;
-                        }
-                        $newsImage = !empty($new->photo_file) ? URL::to('uploads/topics/' . $new->photo_file) : URL::to('uploads/topics/default.png');
-                        $newsDate = Helper::formatDate($new->date);
-                        ?>
-                    @endif
-                @endforeach
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="news-card">
-                            <div class="position-relative">
-                                <img src="{{ $newsImage }}"
-                                     style="height:400px; width:100%" alt="{{ $title }}"
-                                     class="img-fluid news-image">
-                            </div>
-                            <div class="news-content">
-                                <h4>{{ $title }}</h4>
-                                <p class="text-muted">{{ $newsDate }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="news-list">
-                            @if(count($news) > 0)
-                                @foreach($news as $index => $new)
-                                    @if($index > 0)
-                                        <?php
-                                        if ($new->$title_var != "") {
-                                            $title = $new->$title_var;
-                                        } else {
-                                            $title = $new->$title_var2;
-                                        }
-                                        $newsImage = !empty($new->photo_file) ? URL::to('uploads/topics/' . $new->photo_file) : URL::to('uploads/topics/default.png');
-
-                                        $topic_link_url = Helper::topicURL($new->id);
-                                        ?>
-                                        <div class="news-list-item d-flex mb-4">
-                                            {{--<img src="{{ $newsImage }}"--}}
-                                            {{--style="height: 120px !important; width: 120px !important;"--}}
-                                            {{--alt="{{ $title }}" class="mr-3">--}}
-                                            <div style="margin-left: 5px;">
-                                                <h6>{{ $title }}</h6>
-                                                <p class="text-muted mb-0">{{ Helper::formatDate($new->date) }}</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{--@include('frontEnd.homepage.row2')--}}
-        {{--@include('frontEnd.homepage.row3')--}}
-        {{--        @include('frontEnd.homepage.row4')--}}
-        {{--        @include('frontEnd.homepage.row5')--}}
-        {{--@include('frontEnd.homepage.row6')--}}
-        {{--@include('frontEnd.homepage.row7')--}}
+        @include('frontEnd.homepage.row2')
+        @include('frontEnd.homepage.row3')
+        @include('frontEnd.homepage.row4')
+        @include('frontEnd.homepage.row5')
+        @include('frontEnd.homepage.row6')
+        @include('frontEnd.homepage.row7')
 
     </div>
 @endsection
@@ -611,26 +552,30 @@
         });
 
         $('#productCarousel').owlCarousel({
-            loop: true,
-            // nav:true,
-            margin: 0,
+            items: 1, // Number of items shown
+            loop: true, // Enables infinite looping
+            margin: 10, // Margin between items
+            nav: true, // Show next/prev buttons
+            dots: true, // Show pagination dots
+            autoplay: true, // Auto start the carousel
+            autoplayTimeout: 5000, // Duration for each slide
+            autoplayHoverPause: true, // Pause on hover
+            smartSpeed: 1000, // Speed of transition
+            fluidSpeed: true, // Adjust speed to match distance
             responsive: {
                 0: {
-                    items: 1
+                    items: 1 // Items for small screens
                 },
                 600: {
-                    items: 1
+                    items: 1 // Items for medium screens
                 },
                 960: {
-                    items: 1
+                    items: 1 // Items for large screens
                 },
                 1200: {
-                    items: 1
+                    items: 1 // Items for extra-large screens
                 }
             },
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
             navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             slideBy: 1, // Number of items to slide
             rewind: true, // Rewind to the first slide
@@ -655,27 +600,31 @@
             navSpeed: 800, // Speed of navigation buttons
             dotsSpeed: 800, // Speed of pagination dots
         });
+
         $('#videoCarousel').owlCarousel({
-            loop: true,
-            // nav:true,
-            margin: 0,
+            loop: true, // Enables infinite looping
+            margin: 10, // Margin between items
+            nav: true, // Show next/prev buttons
+            dots: true, // Show pagination dots
+            autoplay: true, // Auto start the carousel
+            autoplayTimeout: 3600000, // Duration for each slide
+            autoplayHoverPause: true, // Pause on hover
+            smartSpeed: 1000, // Speed of transition
+            fluidSpeed: true, // Adjust speed to match distance
             responsive: {
                 0: {
-                    items: 1
+                    items: 1 // Items for small screens
                 },
                 600: {
-                    items: 1
+                    items: 1 // Items for medium screens
                 },
                 960: {
-                    items: 1
+                    items: 1 // Items for large screens
                 },
                 1200: {
-                    items: 1
+                    items: 1 // Items for extra-large screens
                 }
             },
-            autoplay: true,
-            autoplayTimeout: 3600000,
-            autoplayHoverPause: true,
             navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
             slideBy: 1, // Number of items to slide
             rewind: true, // Rewind to the first slide
@@ -700,6 +649,7 @@
             navSpeed: 800, // Speed of navigation buttons
             dotsSpeed: 800, // Speed of pagination dots
         });
+
         $(window).resize(function () {
             manageBannersOnScreenChange();
         });

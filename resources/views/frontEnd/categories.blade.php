@@ -29,7 +29,7 @@
                 } else {
                     $category_title = @$CurrentCategory->$title_var2;
                 }
-                 if (@$CurrentCategory->$description_var != "") {
+                if (@$CurrentCategory->$description_var != "") {
                     $categoryDescription = @$CurrentCategory->$description_var;
                 } else {
                     $categoryDescription = @$CurrentCategory->$description_var2;
@@ -57,7 +57,7 @@
                             <li class="active">{!! __("backend.search") !!}</li>
                         @elseif($webmaster_section_title !="")
                             <li class="active">
-                                <a href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{{ $page_title }}</a>
+                                <a href="{{ Helper::sectionURL(@$WebmasterSection->id) }}">{{ $webmaster_section_title }}</a>
                             </li>
                         @elseif(@$search_word!="")
                             <li class="active">{{ @$search_word }}</li>
@@ -91,15 +91,13 @@
                     <div
                         class="col-lg-{{(@count($Categories)>1)? "12":"12"}} col-md-{{(@count($Categories)>1)? "12":"12"}} col-sm-12 col-xs-12">
                         @if(!empty($categoryDescription))
-                        <div class="p-5">
                             <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
-                        </div>
                         @endif
                         @if(@count($Categories) == 0)
-                        <div class="p-5 card text-center no-data">
-                            <i class="fa fa-desktop fa-5x opacity-50"></i>
-                            <h5 class="mt-3 text-muted">{{ __('frontend.noData') }}</h5>
-                        </div>
+                            <div class="p-5 card text-center no-data">
+                                <i class="fa fa-desktop fa-5x opacity-50"></i>
+                                <h5 class="mt-3 text-muted">{{ __('frontend.noData') }}</h5>
+                            </div>
                         @else
                             <div class="row">
                                 @if(@count($Categories) > 0)
@@ -125,9 +123,9 @@
                                         } else {
                                             $details = $details_var2;
                                         }
-                                        $categoryThumbnail = !empty($category->thumbnail) ? URL::to('uploads/sections/'.$category->thumbnail) : '';
-                                        if(empty($categoryThumbnail)) {
-                                            $categoryThumbnail = !empty($category->photo) ? URL::to('uploads/sections/'.$category->photo) : '';
+                                        $categoryThumbnail = !empty($category->thumbnail) ? URL::to('uploads/sections/' . $category->thumbnail) : '';
+                                        if (empty($categoryThumbnail)) {
+                                            $categoryThumbnail = !empty($category->photo) ? URL::to('uploads/sections/' . $category->photo) : '';
                                         }
 
                                         $category_link_url = Helper::categoryURL($category->id);
@@ -137,7 +135,8 @@
                                                 <div class="card post-card pa-0 mb-4">
                                                     {{--video--}}
                                                     <a href="{{ $category_link_url }}">
-                                                        <div class="image-container position-relative" style="height: 200px; width: inherit;">
+                                                        <div class="image-container position-relative"
+                                                             style="height: 200px; width: inherit;">
                                                             <img class="card-img-top" loading="lazy" width="100%"
                                                                  height="100%"
                                                                  src="{{ !empty($categoryThumbnail) ? $categoryThumbnail : URL::to('uploads/sections/default.png') }}"
@@ -154,12 +153,12 @@
                                                             </h3>
                                                         </a>
 
-                                                        <!--@if(strip_tags($category->$details) !="")-->
+                                                    <!--@if(strip_tags($category->$details) !="")-->
                                                         <!--    <p class="card-text mb-0 mt-2">-->
-                                                        <!--        {!! mb_substr(strip_tags($category->$details),0, 180)."..." !!}-->
+                                                    <!--        {!! mb_substr(strip_tags($category->$details),0, 180)."..." !!}-->
                                                         <!--        <a-->
-                                                        <!--            href="{{ $category_link_url }}"-->
-                                                        <!--            class="read-more-link">{{ __("frontend.moreDetails") }}</a>-->
+                                                    <!--            href="{{ $category_link_url }}"-->
+                                                    <!--            class="read-more-link">{{ __("frontend.moreDetails") }}</a>-->
                                                         <!--    </p>-->
                                                         <!--@endif-->
                                                     </div>

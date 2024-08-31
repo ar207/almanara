@@ -102,9 +102,7 @@
                             $description = "description_" . @Helper::currentLanguage()->code;
                         @endphp
                         @if(!empty($categoryDescription))
-                            <div class="p-5">
-                                <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
-                            </div>
+                            <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
                         @endif
                         @if($Topics->total() == 0)
                             <div class="p-5 card text-center no-data">
@@ -163,12 +161,12 @@
                                     {!! $Topics->appends($_GET)->links() !!}
                                 </div>
                                 {{--<div class="col-lg-4 text-end">--}}
-                                    {{--<h5 style="padding-top: 18px"><span--}}
-                                            {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
-                                        {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
-                                    {{--<!--{{ __('backend.of') }}-->--}}
-                                    {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
-                                    {{--</h5>--}}
+                                {{--<h5 style="padding-top: 18px"><span--}}
+                                {{--class="badge bg-primary">{{ $Topics->firstItem() }}</span>--}}
+                                {{--- <span class="badge bg-primary">{{ $Topics->lastItem() }}</span>--}}
+                                {{--<!--{{ __('backend.of') }}-->--}}
+                                {{--<!--( {{ $Topics->total()  }} ) {{ __('backend.records') }}-->--}}
+                                {{--</h5>--}}
                                 {{--</div>--}}
                             </div>
                         @endif

@@ -427,6 +427,7 @@ class HomeController extends Controller
                     } else {
                         $currentSpeciality = $speciality->$cf_details_var2;
                     }
+                    $meta_tags["title"] = $currentSpeciality;
                 }
             }
 
