@@ -110,28 +110,28 @@ class Helper
             ->where('status', 1)
             ->orderBy('row_no', 'asc')
             ->get();
-
-        // Merge products with banners if $isProduct flag is set to 1
-        if ($isProduct) {
-            $products = Topic::query()
-                ->where('webmaster_id', '=', 8)
-                ->where('status', 1)
-                ->orderBy('id', 'desc')
-                ->take(10)
-                ->get();
-            $banners = $banners->merge($products);
-        }
-
-        // Merge videos with banners if $isVideo flag is set to 1
-        if ($isVideo) {
-            $videos = Topic::query()
-                ->where('webmaster_id', '=', 5)
-                ->where('status', 1)
-                ->orderBy('id', 'desc')
-                ->take(5)
-                ->get();
-            $banners = $banners->merge($videos);
-        }
+//
+//        // Merge products with banners if $isProduct flag is set to 1
+//        if ($isProduct) {
+//            $products = Topic::query()
+//                ->where('webmaster_id', '=', 8)
+//                ->where('status', 1)
+//                ->orderBy('id', 'desc')
+//                ->take(10)
+//                ->get();
+//            $banners = $banners->merge($products);
+//        }
+//
+//        // Merge videos with banners if $isVideo flag is set to 1
+//        if ($isVideo) {
+//            $videos = Topic::query()
+//                ->where('webmaster_id', '=', 5)
+//                ->where('status', 1)
+//                ->orderBy('id', 'desc')
+//                ->take(5)
+//                ->get();
+//            $banners = $banners->merge($videos);
+//        }
 
         return $banners;
     }
