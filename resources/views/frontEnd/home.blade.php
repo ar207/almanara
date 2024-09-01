@@ -67,6 +67,7 @@
         @media (max-width: 600px) {
             .news-image {
                 width: 400px !important;
+                max-width: 400px !important;
             }
         }
 
