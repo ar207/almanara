@@ -16,7 +16,7 @@
     src="{{ URL::asset('assets/frontend/vendor/owl-carousel/owl.carousel.js') }}?v={{ Helper::system_version() }}"></script>
 
 <!-- Template Main JS File -->
-<script src="{{ URL::asset('assets/frontend/js/main.js') }}?v={{ \Carbon\Carbon::now()->toDateString() }}"></script>
+<script src="{{ URL::asset('assets/frontend/js/main.js') }}?v={{ date('YmdHis') }}"></script>
 
 {{--ajax subscribe to news letter--}}
 @if(Helper::GeneralSiteSettings("style_subscribe"))
