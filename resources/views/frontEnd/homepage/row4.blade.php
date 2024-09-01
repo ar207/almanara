@@ -35,9 +35,6 @@ if (!empty(count($products)) && empty(count($videos))) {
                                             @endif
                                             loading="lazy"
                                             class="d-block" alt="{{ $title }}">
-                                        <div class="product-details">
-                                            <h5>{{ $title }}</h5>
-                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -111,9 +108,6 @@ if (!empty(count($products)) && empty(count($videos))) {
                                                 </p>
                                             </video>
                                         @endif
-                                        <div class="product-details">
-                                            <h5>{{ $title }}</h5>
-                                        </div>
                                     </div>
                                 </div>
                             @endforeach
