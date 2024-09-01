@@ -85,54 +85,6 @@
             1200: {slidesPerView: 6, spaceBetween: 0}
         }
     });
-    new Swiper(".specializations-slider", {
-        speed: 600,
-        loop: !0,
-        autoplay: {
-            delay: 5000,               // Set delay to 5000 milliseconds (5 seconds)
-            disableOnInteraction: false // Do not disable autoplay on interaction
-        },
-        slidesPerView: "auto",
-        breakpoints: {
-            320: {slidesPerView: 1, spaceBetween: 0},
-            400: {slidesPerView: 2, spaceBetween: 0},
-            800: {slidesPerView: 4, spaceBetween: 0},
-            1e3: {slidesPerView: 4, spaceBetween: 0},
-            1200: {slidesPerView: 4, spaceBetween: 0}
-        }
-    });
-    new Swiper(".products-slider", {
-        speed: 600,
-        loop: !0,
-        autoplay: {
-            delay: 5000,               // Set delay to 5000 milliseconds (5 seconds)
-            disableOnInteraction: false // Do not disable autoplay on interaction
-        },
-        slidesPerView: "auto",
-        breakpoints: {
-            320: {slidesPerView: 1, spaceBetween: 0},
-            400: {slidesPerView: 1, spaceBetween: 0},
-            800: {slidesPerView: 1, spaceBetween: 0},
-            1e3: {slidesPerView: 1, spaceBetween: 0},
-            1200: {slidesPerView: 1, spaceBetween: 0}
-        }
-    });
-    new Swiper(".videos-slider", {
-        speed: 600,
-        loop: !0,
-        autoplay: {
-            delay: 3600000,               // Set delay to 5000 milliseconds (5 seconds)
-            disableOnInteraction: false // Do not disable autoplay on interaction
-        },
-        slidesPerView: "auto",
-        breakpoints: {
-            320: {slidesPerView: 1, spaceBetween: 0},
-            400: {slidesPerView: 1, spaceBetween: 0},
-            800: {slidesPerView: 1, spaceBetween: 0},
-            1e3: {slidesPerView: 1, spaceBetween: 0},
-            1200: {slidesPerView: 1, spaceBetween: 0}
-        }
-    });
     var v = !1;
     v = "rtl" == page_dir, $("#owl-slider").owlCarousel({
         items: 3,
