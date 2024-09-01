@@ -76,7 +76,7 @@ class HomeController extends Controller
 
         if ($part1 == "") {
             $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
-            $categoryWithSpeciality = Section::query()->where('webmaster_id', '=', 8)->where('status', 1)->where('father_id', '=', '0')->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+            $categoryWithSpeciality = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('status', 1)->where('father_id', '=', '0')->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
             // home page
             $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
