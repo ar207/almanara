@@ -1,6 +1,13 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
+    <style>
+        @media (max-width: 768px) {
+            .text-size-mb {
+                font-size: 14px !important;
+            }
+        }
+    </style>
     <div>
         <?php
         $title_var = "title_" . @Helper::currentLanguage()->code;
@@ -102,7 +109,7 @@
                             $description = "description_" . @Helper::currentLanguage()->code;
                         @endphp
                         @if(!empty($categoryDescription))
-                            <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
+                            <h5 class="mt-3 text-muted text-size-mb">{!! $categoryDescription !!}</h5>
                         @endif
                         @if($Topics->total() == 0)
                             <div class="p-5 card text-center no-data">

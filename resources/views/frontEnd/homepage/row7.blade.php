@@ -49,14 +49,14 @@ $HomePartners = Helper::Topics(Helper::GeneralWebmasterSettings("home_content3_s
                                         <img
                                             src="{{ URL::to('uploads/topics/'.$HomePartner->photo_file) }}"
                                             data-bs-toggle="tooltip"
-                                            data-bs-placement="bottom" title="{{ $title }}" width="100%" height="100%"  loading="lazy"
+                                            data-bs-placement="bottom" title="{{ $title }}" width="200px" height="200px"  loading="lazy"
                                             alt="{{ $title }}">
                                     </a>
                                 @else
                                     <img
                                         src="{{ URL::to('uploads/topics/'.$HomePartner->photo_file) }}"
                                         data-bs-toggle="tooltip"
-                                        data-bs-placement="bottom" title="{{ $title }}"  width="100%" height="100%"  loading="lazy"
+                                        data-bs-placement="bottom" title="{{ $title }}"  width="200px" height="200px"  loading="lazy"
                                         alt="{{ $title }}">
                                 @endif
                             </div>

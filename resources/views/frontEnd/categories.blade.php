@@ -1,6 +1,13 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
+    <style>
+        @media (max-width: 768px) {
+            .text-size-mb {
+                font-size: 14px !important;
+            }
+        }
+    </style>
     <div>
         <?php
         $title_var = "title_" . @Helper::currentLanguage()->code;
@@ -91,7 +98,7 @@
                     <div
                         class="col-lg-{{(@count($Categories)>1)? "12":"12"}} col-md-{{(@count($Categories)>1)? "12":"12"}} col-sm-12 col-xs-12">
                         @if(!empty($categoryDescription))
-                            <h5 class="mt-3 text-muted">{!! $categoryDescription !!}</h5>
+                            <h5 class="mt-3 text-muted text-size-mb">{!! $categoryDescription !!}</h5>
                         @endif
                         @if(@count($Categories) == 0)
                             <div class="p-5 card text-center no-data">

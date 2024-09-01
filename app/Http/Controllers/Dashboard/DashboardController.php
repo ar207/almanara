@@ -68,8 +68,8 @@ class DashboardController extends Controller
         }
         // Analytics
         $monthlyVisitors = AnalyticsVisitor::query()
-            ->whereMonth('date', Carbon::now()->month) // Current month
-            ->whereYear('date', Carbon::now()->year)   // Current year
+            ->whereMonth('date', Carbon::now()->month)// Current month
+            ->whereYear('date', Carbon::now()->year)// Current year
             ->count();
 
         $weeklyVisitors = AnalyticsVisitor::query()
@@ -80,8 +80,10 @@ class DashboardController extends Controller
             ->count();
 
         $TodayVisitors = AnalyticsVisitor::query()
-            ->whereDate('date', Carbon::today()) // Current date
+            ->whereDate('date', Carbon::today())// Current date
             ->count();
+
+        $totalVisitors = AnalyticsVisitor::query()->count();
         $TodayPages = AnalyticsPage::query()->where('date', date('Y-m-d'))->count();
 
         // Last 7 Days
@@ -247,10 +249,31 @@ class DashboardController extends Controller
             $TodayVisitorsRate = $TodayVisitorsRate . $fsla . "[$ii,$TotalV]";
         }
 
+        $mostVisitedProducts = $this->getMostVisitedTopics(8);
+        $mostVisitedVideos = $this->getMostVisitedTopics(5);
+        $mostVisitedNews = $this->getMostVisitedTopics(3);
+
         return view('dashboard.home',
             compact("GeneralWebmasterSections", "Webmails", "Events", "Contacts", "TodayVisitors", "TodayPages",
-                "Last7DaysVisitors", "TodayByCountry", "TodayByBrowser1", "TodayByBrowser1_val", "TodayByBrowser2",
-                "TodayByBrowser2_val", "TodayVisitorsRate", "monthlyVisitors", "weeklyVisitors"));
+                "Last7DaysVisitors", "TodayByCountry", "TodayByBrowser1", "TodayByBrowser1_val", "TodayByBrowser2", "totalVisitors",
+                "TodayByBrowser2_val", "TodayVisitorsRate", "monthlyVisitors", "weeklyVisitors", "mostVisitedProducts", "mostVisitedVideos", "mostVisitedNews"));
+    }
+
+    /**
+     * Get the most visited topics based on webmaster ID.
+     *
+     * @param int $webmasterId The ID of the webmaster to filter topics.
+     * @param int $limit The number of topics to retrieve. Default is 5.
+     * @return \Illuminate\Database\Eloquent\Collection The collection of most visited topics.
+     */
+    private function getMostVisitedTopics($webmasterId, $limit = 5)
+    {
+        return Topic::query()
+            ->where('webmaster_id', $webmasterId)
+            ->where('status', 1)
+            ->orderBy('visits', 'desc')
+            ->take($limit)
+            ->get();
     }
 
     /**

@@ -1,67 +1,127 @@
 <?php
-$HomePhotosLimit = 12; ; // 0 = all
-$HomePhotos = Helper::Topics(Helper::GeneralWebmasterSettings("home_content2_section_id"), 0, $HomePhotosLimit, 1);
+// Get banners list array by settings ID (You can get settings ID from Webmaster >> Banners settings)
+$videos = Helper::BannersList(5, 0, 1);
+$products = Helper::BannersList(6, 1, 0);
+$colClass = 'col-sm-6 col-12';
+if (!empty(count($videos)) && empty(count($products))) {
+    $colClass = 'col-12';
+}
+if (!empty(count($products)) && empty(count($videos))) {
+    $colClass = 'col-12';
+}
 ?>
-@if(count($HomePhotos)>0)
-    <section id="gallery" class="gallery">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>{{ __('frontend.homeContents2Title') }}</h2>
-                <p>{{ __('frontend.homeContents2desc') }}</p>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="row g-0 mb-2">
-                <?php
-                $section_url = "";
-                $ph_count = 0;
-                ?>
-                @foreach($HomePhotos as $HomePhoto)
-                    <?php
-                    if ($HomePhoto->$title_var != "") {
-                        $title = $HomePhoto->$title_var;
-                    } else {
-                        $title = $HomePhoto->$title_var2;
-                    }
-
-                    if ($section_url == "") {
-                        $section_url = Helper::sectionURL($HomePhoto->webmaster_id);
-                    }
-                    ?>
-                    @foreach($HomePhoto->photos as $photo)
-                        @if($ph_count<$HomePhotosLimit)
-                            <div class="col-lg-3 col-md-4">
-                                <div class="gallery-item">
-                                    <a href="{{ URL::to('uploads/topics/'.$photo->file) }}"
-                                       class="galelry-lightbox" title="{{ $title }}">
-                                        <img src="{{ URL::to('uploads/topics/'.$photo->file) }}" width="100%" height="210"  loading="lazy"
-                                             alt="{{ $title }}" class="img-fluid">
-                                    </a>
+@if(count($products) > 0 || count($videos) > 0)
+    <div class="container my-5 section-background">
+        <div class="row">
+            @if(!empty(count($products)))
+                <div class="{{ $colClass }}">
+                    <div class="products-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                        <div class="swiper-wrapper">
+                            @foreach($products as $key => $product)
+                                <?php
+                                if ($product->$title_var != "") {
+                                    $title = $product->$title_var;
+                                } else {
+                                    $title = $product->$title_var2;
+                                }
+                                ?>
+                                <div class="swiper-slide">
+                                    <div class="product-slider">
+                                        <img
+                                            @if(!empty($product->photo_file))
+                                            src="{{ URL::to('uploads/topics/'.$product->photo_file) }}"
+                                            @elseif(!empty($product->$file_var))
+                                            src="{{ URL::to('uploads/banners/'.$product->$file_var) }}"
+                                            @endif
+                                            loading="lazy"
+                                            class="d-block" alt="{{ $title }}">
+                                        <div class="product-details">
+                                            <h5>{{ $title }}</h5>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @else
-                            @break
-                        @endif
-                        <?php
-                        $ph_count++;
-                        ?>
-                    @endforeach
-                @endforeach
-
-            </div>
-            <div class="row mt-3">
-                <div class="col-lg-12">
-                    <div class="more-btn">
-                        <a href="{{ url($section_url) }}" class="btn btn-theme"><i
-                                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                            &nbsp;<i
-                                class="fa fa-angle-right"></i></a>
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-@endif
+            @endif
+            @if(!empty(count($videos)))
+                <div class="{{ $colClass }}">
+                    <div class="videos-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                        <div class="swiper-wrapper">
+                            @foreach($videos as $key => $video)
+                                <?php
+                                if ($video->$title_var != "") {
+                                    $title = $video->$title_var;
+                                } else {
+                                    $title = $video->$title_var2;
+                                }
+                                ?>
+                                <div class="swiper-slide">
+                                    <div class="product-slider">
+                                        @if($video->video_type ==1)
+                                            <?php
+                                            $Youtube_id = Helper::Get_youtube_video_id(!empty($video->video_file) ? $video->video_file : $video->youtube_link);
+                                            ?>
+                                            @if($Youtube_id !="")
+                                                {{-- Youtube Video --}}
+                                                <iframe allowfullscreen
+                                                        src="https://www.youtube.com/embed/{{ $Youtube_id }}?mute=1"
+                                                        allow="autoplay">
+                                                </iframe>
+                                            @endif
+                                        @elseif($video->video_type ==2)
+                                            <?php
+                                            $Vimeo_id = Helper::Get_vimeo_video_id(!empty($video->video_file) ? $video->video_file : $video->youtube_link);
+                                            ?>
+                                            @if($Vimeo_id !="")
+                                                {{-- Vimeo Video --}}
+                                                <iframe allowfullscreen
+                                                        src="https://player.vimeo.com/video/{{ $Vimeo_id }}?title=0&amp;byline=0"
+                                                        allow="autoplay">
+                                                </iframe>
+                                            @endif
 
+                                        @elseif($video->video_type ==3)
+                                            {{-- Embed Video --}}
+                                            {!! $video->video_file !!}
+                                        @else
+                                            <video class="video-js" controls preload="auto" width="100%"
+                                                   style="border-radius: 10px"
+                                                   height="500"
+                                                   @if(!empty($video->photo_file)) poster="{{ URL::to('uploads/topics/'.$video->photo_file) }}"
+                                                   @endif
+                                                   data-setup="{}">
+                                                <source
+                                                    @if(!empty($video->video_file))
+                                                    src="{{ URL::to('uploads/topics/'.$video->video_file) }}"
+                                                    @elseif(!empty($video->$file_var))
+                                                    src="{{ URL::to('uploads/banners/'.$video->$file_var) }}"
+                                                    @endif
+                                                    type="video/mp4"/>
+                                                <p class="vjs-no-js">
+                                                    To view this video please enable JavaScript, and consider
+                                                    upgrading
+                                                    to a
+                                                    web browser that
+                                                    <a href="https://videojs.com/html5-video-support/"
+                                                       target="_blank">supports
+                                                        HTML5 video</a>
+                                                </p>
+                                            </video>
+                                        @endif
+                                        <div class="product-details">
+                                            <h5>{{ $title }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+@endif

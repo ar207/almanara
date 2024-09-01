@@ -94,9 +94,46 @@ class Helper
         return count($Webmails);
     }
 
-    static function BannersList($BannersSettingsId)
+    /**
+     * Retrieve and merge banners, products, or videos based on the provided settings.
+     *
+     * @param int $BannersSettingsId The ID of the banners section settings.
+     * @param int $isProduct Flag to determine if products should be merged (1 for yes, 0 for no).
+     * @param int $isVideo Flag to determine if videos should be merged (1 for yes, 0 for no).
+     * @return \Illuminate\Support\Collection Merged collection of banners, products, or videos.
+     */
+    static function BannersList($BannersSettingsId, $isProduct = 0, $isVideo = 0)
     {
-        return Banner::where('section_id', $BannersSettingsId)->where('status', 1)->orderby('row_no', 'asc')->get();
+        // Retrieve banners based on section ID and active status, ordered by row number
+        $banners = Banner::query()
+            ->where('section_id', $BannersSettingsId)
+            ->where('status', 1)
+            ->orderBy('row_no', 'asc')
+            ->get();
+
+        // Merge products with banners if $isProduct flag is set to 1
+        if ($isProduct) {
+            $products = Topic::query()
+                ->where('webmaster_id', '=', 8)
+                ->where('status', 1)
+                ->orderBy('id', 'desc')
+                ->take(10)
+                ->get();
+            $banners = $banners->merge($products);
+        }
+
+        // Merge videos with banners if $isVideo flag is set to 1
+        if ($isVideo) {
+            $videos = Topic::query()
+                ->where('webmaster_id', '=', 5)
+                ->where('status', 1)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+            $banners = $banners->merge($videos);
+        }
+
+        return $banners;
     }
 
     static function MenuList($GroupId)
@@ -988,22 +1025,29 @@ class Helper
         return Topic::where([['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['expire_date', null]])->find($id);
     }
 
-    static function Topics($SectionId, $CatId = 0, $limit = 12, $random = 0)
+    static function Topics($SectionId, $CatId = 0, $limit = 12, $random = 0, $isCategoryWithSpecialties = 0, $isNews = 0)
     {
         try {
-            $Topics = Topic::where([['status', 1], ['webmaster_id', $SectionId], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $SectionId], ['expire_date', null]]);
+            $Topics = Topic::query()->where([['status', 1], ['webmaster_id', $SectionId], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['status', 1], ['webmaster_id', $SectionId], ['expire_date', null]]);
             if ($CatId > 0) {
-                $Topics = $Topics->whereIn("id", TopicCategory::where('section_id', $CatId)->pluck("topic_id")->toarray());
+                $Topics = $Topics->whereIn("id", TopicCategory::query()->where('section_id', $CatId)->pluck("topic_id")->toarray());
             }
             if ($random) {
                 $Topics = $Topics->inRandomOrder();
             } else {
-                $Topics = $Topics->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'));
+                if (!empty($isNews)) {
+                    $Topics = $Topics->orderby('date', 'desc');
+                } else {
+                    $Topics = $Topics->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'));
+                }
             }
             if ($limit > 0) {
                 $Topics = $Topics->limit($limit);
             }
             $Topics = $Topics->get();
+            if (!empty($isCategoryWithSpecialties)) {
+                $Topics = Section::query()->where('webmaster_id', '=', 8)->where('status', 1)->where('father_id', '=', '0')->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+            }
         } catch (\Exception $e) {
             $Topics = [];
         }

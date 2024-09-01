@@ -77,6 +77,7 @@ return [
     'homeFAQDesc' => 'Find clear answers to common questions and past inquiries, Clear answers to common curiosities.',
     'cookiesAcceptMessage' => 'By using this website you accept our cookies and agree to our privacy policy, including cookie policy.',
     'cookiesAcceptBtn' => 'Accept Cookies',
+    'productCategories' => 'Product Categories',
 
 ];
 ?>

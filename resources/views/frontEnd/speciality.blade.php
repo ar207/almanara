@@ -1,6 +1,13 @@
 @extends('frontEnd.layouts.master')
 
 @section('content')
+    <style>
+        @media (max-width: 768px) {
+            .text-size-mb {
+                font-size: 14px !important;
+            }
+        }
+    </style>
     <div>
         <?php
         $title_var = "title_" . @Helper::currentLanguage()->code;
@@ -60,7 +67,7 @@
                             <li class="active">{{ $User->name }}</li>
                         @endif
                         @if(!empty($currentSpeciality))
-                            
+
                         @endif
                     </ol>
                 </div>
@@ -148,9 +155,7 @@
                 @else
                     @if(!empty($speciality))
                         @if(!empty($specialityDescription))
-                            <div class="p-5">
-                                <h5 class="mt-3 text-muted">{!! $specialityDescription !!}</h5>
-                            </div>
+                            <h5 class="mt-3 text-muted text-size-mb">{!! $specialityDescription !!}</h5>
                         @endif
                     @endif
                     @if($Topics->total() == 0)

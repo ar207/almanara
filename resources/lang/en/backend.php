@@ -730,5 +730,8 @@ return array(
     'headerSearch' => 'Header search',
     'cookieAcceptMessage' => 'Cookies policy notification',
     'tiktok' => 'Tiktok',
+    'mostVisitedProducts' => 'Most visited products',
+    'mostVisitedVideos' => 'Most visited videos',
+    'mostVisitedNews' => 'Most visited news',
 
 );

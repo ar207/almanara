@@ -731,5 +731,8 @@ return array(
     'headerSearch' => 'مربع البحث بالهيدر',
     'cookieAcceptMessage' => 'إشعار سياسة ملفات تعريف الارتباط',
     'tiktok' => 'تيك توك',
+    'mostVisitedProducts' => 'المنتجات الأكثر زيارة',
+    'mostVisitedVideos' => 'الفيديوهات الأكثر زيارة',
+    'mostVisitedNews' => 'الأخبار الأكثر زيارة',
 
 );

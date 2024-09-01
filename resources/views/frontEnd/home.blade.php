@@ -78,7 +78,7 @@
             font-size: 14px;
         }
 
-        .video-container iframe {
+        .product-slider iframe {
             width: 100%; /* Adjust the width as needed */
             height: 400px; /* Adjust the height as needed */
             border: none; /* Remove border if present */
@@ -119,7 +119,7 @@
         }
 
         .product-slider {
-            margin: 0 auto;
+            width: -webkit-fill-available;
             height: 450px !important;
             position: relative;
         }
@@ -135,6 +135,7 @@
         }
 
         .product-details {
+            text-align: center;
             margin-top: 15px;
         }
 
@@ -152,37 +153,37 @@
             color: #6c757d;
         }
 
-        /* Custom CSS */
+        video {
+            object-fit: cover;
+            height: 400px !important;
+            width: 100%;
+        }
+
+        .our-services h2 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .our-services .text-muted {
+            color: #6c757d;
+        }
+
         .service-card {
+            height: 200px;
             background-color: #ffffff;
             border-radius: 10px;
+            border: 1px solid #bcbac4;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, background-image 0.3s ease;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
+            margin: 10px !important;
+            cursor: pointer;
         }
 
         .service-card:hover .background-hover {
             opacity: 1;
-        }
-
-        .service-card img {
-            border-radius: 50%;
-            height: 100px;
-            -o-object-fit: cover;
-            object-fit: cover;
-            width: 100px;
-        }
-
-        .service-card:hover img {
-            background-color: #a3bffa; /* Light blue shade on hover */
         }
 
         .service-card .content {
@@ -204,30 +205,16 @@
             z-index: 1;
         }
 
-        video {
+        .service-card img {
+            border-radius: 50%;
+            height: 100px;
+            -o-object-fit: cover;
             object-fit: cover;
-            height: 400px !important;
-            width: 100%;
+            width: 100px;
         }
 
-        .our-services h2 {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .our-services .text-muted {
-            color: #6c757d;
-        }
-
-        .service-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            border: 1px solid #bcbac4;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, background-image 0.3s ease;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .service-card:hover img {
+            background-color: #a3bffa; /* Light blue shade on hover */
         }
 
         .service-card .content {
@@ -288,172 +275,64 @@
         $title_var2 = "title_" . config('smartend.default_language');
         $details_var = "details_" . @Helper::currentLanguage()->code;
         $details_var2 = "details_" . config('smartend.default_language');
-
+        $file_var = "file_" . @Helper::currentLanguage()->code;
         ?>
 
         @include('frontEnd.layouts.slider')
         @include('frontEnd.homepage.row1')
         @if(!empty($categoryWithSpeciality))
-            <section class="our-services py-5">
+            <section id="specialties" class="specialties">
                 <div class="container">
-                    <div class="text-center mb-4">
-                        <h2 class="text-uppercase">Specialties</h2>
+                    <div class="section-title">
+                        <h2>{{ __('frontend.productCategories') }}</h2>
                     </div>
-                    <div id="servicesCarousel" class="carousel slide owl-carousel">
-                        @foreach($categoryWithSpeciality as $key => $speciality)
-                            <?php
-                            if ($speciality->$title_var != "") {
-                                $title = $speciality->$title_var;
-                            } else {
-                                $title = $speciality->$title_var2;
-                            }
-                            if ($speciality->$details_var != "") {
-                                $details = $details_var;
-                            } else {
-                                $details = $details_var2;
-                            }
-                            $categoryThumbnail = !empty($speciality->thumbnail) ? URL::to('uploads/sections/' . $speciality->thumbnail) : '';
-                            if (empty($categoryThumbnail)) {
-                                $categoryThumbnail = !empty($speciality->photo) ? URL::to('uploads/sections/' . $speciality->photo) : '';
-                            }
-                            $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
-                            $category_link_url = url($checkLocale . 'specialities') . '?speciality_id=' . $speciality->id;
+                    <div class="specializations-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                        <div class="swiper-wrapper">
+                            @foreach($categoryWithSpeciality as $key => $speciality)
+                                <?php
+                                if ($speciality->$title_var != "") {
+                                    $title = $speciality->$title_var;
+                                } else {
+                                    $title = $speciality->$title_var2;
+                                }
+                                $categoryThumbnail = !empty($speciality->thumbnail) ? URL::to('uploads/sections/' . $speciality->thumbnail) : '';
+                                if (empty($categoryThumbnail)) {
+                                    $categoryThumbnail = !empty($speciality->photo) ? URL::to('uploads/sections/' . $speciality->photo) : '';
+                                }
+                                $checkLocale = app()->getLocale() == 'en' ? '' : app()->getLocale() . '/';
+                                $category_link_url = url($checkLocale . 'specialities') . '?speciality_id=' . $speciality->id;
 
-                            if ($speciality['is_speciality'] != 1) {
-                                $category_link_url = Helper::categoryURL($speciality->id);
-                            }
-                            ?>
-                            <div class="col-md-3 item" style="width: 100% !important;">
-                                <div class="service-card p-3 text-center" style="height: 250px !important;">
-                                    <!-- Background Image for Hover -->
-                                    <div class="background-hover"
-                                         style="background-image: url('{{ $categoryThumbnail }}');"></div>
+                                if ($speciality['is_speciality'] != 1) {
+                                    $category_link_url = Helper::categoryURL($speciality->id);
+                                }
+                                ?>
+                                <div class="swiper-slide">
+                                    <div class="service-card p-3 text-center">
+                                        <div class="background-hover"
+                                             style="background-image: url('{{ $categoryThumbnail }}');"></div>
 
-                                    <!-- Content -->
-                                    <div class="content d-flex flex-column justify-content-between h-100">
-                                        <div class="service-icon">
-                                            <img src="{{ $categoryThumbnail }}" alt="{{ $title }}">
-                                        </div>
-                                        <div class="mt-auto">
-                                            <a href="{{ $category_link_url }}" class="service-link"
-                                               style="font-weight: bold; font-size: 18px;">{{ $title }}</a>
+                                        <div class="content d-flex flex-column justify-content-between h-100">
+                                            <div class="service-icon">
+                                                <img src="{{ $categoryThumbnail }}" alt="{{ $title }}">
+                                            </div>
+                                            <div class="mt-auto">
+                                                <a href="{{ $category_link_url }}" class="service-link"
+                                                   style="font-weight: bold; font-size: 18px;">{{ $title }}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </section>
         @endif
 
-        <div class="container my-5 section-background">
-            <div class="row">
-                @if(!empty(count($products)))
-                    <div class="col-sm-6">
-                        <div id="productCarousel" class="owl-carousel carousel slide product-slider">
-                            @foreach($products as $key => $product)
-                                <?php
-                                if ($product->$title_var != "") {
-                                    $title = $product->$title_var;
-                                } else {
-                                    $title = $product->$title_var2;
-                                }
-
-                                $video_link_url = Helper::topicURL($product->id);
-                                ?>
-                                @include('frontEnd.layouts.banners',["BannersSettingsId"=>6])
-                                <div class="item">
-                                    <img src="{{ URL::to('uploads/topics/'.$product->photo_file) }}" loading="lazy"
-                                         class="d-block" alt="{{ $title }}">
-                                    <div class="product-details">
-                                        <h5>{{ $title }}</h5>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-                @if(!empty(count($videos)))
-                    <div class="col-sm-6">
-                        <div id="videoCarousel" class="owl-carousel carousel slide product-slider">
-                            @foreach($videos as $key => $video)
-                                @if(!empty($video->video_file))
-                                    <?php
-                                    if ($video->$title_var != "") {
-                                        $title = $video->$title_var;
-                                    } else {
-                                        $title = $video->$title_var2;
-                                    }
-
-                                    $video_link_url = Helper::topicURL($video->id);
-                                    ?>
-                                    @include('frontEnd.layouts.banners',["BannersSettingsId"=>5])
-                                    <div class="item">
-                                        @if($video->video_type ==1)
-                                            <?php
-                                            $Youtube_id = Helper::Get_youtube_video_id($video->video_file);
-                                            ?>
-                                            @if($Youtube_id !="")
-                                                {{-- Youtube Video --}}
-                                                <div class="video-container">
-                                                    <iframe allowfullscreen
-                                                            src="https://www.youtube.com/embed/{{ $Youtube_id }}?mute=1"
-                                                            allow="autoplay">
-                                                    </iframe>
-                                                </div>
-                                            @endif
-                                        @elseif($video->video_type ==2)
-                                            <?php
-                                            $Vimeo_id = Helper::Get_vimeo_video_id($video->video_file);
-                                            ?>
-                                            @if($Vimeo_id !="")
-                                                {{-- Vimeo Video --}}
-                                                <div class="video-container">
-                                                    <iframe allowfullscreen
-                                                            src="https://player.vimeo.com/video/{{ $Vimeo_id }}?title=0&amp;byline=0"
-                                                            allow="autoplay">
-                                                    </iframe>
-                                                </div>
-                                            @endif
-
-                                        @elseif($video->video_type ==3)
-                                            <div class="video-container">
-                                                {{-- Embed Video --}}
-                                                {!! $video->video_file !!}
-                                            </div>
-
-                                        @else
-                                            <video class="video-js" controls preload="auto" width="100%"
-                                                   height="500"
-                                                   poster="{{ URL::to('uploads/topics/'.$video->photo_file) }}"
-                                                   data-setup="{}">
-                                                <source src="{{ URL::to('uploads/topics/'.$video->video_file) }}"
-                                                        type="video/mp4"/>
-                                                <p class="vjs-no-js">
-                                                    To view this video please enable JavaScript, and consider upgrading
-                                                    to a
-                                                    web browser that
-                                                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports
-                                                        HTML5 video</a>
-                                                </p>
-                                            </video>
-                                        @endif
-                                        <div class="product-details">
-                                            <h5>{{ $title }}</h5>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
-
+        @include('frontEnd.homepage.row4')
         @include('frontEnd.homepage.row2')
         @include('frontEnd.homepage.row3')
-        @include('frontEnd.homepage.row4')
         @include('frontEnd.homepage.row5')
         @include('frontEnd.homepage.row6')
         @include('frontEnd.homepage.row7')
@@ -500,154 +379,6 @@
     <script>
         $(document).ready(function () {
             manageBannersOnScreenChange();
-        });
-        $('#servicesCarousel').owlCarousel({
-            items: 4, // Number of items shown
-            loop: true, // Enables infinite looping
-            margin: 10, // Margin between items
-            nav: true, // Show next/prev buttons
-            dots: true, // Show pagination dots
-            autoplay: true, // Auto start the carousel
-            autoplayTimeout: 5000, // Duration for each slide
-            autoplayHoverPause: true, // Pause on hover
-            smartSpeed: 1000, // Speed of transition
-            fluidSpeed: true, // Adjust speed to match distance
-            responsive: {
-                0: {
-                    items: 1 // Items for small screens
-                },
-                600: {
-                    items: 2 // Items for medium screens
-                },
-                960: {
-                    items: 3 // Items for large screens
-                },
-                1200: {
-                    items: 4 // Items for extra-large screens
-                }
-            },
-            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-            slideBy: 1, // Number of items to slide
-            rewind: true, // Rewind to the first slide
-            autoplaySpeed: 1000, // Speed for autoplay
-            dragEndSpeed: 500, // Speed for drag end
-            lazyLoad: true, // Lazy load images
-            center: true, // Center items
-            URLhashListener: true, // Enable URL Hash navigation
-            startPosition: 'URLHash', // Start position based on URL hash
-            video: true, // Enable video support
-            animateOut: 'fadeOut', // Animation out
-            animateIn: 'fadeIn', // Animation in
-            mouseDrag: true, // Enable mouse drag
-            touchDrag: true, // Enable touch drag
-            pullDrag: true, // Enable pull drag
-            freeDrag: true, // Free drag mode
-            rtl: true, // Right-to-left support
-            autoWidth: false, // Auto width for items
-            autoHeight: false, // Auto height for items
-            responsiveClass: true, // Add 'owl-responsive-X' class to items
-            stagePadding: 0, // Padding on stage (can create space around items)
-            navSpeed: 800, // Speed of navigation buttons
-            dotsSpeed: 800, // Speed of pagination dots
-        });
-
-        $('#productCarousel').owlCarousel({
-            items: 1, // Number of items shown
-            loop: true, // Enables infinite looping
-            margin: 10, // Margin between items
-            nav: true, // Show next/prev buttons
-            dots: true, // Show pagination dots
-            autoplay: true, // Auto start the carousel
-            autoplayTimeout: 5000, // Duration for each slide
-            autoplayHoverPause: true, // Pause on hover
-            smartSpeed: 1000, // Speed of transition
-            fluidSpeed: true, // Adjust speed to match distance
-            responsive: {
-                0: {
-                    items: 1 // Items for small screens
-                },
-                600: {
-                    items: 1 // Items for medium screens
-                },
-                960: {
-                    items: 1 // Items for large screens
-                },
-                1200: {
-                    items: 1 // Items for extra-large screens
-                }
-            },
-            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-            slideBy: 1, // Number of items to slide
-            rewind: true, // Rewind to the first slide
-            autoplaySpeed: 1000, // Speed for autoplay
-            dragEndSpeed: 500, // Speed for drag end
-            lazyLoad: true, // Lazy load images
-            center: true, // Center items
-            URLhashListener: true, // Enable URL Hash navigation
-            startPosition: 'URLHash', // Start position based on URL hash
-            video: true, // Enable video support
-            animateOut: 'fadeOut', // Animation out
-            animateIn: 'fadeIn', // Animation in
-            mouseDrag: true, // Enable mouse drag
-            touchDrag: true, // Enable touch drag
-            pullDrag: true, // Enable pull drag
-            freeDrag: true, // Free drag mode
-            rtl: true, // Right-to-left support
-            autoWidth: false, // Auto width for items
-            autoHeight: false, // Auto height for items
-            responsiveClass: true, // Add 'owl-responsive-X' class to items
-            stagePadding: 0, // Padding on stage (can create space around items)
-            navSpeed: 800, // Speed of navigation buttons
-            dotsSpeed: 800, // Speed of pagination dots
-        });
-
-        $('#videoCarousel').owlCarousel({
-            loop: true, // Enables infinite looping
-            margin: 10, // Margin between items
-            nav: true, // Show next/prev buttons
-            dots: true, // Show pagination dots
-            autoplay: true, // Auto start the carousel
-            autoplayTimeout: 3600000, // Duration for each slide
-            autoplayHoverPause: true, // Pause on hover
-            smartSpeed: 1000, // Speed of transition
-            fluidSpeed: true, // Adjust speed to match distance
-            responsive: {
-                0: {
-                    items: 1 // Items for small screens
-                },
-                600: {
-                    items: 1 // Items for medium screens
-                },
-                960: {
-                    items: 1 // Items for large screens
-                },
-                1200: {
-                    items: 1 // Items for extra-large screens
-                }
-            },
-            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-            slideBy: 1, // Number of items to slide
-            rewind: true, // Rewind to the first slide
-            autoplaySpeed: 1000, // Speed for autoplay
-            dragEndSpeed: 500, // Speed for drag end
-            lazyLoad: true, // Lazy load images
-            center: true, // Center items
-            URLhashListener: true, // Enable URL Hash navigation
-            startPosition: 'URLHash', // Start position based on URL hash
-            video: true, // Enable video support
-            animateOut: 'fadeOut', // Animation out
-            animateIn: 'fadeIn', // Animation in
-            mouseDrag: true, // Enable mouse drag
-            touchDrag: true, // Enable touch drag
-            pullDrag: true, // Enable pull drag
-            freeDrag: true, // Free drag mode
-            rtl: true, // Right-to-left support
-            autoWidth: false, // Auto width for items
-            autoHeight: false, // Auto height for items
-            responsiveClass: true, // Add 'owl-responsive-X' class to items
-            stagePadding: 0, // Padding on stage (can create space around items)
-            navSpeed: 800, // Speed of navigation buttons
-            dotsSpeed: 800, // Speed of pagination dots
         });
 
         $(window).resize(function () {
