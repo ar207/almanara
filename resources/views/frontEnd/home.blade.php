@@ -59,8 +59,15 @@
         }
 
         .news-image {
-            height: 250px;
+            height: 400px;
+            width: 100%;
             object-fit: cover;
+        }
+
+        @media (max-width: 600px) {
+            .news-image {
+                width: 400px !important;
+            }
         }
 
         .news-content {
