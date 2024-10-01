@@ -78,7 +78,7 @@ class HomeController extends Controller
             $CategoriesList = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('father_id', '=', '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->take(4)->get();
             $categoryWithSpeciality = Section::query()->where('webmaster_id', '=', 8)->where('is_speciality', 0)->where('status', 1)->where('father_id', '=', '0')->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
             // home page
-            $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->get();
+            $news = Topic::query()->where('webmaster_id', '=', 3)->where('status', 1)->orderBy('date', 'desc')->take(7)->get();
             $whatsNew = Topic::query()->where('webmaster_id', '=', 15)->where('status', 1)->orderBy('id', 'desc')->first();
             $webMaster = WebmasterSection::query()->where('status', 1)->where('id', 15)->first();
             $videos = Topic::query()->where('webmaster_id', '=', 5)->where('status', 1)->orderBy('id', 'desc')->take(5)->get();

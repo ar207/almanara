@@ -26,7 +26,7 @@ if (!empty(count($products)) && empty(count($videos))) {
                                 }
                                 ?>
                                 <div class="swiper-slide">
-                                    <div class="product-slider">
+                                    <div class="product-slider" style="margin-left: 41px!important;">
                                         <img
                                             @if(!empty($product->photo_file))
                                             src="{{ URL::to('uploads/topics/'.$product->photo_file) }}"
@@ -56,7 +56,7 @@ if (!empty(count($products)) && empty(count($videos))) {
                                 }
                                 ?>
                                 <div class="swiper-slide">
-                                    <div class="product-slider">
+                                    <div class="product-slider" style="margin-left: 45px!important;">
                                         @if($video->video_type ==1)
                                             <?php
                                             $Youtube_id = Helper::Get_youtube_video_id(!empty($video->video_file) ? $video->video_file : $video->youtube_link);

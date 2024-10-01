@@ -414,27 +414,27 @@
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 0},
-                400: {slidesPerView: 1, spaceBetween: 0},
-                800: {slidesPerView: 1, spaceBetween: 0},
-                1e3: {slidesPerView: 1, spaceBetween: 0},
-                1200: {slidesPerView: 1, spaceBetween: 0}
+                320: {slidesPerView: 1, spaceBetween: 14},
+                400: {slidesPerView: 1, spaceBetween: 14},
+                800: {slidesPerView: 1, spaceBetween: 14},
+                1e3: {slidesPerView: 1, spaceBetween: 14},
+                1200: {slidesPerView: 1, spaceBetween: 14}
             }
         });
         new Swiper(".videos-slider", {
             speed: 600,
             loop: !0,
             autoplay: {
-                delay: 3600000,               // Set delay to 5000 milliseconds (5 seconds)
+                delay: 180000,               // Set delay to 5000 milliseconds (5 seconds)
                 disableOnInteraction: false // Do not disable autoplay on interaction
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 0},
-                400: {slidesPerView: 1, spaceBetween: 0},
-                800: {slidesPerView: 1, spaceBetween: 0},
-                1e3: {slidesPerView: 1, spaceBetween: 0},
-                1200: {slidesPerView: 1, spaceBetween: 0}
+                320: {slidesPerView: 1, spaceBetween: 10},
+                400: {slidesPerView: 1, spaceBetween: 10},
+                800: {slidesPerView: 1, spaceBetween: 10},
+                1e3: {slidesPerView: 1, spaceBetween: 10},
+                1200: {slidesPerView: 1, spaceBetween: 10}
             }
         });
 
