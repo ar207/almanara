@@ -356,7 +356,7 @@ class HomeController extends Controller
                 $TopicsList = $TopicsList->orderby('date', config('smartend.frontend_topics_order'))->orderby('id', config('smartend.frontend_topics_order'))->paginate(12);
 
                 // Get Most Viewed Topics
-                $MostViewedTopics = $MostViewedTopics->orderby('visits', 'desc')->limit(3)->get();
+                $MostViewedTopics = $MostViewedTopics->orderby('visits', 'desc')->limit(2)->get();
             }
 
             $statics = [];
