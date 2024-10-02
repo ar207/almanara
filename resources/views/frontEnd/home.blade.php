@@ -414,11 +414,11 @@
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 14},
-                400: {slidesPerView: 1, spaceBetween: 14},
-                800: {slidesPerView: 1, spaceBetween: 14},
-                1e3: {slidesPerView: 1, spaceBetween: 14},
-                1200: {slidesPerView: 1, spaceBetween: 14}
+                320: {slidesPerView: 1, spaceBetween: 15},
+                400: {slidesPerView: 1, spaceBetween: 15},
+                800: {slidesPerView: 1, spaceBetween: 15},
+                1e3: {slidesPerView: 1, spaceBetween: 15},
+                1200: {slidesPerView: 1, spaceBetween: 15}
             }
         });
         new Swiper(".videos-slider", {
@@ -430,11 +430,11 @@
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 10},
-                400: {slidesPerView: 1, spaceBetween: 10},
-                800: {slidesPerView: 1, spaceBetween: 10},
-                1e3: {slidesPerView: 1, spaceBetween: 10},
-                1200: {slidesPerView: 1, spaceBetween: 10}
+                320: {slidesPerView: 1, spaceBetween: 15},
+                400: {slidesPerView: 1, spaceBetween: 15},
+                800: {slidesPerView: 1, spaceBetween: 15},
+                1e3: {slidesPerView: 1, spaceBetween: 15},
+                1200: {slidesPerView: 1, spaceBetween: 15}
             }
         });
 
