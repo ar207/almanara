@@ -5,23 +5,23 @@
 <meta name="author" content="{{ URL::to('') }}"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link href="{{ URL::asset('assets/frontend/vendor/fontawesome/css/all.min.css') }}?v={{ Helper::system_version() }}"  rel="stylesheet" media/>
-<link href="{{ URL::asset('assets/frontend/vendor/fontawesome/css/font-awesome.min.css') }}?v={{ Helper::system_version() }}" rel="stylesheet" media/>
-<link href="{{ URL::asset('assets/frontend/vendor/animate.css/animate.min.css') }}?v={{ Helper::system_version() }}" rel="stylesheet">
-<link href="{{ URL::asset('assets/frontend/vendor/bootstrap/css/bootstrap.min.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
-<link href="{{ URL::asset('assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css') }}?v={{ Helper::system_version() }}" media rel="stylesheet"/>
+<link href="{{ URL::asset('assets/frontend/vendor/fontawesome/css/all.min.css') }}?v={{ date('YmdHis') }}"  rel="stylesheet" media/>
+<link href="{{ URL::asset('assets/frontend/vendor/fontawesome/css/font-awesome.min.css') }}?v={{ date('YmdHis') }}" rel="stylesheet" media/>
+<link href="{{ URL::asset('assets/frontend/vendor/animate.css/animate.min.css') }}?v={{ date('YmdHis') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/frontend/vendor/bootstrap/css/bootstrap.min.css') }}?v={{ date('YmdHis') }}" rel="stylesheet"/>
+<link href="{{ URL::asset('assets/frontend/vendor/bootstrap-icons/bootstrap-icons.css') }}?v={{ date('YmdHis') }}" media rel="stylesheet"/>
 
-<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/glightbox/css/glightbox.min.css') }}?v={{ Helper::system_version() }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/swiper/swiper-bundle.min.css') }}?v={{ Helper::system_version() }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/glightbox/css/glightbox.min.css') }}?v={{ date('YmdHis') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/swiper/swiper-bundle.min.css') }}?v={{ date('YmdHis') }}">
 
-<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/owl-carousel/assets/owl.carousel.min.css') }}?v={{ Helper::system_version() }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/owl-carousel/assets/owl.theme.default.min.css') }}?v={{ Helper::system_version() }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/owl-carousel/assets/owl.carousel.min.css') }}?v={{ date('YmdHis') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/frontend/vendor/owl-carousel/assets/owl.theme.default.min.css') }}?v={{ date('YmdHis') }}">
 
 <link href="{{ URL::asset('assets/frontend/css/style.css') }}?v={{ date('YmdHis') }}" rel="stylesheet"/>
 
 
 @if( @Helper::currentLanguage()->direction=="rtl")
-<link href="{{ URL::asset('assets/frontend/css/rtl.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
+<link href="{{ URL::asset('assets/frontend/css/rtl.css') }}?v={{ date('YmdHis') }}" rel="stylesheet"/>
 @endif
 
 <!-- Favicon and Touch Icons -->
