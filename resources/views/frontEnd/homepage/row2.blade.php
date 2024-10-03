@@ -3,7 +3,7 @@ $newsSection = Helper::Topics(Helper::GeneralWebmasterSettings("home_content1_se
 ?>
 @if(count($newsSection)>0)
     <div class="container my-5">
-        <div class="container text-center">
+        <div class="container text-left">
             <h4>{{ trans('frontend.newsTitle') }}</h4>
         </div>
         @foreach($newsSection as $index => $new)

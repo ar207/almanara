@@ -10,106 +10,12 @@ if (!empty(count($products)) && empty(count($videos))) {
     $colClass = 'col-12';
 }
 ?>
-<style>
-    .product-slider {
-        margin-left: 45px !important
-    }
-
-    @media screen and (min-width: 320px) and (max-width: 375px) {
-        .product-slider img {
-            width: 239px !important;
-            height: 247px !important;
-            margin-left: -41px !important;
-        }
-
-        .video-slider-s-css {
-            margin-left: 199px !important;
-        }
-
-        img {
-            max-width: -1%;
-        }
-
-        .swiper-slide {
-            height: 275px !important;
-        }
-
-        .product-slider {
-            width: -webkit-fill-available;
-            height: 484px !important;
-            position: relative;
-            width: 237px;
-        }
-
-        .video-swiper-slide {
-            /*width: 296px !important;*/
-        }
-
-        /*.product-slider iframe {*/
-        /*width: 236px;*/
-        /*height: 196px;*/
-        /*border: none;*/
-        /*border-radius: 10px;*/
-        /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
-        /*}*/
-        .product-slider iframe {
-            width: 100%; /* Adjust the width as needed */
-            height: 300px; /* Adjust the height as needed */
-            border: none; /* Remove border if present */
-            border-radius: 10px; /* Add rounded corners if desired */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
-            margin-left: 41px !important;
-        }
-    }
-
-    @media screen and (min-width: 375px) and (max-width: 425px) {
-        .product-slider img {
-            width: 288px !important;
-            margin-left: -39px !important;
-        }
-
-        .product-slider iframe {
-            width: 100%; /* Adjust the width as needed */
-            height: 300px; /* Adjust the height as needed */
-            border: none; /* Remove border if present */
-            border-radius: 10px; /* Add rounded corners if desired */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
-        }
-
-        .product-slider {
-            width: -webkit-fill-available;
-            height: 483px !important;
-            position: relative;
-            width: 295px;
-        }
-
-        .video-swiper-slide {
-            width: 296px !important;
-        }
-    }
-
-    @media screen and (min-width: 425px) and (max-width: 768px) {
-        .product-slider img {
-            height: 247px !important;
-            margin-left: -1px !important;
-        }
-
-        .product-slider iframe {
-            width: 100%; /* Adjust the width as needed */
-            height: 300px; /* Adjust the height as needed */
-            border: none; /* Remove border if present */
-            border-radius: 10px; /* Add rounded corners if desired */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for visual effect */
-        }
-    }
-</style>
-
 @if(count($products) > 0 || count($videos) > 0)
     <div class="container my-5 section-background">
         <div class="row">
             @if(!empty(count($products)))
                 <div class="{{ $colClass }}">
-                    <div class="container text-center">
+                    <div class="container">
                         <h4>{{ trans('frontend.productsTitle') }}</h4>
                     </div>
                     <div class="products-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -123,15 +29,15 @@ if (!empty(count($products)) && empty(count($videos))) {
                                 }
                                 ?>
                                 <div class="swiper-slide">
-                                    <div class="product-slider" style="margin-left: 41px!important;">
+                                    <div class="product-slider">
                                         <img
-                                                @if(!empty($product->photo_file))
-                                                src="{{ URL::to('uploads/topics/'.$product->photo_file) }}"
-                                                @elseif(!empty($product->$file_var))
-                                                src="{{ URL::to('uploads/banners/'.$product->$file_var) }}"
-                                                @endif
-                                                loading="lazy"
-                                                class="d-block" alt="{{ $title }}">
+                                            @if(!empty($product->photo_file))
+                                            src="{{ URL::to('uploads/topics/'.$product->photo_file) }}"
+                                            @elseif(!empty($product->$file_var))
+                                            src="{{ URL::to('uploads/banners/'.$product->$file_var) }}"
+                                            @endif
+                                            loading="lazy"
+                                            class="d-block" alt="{{ $title }}">
                                     </div>
                                 </div>
                             @endforeach
@@ -140,12 +46,9 @@ if (!empty(count($products)) && empty(count($videos))) {
                     </div>
                 </div>
             @endif
-
             @if(!empty(count($videos)))
-
-
                 <div class="{{ $colClass }}">
-                    <div class="container text-center">
+                    <div class="container">
                         <h4>{{ trans('frontend.videoTitle') }}</h4>
                     </div>
                     <div class="videos-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -158,8 +61,8 @@ if (!empty(count($products)) && empty(count($videos))) {
                                     $title = $video->$title_var2;
                                 }
                                 ?>
-                                <div class="swiper-slide video-swiper-slide">
-                                    <div class="product-slider video-slider-s-css">
+                                <div class="swiper-slide">
+                                    <div class="product-slider">
                                         @if($video->video_type ==1)
                                             <?php
                                             $Youtube_id = Helper::Get_youtube_video_id(!empty($video->video_file) ? $video->video_file : $video->youtube_link);
@@ -194,12 +97,12 @@ if (!empty(count($products)) && empty(count($videos))) {
                                                    @endif
                                                    data-setup="{}">
                                                 <source
-                                                        @if(!empty($video->video_file))
-                                                        src="{{ URL::to('uploads/topics/'.$video->video_file) }}"
-                                                        @elseif(!empty($video->$file_var))
-                                                        src="{{ URL::to('uploads/banners/'.$video->$file_var) }}"
-                                                        @endif
-                                                        type="video/mp4"/>
+                                                    @if(!empty($video->video_file))
+                                                    src="{{ URL::to('uploads/topics/'.$video->video_file) }}"
+                                                    @elseif(!empty($video->$file_var))
+                                                    src="{{ URL::to('uploads/banners/'.$video->$file_var) }}"
+                                                    @endif
+                                                    type="video/mp4"/>
                                                 <p class="vjs-no-js">
                                                     To view this video please enable JavaScript, and consider
                                                     upgrading

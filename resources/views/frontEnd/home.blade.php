@@ -67,7 +67,6 @@
         @media (max-width: 600px) {
             .news-image {
                 width: 400px !important;
-                max-width: 400px !important;
             }
         }
 
@@ -414,27 +413,27 @@
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 15},
-                400: {slidesPerView: 1, spaceBetween: 15},
-                800: {slidesPerView: 1, spaceBetween: 15},
-                1e3: {slidesPerView: 1, spaceBetween: 15},
-                1200: {slidesPerView: 1, spaceBetween: 15}
+                320: {slidesPerView: 1, spaceBetween: 0},
+                400: {slidesPerView: 1, spaceBetween: 0},
+                800: {slidesPerView: 1, spaceBetween: 0},
+                1e3: {slidesPerView: 1, spaceBetween: 0},
+                1200: {slidesPerView: 1, spaceBetween: 0}
             }
         });
         new Swiper(".videos-slider", {
             speed: 600,
             loop: !0,
             autoplay: {
-                delay: 180000,               // Set delay to 5000 milliseconds (5 seconds)
-                disableOnInteraction: false // Do not disable autoplay on interaction
+                delay: 180000,
+                disableOnInteraction: false
             },
             slidesPerView: "auto",
             breakpoints: {
-                320: {slidesPerView: 1, spaceBetween: 15},
-                400: {slidesPerView: 1, spaceBetween: 15},
-                800: {slidesPerView: 1, spaceBetween: 15},
-                1e3: {slidesPerView: 1, spaceBetween: 15},
-                1200: {slidesPerView: 1, spaceBetween: 15}
+                320: {slidesPerView: 1, spaceBetween: 0},
+                400: {slidesPerView: 1, spaceBetween: 0},
+                800: {slidesPerView: 1, spaceBetween: 0},
+                1e3: {slidesPerView: 1, spaceBetween: 0},
+                1200: {slidesPerView: 1, spaceBetween: 0}
             }
         });
 
